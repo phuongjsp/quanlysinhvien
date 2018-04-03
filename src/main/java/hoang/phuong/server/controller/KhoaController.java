@@ -41,10 +41,10 @@ public class KhoaController {
     }
 
     /*---Update a book by id---*/
-    @PutMapping("/khoa/maKhoa-{maKhoa}")
-    public ResponseEntity<?> update(@PathVariable("maKhoa") String maKhoa, @RequestBody Khoa khoa) {
-        khoa.setMaKhoa(maKhoa);
-        if (khoaService.getByMaKhoa(maKhoa) == null) {
+    @PutMapping("/khoa/{id}")
+    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Khoa khoa) {
+        khoa.setId(id);
+        if (khoaService.getByID(id) == null) {
             return ResponseEntity.badRequest().body("can not find Khoa by ma khoa");
         }
         khoaService.update(khoa);
@@ -52,12 +52,12 @@ public class KhoaController {
     }
 
     /*---Delete a book by id---*/
-    @DeleteMapping("/khoa/maKhoa-{maKhoa}")
-    public ResponseEntity<?> delete(@PathVariable("maKhoa") String maKhoa) {
-        if (khoaService.getByMaKhoa(maKhoa) == null) {
+    @DeleteMapping("/khoa/{id}")
+    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+        if (khoaService.getByID(id) == null) {
             return ResponseEntity.badRequest().body("can not find Khoa by ma khoa");
         }
-        khoaService.delete(maKhoa);
+        khoaService.delete(id);
         return ResponseEntity.ok().body("Khoa has been deleted successfully.");
     }
 }

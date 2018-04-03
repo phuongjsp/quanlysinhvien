@@ -43,7 +43,7 @@ public class KhoaServiceImpl implements KhoaService {
 
     @Transactional
     @Override
-    public void delete(String maKhoa) {
-        khoaDAO.delete(maKhoa);
+    public void delete(int id) {
+        khoaDAO.delete(id);
     }
 }

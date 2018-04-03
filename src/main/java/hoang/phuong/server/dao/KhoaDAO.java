@@ -15,5 +15,5 @@ public interface KhoaDAO {
 
     void update(Khoa khoa);
 
-    void delete(String maKhoa);
+    void delete(int id);
 }

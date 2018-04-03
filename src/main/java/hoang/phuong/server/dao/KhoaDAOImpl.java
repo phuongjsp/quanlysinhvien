@@ -31,7 +31,8 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
 
     @Override
     public void update(Khoa khoa) {
-        Khoa khoa2 = getByMaKhoa(khoa.getMaKhoa());
+        Khoa khoa2 = getByID(khoa.getId());
+        khoa2.setMaKhoa(khoa.getMaKhoa());
         khoa2.setTenKhoa(khoa.getTenKhoa());
         khoa2.setNamHoc(khoa.getNamHoc());
         khoa2.setGhiChu(khoa.getGhiChu());
@@ -39,8 +40,7 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
     }
 
     @Override
-    public void delete(String maKhoa) {
-        Khoa khoa = getByMaKhoa(maKhoa);
-        deleteDAO(khoa);
+    public void delete(int id) {
+        deleteDAO(id);
     }
 }

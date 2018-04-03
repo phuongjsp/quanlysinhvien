@@ -15,5 +15,5 @@ public interface KhoaService {
 
     void update(Khoa khoa);
 
-    void delete(String maKhoa);
+    void delete(int id);
 }
