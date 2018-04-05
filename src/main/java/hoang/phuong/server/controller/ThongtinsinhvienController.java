@@ -20,10 +20,7 @@ public class ThongtinsinhvienController {
     private ThongtinthemService thongtinthemService;
     @Autowired
     private ThongtingiadinhService thongtingiadinhService;
-    @GetMapping("/")
-    public ResponseEntity<?> index() {
-        return ResponseEntity.ok().body("Helle Word" );
-    }
+
     /*---Add new book---*/
     @PostMapping("/thongtinsinhvien")
     public ResponseEntity<?> save(@RequestBody Thongtinsinhvien thongtinsinhvien) {
@@ -44,15 +41,19 @@ public class ThongtinsinhvienController {
         return ResponseEntity.ok().body(thongtinsinhvien);
     }
 
+    @GetMapping("/")
+    public ResponseEntity<?> hello() {
+        return ResponseEntity.ok().body("thong tin sinh vien :");
+    }
     /*---get all books---*/
     @GetMapping("/thongtinsinhvien")
     public ResponseEntity<List<Thongtinsinhvien>> list() {
 
         List<Thongtinsinhvien> thongtinsinhviens = thongtinsinhvienService.list();
-        for(Thongtinsinhvien thongtinsinhvien : thongtinsinhvienService.list()){
+        thongtinsinhviens.forEach(thongtinsinhvien -> {
             thongtinsinhvien.setThongtingiadinhList(thongtingiadinhService.listByIDSv(thongtinsinhvien.getId()));
             thongtinsinhvien.setThongtinthemList(thongtinthemService.listByIDSv(thongtinsinhvien.getId()));
-        }
+        });
         return ResponseEntity.ok().body(thongtinsinhviens);
     }
 

@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="quan-ly-sinh-vien" target="1.7" />
+      <module name="quan-ly-sinh-vien" target="8" />
     </bytecodeTargetLevel>
   </component>
 </project>
