@@ -15,8 +15,8 @@ public class SvCoVbServiceImpl implements SvCoVbService {
 
     @Transactional
     @Override
-    public int save(Svcovb svcovb) {
-        return svCoVbDAO.save(svcovb);
+    public void save(Svcovb svcovb) {
+         svCoVbDAO.save(svcovb);
     }
 
     @Override

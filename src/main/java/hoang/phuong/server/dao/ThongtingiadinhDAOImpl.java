@@ -9,9 +9,8 @@ import java.util.List;
 @Repository
 public class ThongtingiadinhDAOImpl extends AbstractDAO<Integer, Thongtingiadinh> implements ThongtingiadinhDAO {
     @Override
-    public int save(Thongtingiadinh thongtingiadinh) {
+    public void save(Thongtingiadinh thongtingiadinh) {
         saveDAO(thongtingiadinh);
-        return thongtingiadinh.getId();
     }
 
     @Override
@@ -30,17 +29,23 @@ public class ThongtingiadinhDAOImpl extends AbstractDAO<Integer, Thongtingiadinh
     }
 
     @Override
-    public void update(Thongtingiadinh thongtingiadinh) {
-        Thongtingiadinh thongtingiadinh2 = getByID(thongtingiadinh.getId());
-        if (thongtingiadinh.getNgheNghiep() != null) thongtingiadinh2.setNgheNghiep(thongtingiadinh.getNgheNghiep());
-        if (thongtingiadinh.getQuanHe() != null) thongtingiadinh2.setQuanHe(thongtingiadinh.getQuanHe());
-        if (thongtingiadinh.getTen() != null) thongtingiadinh2.setTen(thongtingiadinh.getTen());
-        if (thongtingiadinh.getSdt() != null) thongtingiadinh2.setSdt(thongtingiadinh.getSdt());
-        getSession().flush();
+    public boolean update(Thongtingiadinh thongtingiadinh) {
+        if(getByID(thongtingiadinh.getId())!=null){
+            Thongtingiadinh thongtingiadinh2 = getByID(thongtingiadinh.getId());
+            if (thongtingiadinh.getNgheNghiep() != null) thongtingiadinh2.setNgheNghiep(thongtingiadinh.getNgheNghiep());
+            if (thongtingiadinh.getQuanHe() != null) thongtingiadinh2.setQuanHe(thongtingiadinh.getQuanHe());
+            if (thongtingiadinh.getTen() != null) thongtingiadinh2.setTen(thongtingiadinh.getTen());
+            if (thongtingiadinh.getSdt() != null) thongtingiadinh2.setSdt(thongtingiadinh.getSdt());
+            getSession().flush();
+            return true;
+        }return false;
     }
 
     @Override
-    public void delete(int id) {
-        deleteDAO(id);
+    public boolean delete(int id) {
+        if(getByID(id)!=null){
+            deleteDAO(id);
+            return true;
+        }return false;
     }
 }

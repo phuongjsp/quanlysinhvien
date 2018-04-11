@@ -38,28 +38,6 @@ public class Thongtinsinhvien {
     @ManyToOne(optional = false)
     @JoinColumn(name = "Lop", referencedColumnName = "id", insertable = false, updatable = false)
     private Lopsv lopsvByLop;
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idSv", referencedColumnName = "id", insertable = false, updatable = false)
-    private List<Thongtingiadinh> thongtingiadinhList = new ArrayList<>();
-    @OneToMany(cascade = CascadeType.ALL)
-    @JoinColumn(name = "idSV", referencedColumnName = "id", insertable = false, updatable = false)
-    private List<Thongtinthem> thongtinthemList = new ArrayList<>();
-
-    public List<Thongtingiadinh> getThongtingiadinhList() {
-        return thongtingiadinhList;
-    }
-
-    public void setThongtingiadinhList(List<Thongtingiadinh> thongtingiadinhList) {
-        this.thongtingiadinhList = thongtingiadinhList;
-    }
-
-    public List<Thongtinthem> getThongtinthemList() {
-        return thongtinthemList;
-    }
-
-    public void setThongtinthemList(List<Thongtinthem> thongtinthemList) {
-        this.thongtinthemList = thongtinthemList;
-    }
 
     public void setId(int id) {
         this.id = id;

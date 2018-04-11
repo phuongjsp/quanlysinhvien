@@ -38,7 +38,6 @@
           <element id="library" level="project" name="Maven: javax.xml.bind:jaxb-api:2.2.11" />
           <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-core:2.2.11" />
           <element id="library" level="project" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.11" />
-          <element id="library" level="project" name="Maven: com.google.appengine:appengine-api-1.0-sdk:1.9.54" />
           <element id="library" level="project" name="Maven: javax.servlet:jstl:1.2" />
         </element>
       </element>

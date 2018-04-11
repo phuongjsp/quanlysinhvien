@@ -8,9 +8,12 @@ import java.util.List;
 @Repository
 public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanBangDAO {
     @Override
-    public int save(Vanbang vanbang) {
-        saveDAO(vanbang);
-        return vanbang.getId();
+    public boolean save(Vanbang vanbang) {
+       if(getByMaVB(vanbang.getMaVanBang())!=null) {
+           saveDAO(vanbang);
+           return true;
+       }
+       return false;
     }
 
     @Override
@@ -29,14 +32,20 @@ public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanB
     }
 
     @Override
-    public void update(Vanbang vanbang) {
-Vanbang vanbang2 = getbyId(vanbang.getId());
-        vanbang2.setTenVanBang(vanbang.getTenVanBang());
-        getSession().flush();
+    public boolean update(Vanbang vanbang) {
+if(getbyId(vanbang.getId())!=null){
+            Vanbang vanbang2 = getbyId(vanbang.getId());
+            vanbang2.setTenVanBang(vanbang.getTenVanBang());
+            getSession().flush();
+            return true;
+        }return false;
     }
 
     @Override
-    public void delete(int id) {
-    deleteDAO(id);
+    public boolean delete(int id) {
+   if(getbyId(id)!=null){
+       deleteDAO(id);
+       return true;
+   }return false;
     }
 }

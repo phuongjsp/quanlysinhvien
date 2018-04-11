@@ -18,52 +18,48 @@ public class ThongtinthemController {
     @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
 
-    /*---Add new book---*/
+    /*---Add new thongtinthem---*/
     @PostMapping("/thongtinthem")
-    public ResponseEntity<?> save(@RequestBody Thongtinthem thongtinthem) {
-        long id = thongtinthemService.save(thongtinthem);
-        return ResponseEntity.ok().body("New thong  tin them has been saved with ID:" + id);
+    public void save(@RequestBody Thongtinthem thongtinthem) {
+          thongtinthemService.save(thongtinthem);
     }
 
-    /*---Get a book by id---*/
+    /*---Get a thongtinthem by id---*/
     @GetMapping("/thongtinthem/{id}")
-    public ResponseEntity<Thongtinthem> get(@PathVariable("id") int id) {
-        Thongtinthem thongtinthem = thongtinthemService.getByID(id);
-        return ResponseEntity.ok().body(thongtinthem);
+    public  Thongtinthem get(@PathVariable("id") int id) {
+        return thongtinthemService.getByID(id);
+    }
+    /*---Get a thongtinthem by idsv---*/
+    @GetMapping("/thongtinthem/maSv-{maSv}")
+    public  List<Thongtinthem>  get(@PathVariable("maSv") String maSv) {
+        Thongtinsinhvien thongtinsinhvien = thongtinsinhvienService.getByMaSV(maSv);
+        return  thongtinthemService.listByIDSv(thongtinsinhvien.getId());
     }
 
-    @GetMapping("/thongtinthem/IDSV-{idsv}")
-    public ResponseEntity<List<Thongtinthem>> get(@PathVariable("idsv") String idsv) {
-        Thongtinsinhvien thongtinsinhvien = thongtinsinhvienService.getByMaSV(idsv);
-        List<Thongtinthem> thongtinthemlist = thongtinthemService.listByIDSv(thongtinsinhvien.getId());
-        return ResponseEntity.ok().body(thongtinthemlist);
-    }
-
-    /*---get all books---*/
+    /*---get all thongtinthem---*/
     @GetMapping("/thongtinthem")
-    public ResponseEntity<List<Thongtinthem>> list() {
-        List<Thongtinthem> thongtinthems = thongtinthemService.list();
-        return ResponseEntity.ok().body(thongtinthems);
+    public List<Thongtinthem>  list() {
+        return thongtinthemService.list();
     }
 
-    /*---Update a book by id---*/
+    /*---Update a thongtinthem by id---*/
     @PutMapping("/thongtinthem/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Thongtinthem thongtinthem) {
+    public boolean    update(@PathVariable("id") int id, @RequestBody Thongtinthem thongtinthem) {
         thongtinthem.setId(id);
         if (thongtinthemService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find thongtinthem by id");
+            return true;
         }
         thongtinthemService.update(thongtinthem);
-        return ResponseEntity.ok().body("thongtinthem has been updated successfully.");
+        return false;
     }
 
-    /*---Delete a book by id---*/
+    /*---Delete a thongtinthem by id---*/
     @DeleteMapping("/thongtinthem/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public boolean delete(@PathVariable("id") int id) {
         if (thongtinthemService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find thongtinthem by id");
+            return true;
         }
         thongtinthemService.delete(id);
-        return ResponseEntity.ok().body("thongtinthem has been deleted successfully.");
+        return false;
     }
 }

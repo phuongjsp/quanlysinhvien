@@ -8,9 +8,8 @@ import java.util.List;
 @Repository
 public class SvCoVbDAOImpl extends AbstractDAO<Integer,Svcovb> implements SvCoVbDAO {
     @Override
-    public int save(Svcovb svcovb) {
+    public void save(Svcovb svcovb) {
         saveDAO(svcovb);
-        return svcovb.getId();
     }
 
     @Override
@@ -45,17 +44,23 @@ public class SvCoVbDAOImpl extends AbstractDAO<Integer,Svcovb> implements SvCoVb
     }
 
     @Override
-    public void update(Svcovb svcovb) {
-Svcovb svcovb2 = getByKey(svcovb.getId());
-svcovb2.setIdSv(svcovb.getIdSv());
-svcovb2.setLoaiVb(svcovb.getLoaiVb());
-        svcovb2.setTenThuocTinh(svcovb.getTenThuocTinh());
-        svcovb2.setThuocTinh(svcovb.getThuocTinh());
-        getSession().flush();
+    public boolean update(Svcovb svcovb) {
+if(getById(svcovb.getId())!=null){
+    Svcovb svcovb2 = getById(svcovb.getId());
+    svcovb2.setIdSv(svcovb.getIdSv());
+    svcovb2.setLoaiVb(svcovb.getLoaiVb());
+    svcovb2.setTenThuocTinh(svcovb.getTenThuocTinh());
+    svcovb2.setThuocTinh(svcovb.getThuocTinh());
+    getSession().flush();
+    return true;
+}return false;
     }
 
     @Override
-    public void delete(int id) {
-deleteDAO(id);
+    public boolean delete(int id) {
+if(getById(id)!=null){
+    deleteDAO(id);
+    return true;
+}return false;
     }
 }

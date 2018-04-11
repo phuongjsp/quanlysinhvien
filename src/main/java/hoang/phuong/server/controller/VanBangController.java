@@ -12,52 +12,48 @@ public class VanBangController {
     @Autowired
     private VanBangService vanBangService;
 
-    /*---Add new book---*/
+    /*---Add new vanbang---*/
     @PostMapping("/vanbang")
-    public ResponseEntity<?> save(@RequestBody Vanbang vanbang) {
-        long id = vanBangService.save(vanbang);
-        return ResponseEntity.ok().body("vanBang tao has been saved with ID:" + id);
+    public void save(@RequestBody Vanbang vanbang) {
+         vanBangService.save(vanbang);
     }
 
-    /*---Get a book by id---*/
+    /*---Get a vanbang by id---*/
     @GetMapping("/vanbang/{id}")
-    public ResponseEntity<Vanbang> get(@PathVariable("id") int id) {
-        Vanbang vanbang = vanBangService.getbyId(id);
-        return ResponseEntity.ok().body(vanbang);
+    public  Vanbang  get(@PathVariable("id") int id) {
+        return vanBangService.getbyId(id);
     }
-
+    /*---Get a vanbang by maVB---*/
     @GetMapping("/vanbang/maVB-{maVB}")
-    public ResponseEntity<Vanbang> get(@PathVariable("maVB") String maVB) {
-        Vanbang vanbang = vanBangService.getByMaVB(maVB);
-        return ResponseEntity.ok().body(vanbang);
+    public  Vanbang get(@PathVariable("maVB") String maVB) {
+        return vanBangService.getByMaVB(maVB);
     }
 
-    /*---get all books---*/
+    /*---get all vanbang---*/
     @GetMapping("/vanbang")
-    public ResponseEntity<List<Vanbang>> list() {
-        List<Vanbang> vanbangs = vanBangService.list();
-        return ResponseEntity.ok().body(vanbangs);
+    public List<Vanbang>  list() {
+        return vanBangService.list();
     }
 
-    /*---Update a book by id---*/
+    /*---Update a book by maVB---*/
     @PutMapping("/vanbang/maVB-{maVB}")
-    public ResponseEntity<?> update(@PathVariable("maVB") String maVB, @RequestBody Vanbang vanbang) {
+    public boolean update(@PathVariable("maVB") String maVB, @RequestBody Vanbang vanbang) {
         vanbang.setMaVanBang(maVB);
         if (vanBangService.getByMaVB(maVB) == null) {
-            return ResponseEntity.badRequest().body("can not find Vanbang  by ma nganh");
+            return true;
         }
         vanBangService.update(vanbang);
-        return ResponseEntity.ok().body(" Vanbang has been updated successfully.");
+        return false;
     }
 
-    /*---Delete a book by id---*/
+    /*---Delete a vanbang by maVB---*/
     @DeleteMapping("/vanbang/maVB-{maVB}")
-    public ResponseEntity<?> delete(@PathVariable("maVB") String maVB) {
+    public boolean delete(@PathVariable("maVB") String maVB) {
         if (vanBangService.getByMaVB(maVB) == null) {
-            return ResponseEntity.badRequest().body("can not find Vanbang  by ma nganh");
+            return true;
         }
 
         vanBangService.delete(vanBangService.getByMaVB(maVB).getId());
-        return ResponseEntity.ok().body(" Vanbang has been deleted successfully.");
+        return false;
     }
 }

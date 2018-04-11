@@ -25,9 +25,12 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
     }
 
     @Override
-    public int save(Thongtinsinhvien thongtinsinhvien) {
-        saveDAO(thongtinsinhvien);
-        return thongtinsinhvien.getId();
+    public boolean save(Thongtinsinhvien thongtinsinhvien) {
+       if(getByMaSV(thongtinsinhvien.getMaSv())!=null){
+           saveDAO(thongtinsinhvien);
+           return true;
+       }
+       return false;
     }
 
     @Override

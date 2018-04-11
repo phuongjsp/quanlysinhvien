@@ -37,7 +37,8 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
     }
 
     public void saveDAO(T entity) {
-        getSession().save(entity);
+
+            getSession().save(entity);
     }
 
     public void persistDAO(T entity) {

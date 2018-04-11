@@ -2,7 +2,9 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Khoa;
 import hoang.phuong.server.service.KhoaService;
+import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -13,51 +15,45 @@ public class KhoaController {
     @Autowired
     private KhoaService khoaService;
 
-    /*---Add new book---*/
-    @PostMapping("/khoa")
-    public ResponseEntity<?> save(@RequestBody Khoa khoa) {
-        long id = khoaService.save(khoa);
-        return ResponseEntity.ok().body("New Khoa has been saved with ID:" + id);
+    /*---Add new Khoa---*/
+    @PostMapping("/khoa" )
+    public void save(@RequestBody Khoa khoa) {
+        khoaService.save(khoa);
     }
 
-    /*---Get a book by id---*/
+    /*---Get a Khoa by id---*/
     @GetMapping("/khoa/{id}")
-    public ResponseEntity<Khoa> get(@PathVariable("id") int id) {
-        Khoa khoa = khoaService.getByID(id);
-        return ResponseEntity.ok().body(khoa);
+    public Khoa get(@PathVariable("id") int id) {
+        return khoaService.getByID(id);
     }
 
     @GetMapping("/khoa/maKhoa-{maKhoa}")
-    public ResponseEntity<Khoa> get(@PathVariable("maKhoa") String maKhoa) {
-        Khoa khoa = khoaService.getByMaKhoa(maKhoa);
-        return ResponseEntity.ok().body(khoa);
+    public Khoa get(@PathVariable("maKhoa") String maKhoa) {
+        return khoaService.getByMaKhoa(maKhoa);
     }
 
-    /*---get all books---*/
+    /*---get all Khoa---*/
     @GetMapping("/khoa")
-    public ResponseEntity<List<Khoa>> list() {
-        List<Khoa> khoas = khoaService.list();
-        return ResponseEntity.ok().body(khoas);
+    public List<Khoa> list() {
+        return khoaService.list();
     }
-
     /*---Update a book by id---*/
     @PutMapping("/khoa/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Khoa khoa) {
+    public boolean update(@PathVariable("id") int id, @RequestBody Khoa khoa) {
         khoa.setId(id);
         if (khoaService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find Khoa by ma khoa");
+            return false;
         }
         khoaService.update(khoa);
-        return ResponseEntity.ok().body("Khoa has been updated successfully.");
+        return true;
     }
-
-    /*---Delete a book by id---*/
+    /*---Delete a Khoa by id---*/
     @DeleteMapping("/khoa/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public boolean delete(@PathVariable("id") int id) {
         if (khoaService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find Khoa by ma khoa");
+            return true;
         }
         khoaService.delete(id);
-        return ResponseEntity.ok().body("Khoa has been deleted successfully.");
+        return false;
     }
 }

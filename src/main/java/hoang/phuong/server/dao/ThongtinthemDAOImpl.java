@@ -9,9 +9,8 @@ import java.util.List;
 @Repository
 public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> implements ThongtinthemDAO {
     @Override
-    public int save(Thongtinthem thongtinthem) {
+    public void save(Thongtinthem thongtinthem) {
         saveDAO(thongtinthem);
-        return thongtinthem.getId();
     }
 
     @Override
@@ -30,15 +29,21 @@ public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> impl
     }
 
     @Override
-    public void update(Thongtinthem thongtinthem) {
-        Thongtinthem thongtinthem2 = getByID(thongtinthem.getId());
-        thongtinthem2.setTenThongTin(thongtinthem.getTenThongTin());
-        thongtinthem2.setThongTin(thongtinthem.getThongTin());
-        getSession().flush();
+    public boolean update(Thongtinthem thongtinthem) {
+        if(getByID(thongtinthem.getId())!=null){
+            Thongtinthem thongtinthem2 = getByID(thongtinthem.getId());
+            thongtinthem2.setTenThongTin(thongtinthem.getTenThongTin());
+            thongtinthem2.setThongTin(thongtinthem.getThongTin());
+            getSession().flush();
+            return true;
+        }return false;
     }
 
     @Override
-    public void delete(int id) {
-        deleteDAO(id);
+    public boolean delete(int id) {
+      if(getByID(id)!=null){
+          deleteDAO(id);
+          return true;
+      }return false;
     }
 }

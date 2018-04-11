@@ -20,62 +20,56 @@ private ThongtinsinhvienService thongtinsinhvienService;
 private VanBangService vanBangService;
     /*---Add new book---*/
     @PostMapping("/svcovb")
-    public ResponseEntity<?> save(@RequestBody Svcovb svcovb) {
-        long id = svCoVbService.save(svcovb);
-        return ResponseEntity.ok().body("svCoVb has been saved with ID:" + id);
+    public void save(@RequestBody Svcovb svcovb) {
+        svCoVbService.save(svcovb);
     }
 
     /*---Get a book by id---*/
     @GetMapping("/svcovb/{id}")
-    public ResponseEntity<Svcovb> get(@PathVariable("id") int id) {
-        Svcovb svcovb = svCoVbService.getById(id);
-        return ResponseEntity.ok().body(svcovb);
+    public  Svcovb get(@PathVariable("id") int id) {
+        return svCoVbService.getById(id);
     }
-
-
-
-    /*---get all books---*/
+    /*---get all svcovb---*/
     @GetMapping("/svcovb")
-    public ResponseEntity<List<Svcovb>> list() {
-        List<Svcovb> svcovbs = svCoVbService.list();
-        return ResponseEntity.ok().body(svcovbs);
+    public List<Svcovb> list() {
+        return svCoVbService.list();
     }
+    /*---get all svcovb by masv---*/
     @GetMapping("/svcovb/maSV-{MaSv}")
-    public ResponseEntity<List<Svcovb>> listByMaSV(@PathVariable("MaSv") String MaSv) {
-        List<Svcovb> svcovbs = svCoVbService.listByIdSv(thongtinsinhvienService.getByMaSV(MaSv).getId());
-        return ResponseEntity.ok().body(svcovbs);
+    public List<Svcovb> istByMaSV(@PathVariable("MaSv") String MaSv) {
+        return svCoVbService.listByIdSv(thongtinsinhvienService.getByMaSV(MaSv).getId());
     }
+    /*---get all svcovb by mavb---*/
     @GetMapping("/svcovb/maVB-{maVB}")
-    public ResponseEntity<List<Svcovb>> listByidVB(@PathVariable("maVB") String maVB) {
-        List<Svcovb> svcovbs = svCoVbService.listByLoaiVB(vanBangService.getByMaVB(maVB).getId());
-        return ResponseEntity.ok().body(svcovbs);
+    public List<Svcovb> listByidVB(@PathVariable("maVB") String maVB) {
+        return svCoVbService.listByLoaiVB(vanBangService.getByMaVB(maVB).getId());
     }
+    /*---get all svcovb by mavb and masv---*/
     @GetMapping("/svcovb/maSV-{MaSv}-maVB-{maVB}")
-    public ResponseEntity<List<Svcovb>> listbyIdSvAndLoaiVb(
+    public List<Svcovb> listbyIdSvAndLoaiVb(
             @PathVariable("MaSv") String MaSv,
             @PathVariable("maVB") String maVB) {
-        List<Svcovb> svcovbs = svCoVbService.listbyIdSvAndLoaiVb(thongtinsinhvienService.getByMaSV(MaSv).getId(),
+        return svCoVbService.listbyIdSvAndLoaiVb(thongtinsinhvienService.getByMaSV(MaSv).getId(),
                 vanBangService.getByMaVB(maVB).getId() );
-        return ResponseEntity.ok().body(svcovbs);
     }
     /*---Update a book by id---*/
     @PutMapping("/svcovb/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Svcovb svcovb) {
+    public boolean update(@PathVariable("id") int id, @RequestBody Svcovb svcovb) {
         svcovb.setId(id);
         if (svCoVbService.getById(id) == null) {
-            return ResponseEntity.badRequest().body("can not find svcovb  by ma nganh");
+            return true;
         }
         svCoVbService.update(svcovb);
-        return ResponseEntity.ok().body(" svcovb has been updated successfully.");
+        return false;
     }
 
     /*---Delete a book by id---*/
     @DeleteMapping("/svcovb/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public boolean dalete(@PathVariable("id") int id) {
         if (svCoVbService.getById(id) == null) {
-            return ResponseEntity.badRequest().body("can not find svcovb  by ma nganh");
+            return true;
         }
         svCoVbService.delete(id);
-        return ResponseEntity.ok().body(" svcovb has been deleted successfully.");
+        return false;
     }
 }

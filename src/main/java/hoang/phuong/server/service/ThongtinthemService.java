@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Thongtinthem;
 import java.util.List;
 
 public interface ThongtinthemService {
-    int save(Thongtinthem thongtinthem);
+    void save(Thongtinthem thongtinthem);
 
     Thongtinthem getByID(int id);
 

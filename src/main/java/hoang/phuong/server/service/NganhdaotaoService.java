@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Nganhdaotao;
 import java.util.List;
 
 public interface NganhdaotaoService {
-    int save(Nganhdaotao nganhDaoTao);
+    boolean save(Nganhdaotao nganhDaoTao);
 
     Nganhdaotao getByID(int id);
 

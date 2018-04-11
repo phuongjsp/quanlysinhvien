@@ -32,7 +32,7 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
 
     @Transactional
     @Override
-    public int save(Thongtinsinhvien thongtinsinhvien) {
+    public boolean save(Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienDAO.save(thongtinsinhvien);
     }
 

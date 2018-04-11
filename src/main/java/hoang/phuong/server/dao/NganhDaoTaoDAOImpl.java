@@ -9,9 +9,12 @@ import java.util.List;
 @Repository
 public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implements NganhDaoTaoDAO {
     @Override
-    public int save(Nganhdaotao nganhDaoTao) {
-        saveDAO(nganhDaoTao);
-        return nganhDaoTao.getId();
+    public boolean save(Nganhdaotao nganhDaoTao) {
+        if(getByMaNganhdaotao(nganhDaoTao.getMaNganh())!=null){
+            saveDAO(nganhDaoTao);
+            return true;
+        }
+        return false;
     }
 
     @Override
@@ -30,16 +33,24 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
     }
 
     @Override
-    public void update(Nganhdaotao nganhdaotao) {
-        Nganhdaotao nganhdaotao2 = getByMaNganhdaotao(nganhdaotao.getMaNganh());
-        nganhdaotao2.setTenNganh(nganhdaotao.getTenNganh());
-        nganhdaotao2.setKhoa(nganhdaotao.getKhoa());
-        nganhdaotao2.setGhiChu(nganhdaotao.getGhiChu());
-        getSession().flush();
+    public boolean update(Nganhdaotao nganhdaotao) {
+        if(getByMaNganhdaotao(nganhdaotao.getMaNganh())!=null){
+            Nganhdaotao nganhdaotao2 = getByMaNganhdaotao(nganhdaotao.getMaNganh());
+            nganhdaotao2.setTenNganh(nganhdaotao.getTenNganh());
+            nganhdaotao2.setKhoa(nganhdaotao.getKhoa());
+            nganhdaotao2.setGhiChu(nganhdaotao.getGhiChu());
+            getSession().flush();
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void delete(String maNganhdaotao) {
-        deleteDAO(getByMaNganhdaotao(maNganhdaotao));
+    public boolean delete(String maNganhdaotao) {
+       if(getByMaNganhdaotao(maNganhdaotao)!=null){
+           deleteDAO(getByMaNganhdaotao(maNganhdaotao));
+           return true;
+       }
+       return false;
     }
 }

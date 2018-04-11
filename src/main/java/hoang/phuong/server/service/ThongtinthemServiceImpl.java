@@ -17,8 +17,8 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
 
     @Transactional
     @Override
-    public int save(Thongtinthem thongtinthem) {
-        return thongtinthemDAO.save(thongtinthem);
+    public void save(Thongtinthem thongtinthem) {
+          thongtinthemDAO.save(thongtinthem);
     }
 
     @Override

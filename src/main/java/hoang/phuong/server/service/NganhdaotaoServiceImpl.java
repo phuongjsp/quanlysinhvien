@@ -16,7 +16,7 @@ public class NganhdaotaoServiceImpl implements NganhdaotaoService {
 
     @Transactional
     @Override
-    public int save(Nganhdaotao nganhDaoTao) {
+    public boolean save(Nganhdaotao nganhDaoTao) {
         return nganhDaoTaoDAO.save(nganhDaoTao);
     }
 

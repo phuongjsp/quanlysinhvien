@@ -13,45 +13,41 @@ public class DiaChiController {
     @Autowired
     private DiaChiService diaChiService;
 
-    /*---Add new book---*/
+    /*---Add new diachi---*/
     @PostMapping("/diachi")
-    public ResponseEntity<?> save(@RequestBody Diachi diachi) {
-        long id = diaChiService.save(diachi);
-        return ResponseEntity.ok().body("New Dia chi has been saved with ID:" + id);
+    public void save(@RequestBody Diachi diachi) {
+         diaChiService.save(diachi);
     }
 
-    /*---Get a book by id---*/
+    /*---Get a diachi by id---*/
     @GetMapping("/diachi/{id}")
-    public ResponseEntity<Diachi> get(@PathVariable("id") int id) {
-        Diachi diachi = diaChiService.getByID(id);
-        return ResponseEntity.ok().body(diachi);
+    public Diachi get(@PathVariable("id") int id) {
+        return diaChiService.getByID(id);
     }
 
-    /*---get all books---*/
+    /*---get all diachi---*/
     @GetMapping("/diachi")
-    public ResponseEntity<List<Diachi>> list() {
-        List<Diachi> diachis = diaChiService.list();
-        return ResponseEntity.ok().body(diachis);
+    public  List<Diachi> list() {
+        return diaChiService.list();
     }
 
-    /*---Update a book by id---*/
+    /*---Update a diachi by id---*/
     @PutMapping("/diachi/{id}")
-    public ResponseEntity<?> update(@PathVariable("id") int id, @RequestBody Diachi diachi) {
+    public boolean update(@PathVariable("id") int id, @RequestBody Diachi diachi) {
         diachi.setId(id);
         if (diaChiService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find Dia Chi by id");
+            return false;
         }
         diaChiService.update(diachi);
-        return ResponseEntity.ok().body("Dia Chi has been updated successfully.");
+        return true;
     }
-
-    /*---Delete a book by id---*/
+    /*---Delete a diachi by id---*/
     @DeleteMapping("/diachi/{id}")
-    public ResponseEntity<?> delete(@PathVariable("id") int id) {
+    public boolean delete(@PathVariable("id") int id) {
         if (diaChiService.getByID(id) == null) {
-            return ResponseEntity.badRequest().body("can not find Dia Chi by id");
+            return true;
         }
         diaChiService.delete(id);
-        return ResponseEntity.ok().body("Dia chi has been deleted successfully.");
+        return false;
     }
 }

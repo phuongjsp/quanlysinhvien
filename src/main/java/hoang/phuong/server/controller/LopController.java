@@ -13,45 +13,42 @@ public class LopController {
     @Autowired
     private LopsvService lopsvService;
 
-    /*---Add new book---*/
+    /*---Add new lopsv---*/
     @PostMapping("/lopsv")
-    public ResponseEntity<?> save(@RequestBody Lopsv lopsv) {
-        long id = lopsvService.save(lopsv);
-        return ResponseEntity.ok().body("New Lop sv has been saved with ID:" + id);
+    public void save(@RequestBody Lopsv lopsv) {
+      lopsvService.save(lopsv);
     }
 
-
+    /*---get all maLop---*/
     @GetMapping("/lopsv/maLop-{maLop}")
-    public ResponseEntity<Lopsv> get(@PathVariable("maLop") String maLop) {
-        Lopsv lopsv = lopsvService.getByMaLop(maLop);
-        return ResponseEntity.ok().body(lopsv);
+    public  Lopsv get(@PathVariable("maLop") String maLop) {
+        return lopsvService.getByMaLop(maLop);
     }
 
-    /*---get all books---*/
+    /*---get all lopsv---*/
     @GetMapping("/lopsv")
-    public ResponseEntity<List<Lopsv>> list() {
-        List<Lopsv> lopsvs = lopsvService.list();
-        return ResponseEntity.ok().body(lopsvs);
+    public List<Lopsv> list() {
+        return lopsvService.list();
     }
 
-    /*---Update a book by id---*/
+    /*---Update a lopsv by maLop---*/
     @PutMapping("/lopsv/maLop-{maLop}")
-    public ResponseEntity<?> update(@PathVariable("maLop") String maLop, @RequestBody Lopsv lopsv) {
+    public boolean update(@PathVariable("maLop") String maLop, @RequestBody Lopsv lopsv) {
         lopsv.setMaLop(maLop);
         if (lopsvService.getByMaLop(maLop) == null) {
-            return ResponseEntity.badRequest().body("can not find Lop sv by ma Lop");
+            return true;
         }
         lopsvService.update(lopsv);
-        return ResponseEntity.ok().body("Lop sv has been updated successfully.");
+        return false;
     }
 
-    /*---Delete a book by id---*/
+    /*---Delete a lopsv by maLop---*/
     @DeleteMapping("/lopsv/maLop-{maLop}")
-    public ResponseEntity<?> delete(@PathVariable("maLop") String maLop) {
+    public boolean delete(@PathVariable("maLop") String maLop) {
         if (lopsvService.getByMaLop(maLop) == null) {
-            return ResponseEntity.badRequest().body("can not find Lop sv by ma Lop");
+            return true;
         }
         lopsvService.delete(maLop);
-        return ResponseEntity.ok().body("Lop sv has been deleted successfully.");
+        return false;
     }
 }

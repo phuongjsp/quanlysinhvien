@@ -13,51 +13,47 @@ public class NganhdaotaoController {
     @Autowired
     private NganhdaotaoService nganhdaotaoService;
 
-    /*---Add new book---*/
+    /*---Add new nganhdaotao---*/
     @PostMapping("/nganhdaotao")
-    public ResponseEntity<?> save(@RequestBody Nganhdaotao nganhdaotao) {
-        long id = nganhdaotaoService.save(nganhdaotao);
-        return ResponseEntity.ok().body("New nganh dao tao has been saved with ID:" + id);
+    public void save(@RequestBody Nganhdaotao nganhdaotao) {
+        nganhdaotaoService.save(nganhdaotao);
     }
 
-    /*---Get a book by id---*/
+    /*---Get a nganhdaotao by id---*/
     @GetMapping("/nganhdaotao/{id}")
-    public ResponseEntity<Nganhdaotao> get(@PathVariable("id") int id) {
-        Nganhdaotao nganhdaotao = nganhdaotaoService.getByID(id);
-        return ResponseEntity.ok().body(nganhdaotao);
+    public  Nganhdaotao get(@PathVariable("id") int id) {
+        return nganhdaotaoService.getByID(id);
     }
-
+    /*---Get a nganhdaotao by maNganh---*/
     @GetMapping("/nganhdaotao/maNganh-{maNganh}")
-    public ResponseEntity<Nganhdaotao> get(@PathVariable("maNganh") String maNganh) {
-        Nganhdaotao nganhdaotao = nganhdaotaoService.getByMaNganhdaotao(maNganh);
-        return ResponseEntity.ok().body(nganhdaotao);
+    public Nganhdaotao get(@PathVariable("maNganh") String maNganh) {
+        return nganhdaotaoService.getByMaNganhdaotao(maNganh);
     }
 
-    /*---get all books---*/
+    /*---get all nganhdaotao---*/
     @GetMapping("/nganhdaotao")
-    public ResponseEntity<List<Nganhdaotao>> list() {
-        List<Nganhdaotao> nganhdaotaos = nganhdaotaoService.list();
-        return ResponseEntity.ok().body(nganhdaotaos);
+    public  List<Nganhdaotao> list() {
+        return  nganhdaotaoService.list();
     }
 
-    /*---Update a book by id---*/
+    /*---Update a nganhdaotao by maNganh---*/
     @PutMapping("/nganhdaotao/maNganh-{maNganh}")
-    public ResponseEntity<?> update(@PathVariable("maNganh") String maNganh, @RequestBody Nganhdaotao nganhdaotao) {
+    public boolean update(@PathVariable("maNganh") String maNganh, @RequestBody Nganhdaotao nganhdaotao) {
         nganhdaotao.setMaNganh(maNganh);
         if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
-            return ResponseEntity.badRequest().body("can not find Nganh dao tao  by ma nganh");
+            return true;
         }
         nganhdaotaoService.update(nganhdaotao);
-        return ResponseEntity.ok().body(" Nganh dao tao has been updated successfully.");
+        return false;
     }
 
-    /*---Delete a book by id---*/
+    /*---Delete a nganhdaotao by maNganh---*/
     @DeleteMapping("/nganhdaotao/maNganh-{maNganh}")
-    public ResponseEntity<?> delete(@PathVariable("maNganh") String maNganh) {
+    public boolean delete(@PathVariable("maNganh") String maNganh) {
         if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
-            return ResponseEntity.badRequest().body("can not find Nganh dao tao  by ma nganh");
+            return true;
         }
         nganhdaotaoService.delete(maNganh);
-        return ResponseEntity.ok().body(" Nganh dao tao has been deleted successfully.");
+        return false;
     }
 }

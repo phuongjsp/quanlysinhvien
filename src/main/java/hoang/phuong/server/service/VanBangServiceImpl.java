@@ -16,7 +16,7 @@ public class VanBangServiceImpl implements VanBangService {
 
     @Transactional
     @Override
-    public int save(Vanbang vanbang) {
+    public boolean save(Vanbang vanbang) {
         return vanBangDAO.save(vanbang);
     }
 

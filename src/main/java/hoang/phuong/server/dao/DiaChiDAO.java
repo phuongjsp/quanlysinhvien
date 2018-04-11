@@ -11,7 +11,7 @@ public interface DiaChiDAO {
 
     List<Diachi> list();
 
-    void update(Diachi diachi);
+    boolean update(Diachi diachi);
 
-    void delete(int id);
+    boolean delete(int id);
 }

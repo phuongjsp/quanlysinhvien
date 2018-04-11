@@ -24,12 +24,26 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
     }
 
     @Override
-    public void update(Diachi diachi) {
-        saveDAO(diachi);
+    public boolean update(Diachi diachi) {
+
+        if(getByID(diachi.getId())!=null) {
+           Diachi diachi2 = getByID(diachi.getId());
+           diachi2.setTinh(diachi.getTinh());
+           diachi2.setQuanHuyen(diachi.getQuanHuyen());
+           diachi2.setXaPhuong(diachi.getXaPhuong());
+           diachi2.setThonXom(diachi.getThonXom());
+           getSession().flush();
+            return true;
+        }
+        return false;
     }
 
     @Override
-    public void delete(int id) {
-        deleteDAO(id);
+    public boolean delete(int id) {
+       if(getByID(id)!=null) {
+           deleteDAO(id);
+           return true;
+       }
+       return false;
     }
 }

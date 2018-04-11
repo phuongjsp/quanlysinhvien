@@ -9,9 +9,12 @@ import java.util.List;
 @Repository
 public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDAO {
     @Override
-    public int save(Lopsv lopsv) {
-        saveDAO(lopsv);
-        return lopsv.getId();
+    public boolean save(Lopsv lopsv) {
+        if(getByMaLop(lopsv.getMaLop())!=null) {
+             saveDAO(lopsv);
+             return true;
+        }
+        return false;
     }
 
     @Override
@@ -25,14 +28,21 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
     }
 
     @Override
-    public void update(Lopsv lopsv) {
-        Lopsv lopsv2 = getByMaLop(lopsv.getMaLop());
-        lopsv2.setTenLop(lopsv.getTenLop());
-        getSession().flush();
+    public boolean update(Lopsv lopsv) {
+
+        if(getByMaLop(lopsv.getMaLop())!=null){
+            Lopsv lopsv2 = getByMaLop(lopsv.getMaLop());
+            lopsv2.setTenLop(lopsv.getTenLop());
+            getSession().flush();
+            return true;
+        }return false  ;
     }
 
     @Override
-    public void delete(String maLop) {
-        deleteDAO(getByMaLop(maLop));
+    public boolean delete(String maLop) {
+       if(getByMaLop(maLop)!=null){
+           deleteDAO(getByMaLop(maLop));
+           return true;
+       }return false;
     }
 }

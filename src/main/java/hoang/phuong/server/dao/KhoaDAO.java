@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Khoa;
 import java.util.List;
 
 public interface KhoaDAO {
-    int save(Khoa khoa);
+    boolean save(Khoa khoa);
 
     Khoa getByID(int id);
 
@@ -13,7 +13,7 @@ public interface KhoaDAO {
 
     List<Khoa> list();
 
-    void update(Khoa khoa);
+    boolean update(Khoa khoa);
 
-    void delete(int id);
+    boolean delete(int id);
 }

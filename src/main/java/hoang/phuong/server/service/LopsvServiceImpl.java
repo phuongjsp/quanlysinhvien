@@ -16,7 +16,7 @@ public class LopsvServiceImpl implements LopsvService {
 
     @Transactional
     @Override
-    public int save(Lopsv lopsv) {
+    public boolean save(Lopsv lopsv) {
         return lopsvDAO.save(lopsv);
     }
 
