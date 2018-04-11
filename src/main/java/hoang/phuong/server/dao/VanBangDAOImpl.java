@@ -9,7 +9,7 @@ import java.util.List;
 public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanBangDAO {
     @Override
     public boolean save(Vanbang vanbang) {
-       if(getByMaVB(vanbang.getMaVanBang())!=null) {
+       if(getByMaVB(vanbang.getMaVanBang())==null) {
            saveDAO(vanbang);
            return true;
        }

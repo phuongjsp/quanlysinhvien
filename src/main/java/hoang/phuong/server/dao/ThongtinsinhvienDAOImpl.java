@@ -26,7 +26,7 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
 
     @Override
     public boolean save(Thongtinsinhvien thongtinsinhvien) {
-       if(getByMaSV(thongtinsinhvien.getMaSv())!=null){
+       if(getByMaSV(thongtinsinhvien.getMaSv())==null){
            saveDAO(thongtinsinhvien);
            return true;
        }
