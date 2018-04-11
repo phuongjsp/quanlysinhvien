@@ -50,10 +50,10 @@ public class VanBangController {
     @DeleteMapping("/vanbang/maVB-{maVB}")
     public boolean delete(@PathVariable("maVB") String maVB) {
         if (vanBangService.getByMaVB(maVB) == null) {
-            return true;
+            return false;
         }
 
         vanBangService.delete(vanBangService.getByMaVB(maVB).getId());
-        return false;
+        return true;
     }
 }

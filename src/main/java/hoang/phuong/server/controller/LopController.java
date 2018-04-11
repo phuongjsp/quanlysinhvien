@@ -46,9 +46,9 @@ public class LopController {
     @DeleteMapping("/lopsv/maLop-{maLop}")
     public boolean delete(@PathVariable("maLop") String maLop) {
         if (lopsvService.getByMaLop(maLop) == null) {
-            return true;
+            return false;
         }
         lopsvService.delete(maLop);
-        return false;
+        return true;
     }
 }

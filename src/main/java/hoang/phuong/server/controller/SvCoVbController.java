@@ -67,9 +67,9 @@ private VanBangService vanBangService;
     @DeleteMapping("/svcovb/{id}")
     public boolean dalete(@PathVariable("id") int id) {
         if (svCoVbService.getById(id) == null) {
-            return true;
+            return false;
         }
         svCoVbService.delete(id);
-        return false;
+        return true;
     }
 }

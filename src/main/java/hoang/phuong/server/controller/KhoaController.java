@@ -51,9 +51,9 @@ public class KhoaController {
     @DeleteMapping("/khoa/{id}")
     public boolean delete(@PathVariable("id") int id) {
         if (khoaService.getByID(id) == null) {
-            return true;
+            return false;
         }
         khoaService.delete(id);
-        return false;
+        return true;
     }
 }

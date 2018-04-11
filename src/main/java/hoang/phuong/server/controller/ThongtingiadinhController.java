@@ -55,9 +55,9 @@ public class ThongtingiadinhController {
     @DeleteMapping("/thongtingiadinh/{id}")
     public boolean delete(@PathVariable("id") int id) {
         if (thongtingiadinhService.getByID(id) == null) {
-            return true;
+            return false;
         }
         thongtingiadinhService.delete(id);
-        return false;
+        return true;
     }
 }

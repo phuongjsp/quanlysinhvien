@@ -51,9 +51,9 @@ public class NganhdaotaoController {
     @DeleteMapping("/nganhdaotao/maNganh-{maNganh}")
     public boolean delete(@PathVariable("maNganh") String maNganh) {
         if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
-            return true;
+            return false;
         }
         nganhdaotaoService.delete(maNganh);
-        return false;
+        return true;
     }
 }

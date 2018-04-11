@@ -45,9 +45,9 @@ public class DiaChiController {
     @DeleteMapping("/diachi/{id}")
     public boolean delete(@PathVariable("id") int id) {
         if (diaChiService.getByID(id) == null) {
-            return true;
+            return false;
         }
         diaChiService.delete(id);
-        return false;
+        return true;
     }
 }

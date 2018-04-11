@@ -57,9 +57,9 @@ public class ThongtinthemController {
     @DeleteMapping("/thongtinthem/{id}")
     public boolean delete(@PathVariable("id") int id) {
         if (thongtinthemService.getByID(id) == null) {
-            return true;
+            return false;
         }
         thongtinthemService.delete(id);
-        return false;
+        return true;
     }
 }
