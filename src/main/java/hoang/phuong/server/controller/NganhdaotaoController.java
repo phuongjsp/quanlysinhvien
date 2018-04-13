@@ -41,10 +41,10 @@ public class NganhdaotaoController {
     public boolean update(@PathVariable("maNganh") String maNganh, @RequestBody Nganhdaotao nganhdaotao) {
         nganhdaotao.setMaNganh(maNganh);
         if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
-            return true;
+            return false;
         }
         nganhdaotaoService.update(nganhdaotao);
-        return false;
+        return true;
     }
 
     /*---Delete a nganhdaotao by maNganh---*/

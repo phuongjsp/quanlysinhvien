@@ -36,10 +36,10 @@ public class LopController {
     public boolean update(@PathVariable("maLop") String maLop, @RequestBody Lopsv lopsv) {
         lopsv.setMaLop(maLop);
         if (lopsvService.getByMaLop(maLop) == null) {
-            return true;
+            return false   ;
         }
         lopsvService.update(lopsv);
-        return false;
+        return true;
     }
 
     /*---Delete a lopsv by maLop---*/

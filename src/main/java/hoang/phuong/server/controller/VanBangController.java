@@ -40,10 +40,10 @@ public class VanBangController {
     public boolean update(@PathVariable("maVB") String maVB, @RequestBody Vanbang vanbang) {
         vanbang.setMaVanBang(maVB);
         if (vanBangService.getByMaVB(maVB) == null) {
-            return true;
+            return false   ;
         }
         vanBangService.update(vanbang);
-        return false;
+        return true;
     }
 
     /*---Delete a vanbang by maVB---*/

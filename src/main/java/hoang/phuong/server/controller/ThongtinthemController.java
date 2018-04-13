@@ -47,10 +47,10 @@ public class ThongtinthemController {
     public boolean    update(@PathVariable("id") int id, @RequestBody Thongtinthem thongtinthem) {
         thongtinthem.setId(id);
         if (thongtinthemService.getByID(id) == null) {
-            return true;
+            return false;
         }
         thongtinthemService.update(thongtinthem);
-        return false;
+        return true;
     }
 
     /*---Delete a thongtinthem by id---*/

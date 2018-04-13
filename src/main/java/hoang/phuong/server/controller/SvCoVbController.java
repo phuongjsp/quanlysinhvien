@@ -57,10 +57,10 @@ private VanBangService vanBangService;
     public boolean update(@PathVariable("id") int id, @RequestBody Svcovb svcovb) {
         svcovb.setId(id);
         if (svCoVbService.getById(id) == null) {
-            return true;
+            return false;
         }
         svCoVbService.update(svcovb);
-        return false;
+        return true;
     }
 
     /*---Delete a book by id---*/
