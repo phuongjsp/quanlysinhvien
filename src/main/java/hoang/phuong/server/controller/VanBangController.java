@@ -36,10 +36,9 @@ public class VanBangController {
     }
 
     /*---Update a book by maVB---*/
-    @PutMapping("/vanbang/maVB-{maVB}")
-    public boolean update(@PathVariable("maVB") String maVB, @RequestBody Vanbang vanbang) {
-        vanbang.setMaVanBang(maVB);
-        if (vanBangService.getByMaVB(maVB) == null) {
+    @PutMapping("/vanbang/update")
+    public boolean update( @RequestBody Vanbang vanbang) {
+        if (vanBangService.getbyId(vanbang.getId()) == null) {
             return false   ;
         }
         vanBangService.update(vanbang);

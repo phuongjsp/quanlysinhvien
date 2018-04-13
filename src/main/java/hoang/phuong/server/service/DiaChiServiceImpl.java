@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
+import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
@@ -28,6 +29,11 @@ public class DiaChiServiceImpl implements DiaChiService {
     @Override
     public List<Diachi> list() {
         return diaChiDAO.list();
+    }
+
+    @Override
+    public List<Diachi> listByProperties(Map<String, String> map) {
+        return diaChiDAO.listByProperties(map);
     }
 
     @Transactional

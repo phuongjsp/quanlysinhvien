@@ -36,11 +36,10 @@ public class NganhdaotaoController {
         return  nganhdaotaoService.list();
     }
 
-    /*---Update a nganhdaotao by maNganh---*/
-    @PutMapping("/nganhdaotao/maNganh-{maNganh}")
-    public boolean update(@PathVariable("maNganh") String maNganh, @RequestBody Nganhdaotao nganhdaotao) {
-        nganhdaotao.setMaNganh(maNganh);
-        if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
+    /*---Update a nganhdaotao by id---*/
+    @PutMapping("/nganhdaotao/id-{id}")
+    public boolean update(@PathVariable("id") int id, @RequestBody Nganhdaotao nganhdaotao) {
+        if (nganhdaotaoService.getByID(id) == null) {
             return false;
         }
         nganhdaotaoService.update(nganhdaotao);

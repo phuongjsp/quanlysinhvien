@@ -7,6 +7,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @RestController
 public class DiaChiController {
@@ -30,7 +31,11 @@ public class DiaChiController {
     public  List<Diachi> list() {
         return diaChiService.list();
     }
-
+    /*---get all diachi by Properties---*/
+    @PostMapping("/diachi/fliter")
+    public  List<Diachi> listByProperties(@RequestBody  Map<String, String> mapparameters) {
+        return diaChiService.listByProperties(mapparameters);
+    }
     /*---Update a diachi by id---*/
     @PutMapping("/diachi/{id}")
     public boolean update(@PathVariable("id") int id, @RequestBody Diachi diachi) {

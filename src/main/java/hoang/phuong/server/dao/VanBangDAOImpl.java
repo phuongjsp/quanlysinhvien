@@ -35,6 +35,7 @@ public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanB
     public boolean update(Vanbang vanbang) {
 if(getbyId(vanbang.getId())!=null){
             Vanbang vanbang2 = getbyId(vanbang.getId());
+            vanbang2.setMaVanBang(vanbang.getMaVanBang());
             vanbang2.setTenVanBang(vanbang.getTenVanBang());
             getSession().flush();
             return true;

@@ -10,7 +10,7 @@ import java.util.List;
 public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDAO {
     @Override
     public boolean save(Lopsv lopsv) {
-        if(getByMaLop(lopsv.getMaLop())!=null) {
+        if(getByMaLop(lopsv.getMaLop())==null) {
              saveDAO(lopsv);
              return true;
         }

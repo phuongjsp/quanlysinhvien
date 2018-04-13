@@ -34,8 +34,9 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
 
     @Override
     public boolean update(Nganhdaotao nganhdaotao) {
-        if(getByMaNganhdaotao(nganhdaotao.getMaNganh())!=null){
-            Nganhdaotao nganhdaotao2 = getByMaNganhdaotao(nganhdaotao.getMaNganh());
+        if(getByID(nganhdaotao.getId())!=null){
+            Nganhdaotao nganhdaotao2 = getByID(nganhdaotao.getId());
+            nganhdaotao2.setMaNganh(nganhdaotao.getMaNganh());
             nganhdaotao2.setTenNganh(nganhdaotao.getTenNganh());
             nganhdaotao2.setKhoa(nganhdaotao.getKhoa());
             nganhdaotao2.setGhiChu(nganhdaotao.getGhiChu());
