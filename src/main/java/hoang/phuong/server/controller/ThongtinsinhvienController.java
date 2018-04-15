@@ -75,10 +75,9 @@ private SvCoVbService svCoVbService;
     }
 
     /*---Update a thongtinsinhvien by maSV---*/
-    @PutMapping("/thongtinsinhvien/maSV-{maSV}")
-    public boolean update(@PathVariable("maSV") String maSV, @RequestBody Thongtinsinhvien thongtinsinhvien) {
-        thongtinsinhvien.setMaSv(maSV);
-        if (thongtinsinhvienService.getByMaSV(maSV) == null) {
+    @PutMapping("/thongtinsinhvien/{id}")
+    public boolean update(@PathVariable("id") int id, @RequestBody Thongtinsinhvien thongtinsinhvien) {
+        if (thongtinsinhvienService.getById(id) == null) {
             return false;
         }
         thongtinsinhvienService.update(thongtinsinhvien);

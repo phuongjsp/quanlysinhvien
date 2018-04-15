@@ -17,7 +17,7 @@ public class DiaChiServiceImpl implements DiaChiService {
 
     @Transactional
     @Override
-    public int save(Diachi diachi) {
+    public Diachi save(Diachi diachi) {
         return diaChiDAO.save(diachi);
     }
 

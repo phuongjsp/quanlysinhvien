@@ -6,7 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 public interface DiaChiDAO {
-    int save(Diachi diachi);
+    Diachi save(Diachi diachi);
 
     Diachi getByID(int id);
 

@@ -62,7 +62,7 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
 
     public List<T> listOrderByDAO(List<Map<String, Object>> mapOrder, int min, int max) {
         Criteria criteria = createEntityCriteria();
-        mapOrder.forEach((map) -> {
+     if(!mapOrder.isEmpty())   mapOrder.forEach((map) -> {
             if (map.get("order") != null) {
                 if (map.get("order").equals("asc")) criteria.addOrder(Order.asc(map.get("property").toString()));
                 if (map.get("order").equals("desc")) criteria.addOrder(Order.desc(map.get("property").toString()));
@@ -78,7 +78,8 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
                     criteria.add(Restrictions.between(map.get("property").toString(), map.get("valuelow"), map.get("valuehight")));
             }
         });
-        return criteria.setFirstResult(min).setMaxResults(max).list();
+        if(min!=max)criteria.setFirstResult(min).setMaxResults(max);
+        return criteria.list();
     }
 
     public void deleteDAO(PK key) {

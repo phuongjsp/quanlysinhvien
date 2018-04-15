@@ -11,9 +11,18 @@ import java.util.Map;
 @Repository
 public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaChiDAO {
     @Override
-    public int save(Diachi diachi) {
-        saveDAO(diachi);
-        return diachi.getId();
+    public Diachi save(Diachi diachi) {
+        Criteria criteria = createEntityCriteria();
+        criteria.add(Restrictions.eq("tinh",diachi.getTinh()).ignoreCase())
+                .add(Restrictions.eq("quanHuyen",diachi.getQuanHuyen()).ignoreCase())
+                .add(Restrictions.eq("xaPhuong",diachi.getXaPhuong()).ignoreCase())
+                .add(Restrictions.eq("thonXom",diachi.getThonXom()).ignoreCase());
+        Diachi result = (Diachi) criteria.uniqueResult();
+        if(result==null){
+            saveDAO(diachi);
+            return diachi;
+        }
+        else return result;
     }
 
     @Override

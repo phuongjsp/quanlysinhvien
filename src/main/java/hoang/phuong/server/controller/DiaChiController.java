@@ -16,8 +16,8 @@ public class DiaChiController {
 
     /*---Add new diachi---*/
     @PostMapping("/diachi")
-    public void save(@RequestBody Diachi diachi) {
-         diaChiService.save(diachi);
+    public Diachi save(@RequestBody Diachi diachi) {
+       return   diaChiService.save(diachi);
     }
 
     /*---Get a diachi by id---*/
