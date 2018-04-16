@@ -10,7 +10,17 @@ public class Thongtinthem {
     private int idSv;
     private String tenThongTin;
     private String thongTin;
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idSV", referencedColumnName = "id", insertable = false, updatable = false)
+    private Thongtinsinhvien thongtinsinhvien;
 
+    public Thongtinsinhvien getThongtinsinhvien() {
+        return thongtinsinhvien;
+    }
+
+    public void setThongtinsinhvien(Thongtinsinhvien thongtinsinhvien) {
+        this.thongtinsinhvien = thongtinsinhvien;
+    }
 
     public int getId() {
         return id;
@@ -72,5 +82,16 @@ public class Thongtinthem {
         result = 31 * result + (tenThongTin != null ? tenThongTin.hashCode() : 0);
         result = 31 * result + (thongTin != null ? thongTin.hashCode() : 0);
         return result;
+    }
+
+    @Override
+    public String toString() {
+        return "Thongtinthem{" +
+                "id=" + id +
+                ", idSv=" + idSv +
+                ", tenThongTin='" + tenThongTin + '\'' +
+                ", thongTin='" + thongTin + '\'' +
+                ", thongtinsinhvien=" + thongtinsinhvien +
+                '}';
     }
 }
