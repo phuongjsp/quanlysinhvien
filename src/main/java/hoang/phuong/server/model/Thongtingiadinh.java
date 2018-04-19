@@ -10,17 +10,17 @@ public class Thongtingiadinh {
     private String ten;
     private String sdt;
     private String ngheNghiep;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "idSV", referencedColumnName = "id", insertable = false, updatable = false)
-    private Thongtinsinhvien thongtinsinhvien;
-
-    public Thongtinsinhvien getThongtinsinhvien() {
-        return thongtinsinhvien;
-    }
-
-    public void setThongtinsinhvien(Thongtinsinhvien thongtinsinhvien) {
-        this.thongtinsinhvien = thongtinsinhvien;
-    }
+//    @ManyToOne(optional = false)
+//    @JoinColumn(name = "idSV", referencedColumnName = "id", insertable = false, updatable = false)
+//    private Thongtinsinhvien thongtinsinhvien;
+//
+//    public Thongtinsinhvien getThongtinsinhvien() {
+//        return thongtinsinhvien;
+//    }
+//
+//    public void setThongtinsinhvien(Thongtinsinhvien thongtinsinhvien) {
+//        this.thongtinsinhvien = thongtinsinhvien;
+//    }
     @Id
     @Column(name = "id")
     public int getId() {

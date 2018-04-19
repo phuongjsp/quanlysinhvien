@@ -1,8 +1,22 @@
 package hoang.phuong.server.config;
 
+import org.springframework.orm.jpa.support.OpenEntityManagerInViewFilter;
+import org.springframework.web.filter.CharacterEncodingFilter;
+import org.springframework.web.filter.DelegatingFilterProxy;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
+import javax.servlet.Filter;
+
 public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
+
+    @Override
+    protected Filter[] getServletFilters() {
+        CharacterEncodingFilter encodingFilter = new CharacterEncodingFilter();
+        encodingFilter.setForceEncoding(true);
+        encodingFilter.setEncoding("UTF-8");
+        return new Filter[]{encodingFilter};
+
+    }
 
     @Override
     protected Class<?>[] getRootConfigClasses() {

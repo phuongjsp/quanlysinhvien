@@ -10,6 +10,7 @@ import java.util.List;
 public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
     @Override
     public boolean save(Khoa khoa) {
+        System.out.println(khoa);
         if (getByMaKhoa(khoa.getMaKhoa()) == null) {
              saveDAO(khoa);
             return true;

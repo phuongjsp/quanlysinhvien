@@ -90,4 +90,14 @@ public class Khoa {
         return result;
     }
 
+    @Override
+    public String toString() {
+        return "Khoa{" +
+                "id=" + id +
+                ", tenKhoa='" + tenKhoa + '\'' +
+                ", maKhoa='" + maKhoa + '\'' +
+                ", namHoc='" + namHoc + '\'' +
+                ", ghiChu='" + ghiChu + '\'' +
+                '}';
+    }
 }
