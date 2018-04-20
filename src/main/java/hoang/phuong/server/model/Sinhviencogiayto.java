@@ -5,13 +5,16 @@ import javax.persistence.*;
 @Entity
 @Table(name = "sinhviencogiayto")
 public class Sinhviencogiayto {
-    private int id;
-    private int idSv;
-    private int idGiayTo;
-
     @Id
     @Column(name = "id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private int id;
+    private int idSv;
+    private int idGiayTo;
+    @Column(name = "thongtin", columnDefinition = "longtext")
+    private String thongtin;
+
+
     public int getId() {
         return id;
     }
@@ -20,8 +23,6 @@ public class Sinhviencogiayto {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "idSv")
     public int getIdSv() {
         return idSv;
     }
@@ -30,8 +31,6 @@ public class Sinhviencogiayto {
         this.idSv = idSv;
     }
 
-    @Basic
-    @Column(name = "idGiayTo")
     public int getIdGiayTo() {
         return idGiayTo;
     }
@@ -60,5 +59,14 @@ public class Sinhviencogiayto {
         result = 31 * result + idSv;
         result = 31 * result + idGiayTo;
         return result;
+    }
+
+
+    public String getThongtin() {
+        return thongtin;
+    }
+
+    public void setThongtin(String thongtin) {
+        this.thongtin = thongtin;
     }
 }
