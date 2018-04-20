@@ -15,8 +15,8 @@ public class KhoaController {
     @Autowired
     private KhoaService khoaService;
 
-    /*---Add new Khoa---*/
-    @PostMapping(path = "/khoa", produces = "application/json;charset=UTF-8")
+    /*---Add new Khoa--- , produces = "application/json;charset=UTF-8"*/
+    @PostMapping(path = "/khoa")
     public void save(@RequestBody Khoa khoa) {
         khoaService.save(khoa);
     }

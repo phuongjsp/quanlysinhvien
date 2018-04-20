@@ -17,6 +17,7 @@ public class Thongtinsinhvien {
     private Integer khoaHoc;
     private Date ngaySinh;
     private Integer nganhDk;
+    @Column(name = "anhThe", columnDefinition = "longtext")
     private String anhThe;
     private Integer gioiTinh;
     private String danToc;
@@ -38,6 +39,7 @@ public class Thongtinsinhvien {
     @ManyToOne(optional = false)
     @JoinColumn(name = "Lop", referencedColumnName = "id", insertable = false, updatable = false)
     private Lopsv lopsvByLop;
+
 
     public void setId(int id) {
         this.id = id;

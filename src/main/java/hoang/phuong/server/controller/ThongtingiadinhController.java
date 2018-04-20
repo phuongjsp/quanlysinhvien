@@ -30,8 +30,8 @@ public class ThongtingiadinhController {
     }
     /*---Get a thongtingiadinh by id-sv--*/
     @GetMapping("/thongtingiadinh/IDSV-{idsv}")
-    public  List<Thongtingiadinh> get(@PathVariable("idsv") String idsv) {
-        return thongtingiadinhService.listByIDSv(thongtinsinhvienService.getByMaSV(idsv).getId());
+    public  List<Thongtingiadinh> getListByIDSv(@PathVariable("idsv") int idsv) {
+        return thongtingiadinhService.listByIDSv(idsv);
     }
 
     /*---get all thongtingiadinh---*/
