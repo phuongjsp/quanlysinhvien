@@ -45,7 +45,7 @@ private VanBangService vanBangService;
         return svCoVbService.listByLoaiVB(vanBangService.getByMaVB(maVB).getId());
     }
     /*---get all svcovb by mavb and masv---*/
-    @GetMapping("/svcovb/maSV-{MaSv}-maVB-{maVB}")
+    @GetMapping("/svcovb/only/maSV-{MaSv}-maVB-{maVB}")
     public List<Svcovb> listbyIdSvAndLoaiVb(
             @PathVariable("MaSv") String MaSv,
             @PathVariable("maVB") String maVB) {
