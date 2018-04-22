@@ -9,8 +9,13 @@ import java.util.List;
 @Repository
 public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> implements ThongtinthemDAO {
     @Override
-    public void save(Thongtinthem thongtinthem) {
-        saveDAO(thongtinthem);
+    public Thongtinthem save(Thongtinthem thongtinthem) {
+        try {
+            saveDAO(thongtinthem);
+            return thongtinthem;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

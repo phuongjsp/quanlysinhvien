@@ -16,7 +16,7 @@ public class NganhdaotaoServiceImpl implements NganhdaotaoService {
 
     @Transactional
     @Override
-    public boolean save(Nganhdaotao nganhDaoTao) {
+    public Nganhdaotao save(Nganhdaotao nganhDaoTao) {
         return nganhDaoTaoDAO.save(nganhDaoTao);
     }
 
@@ -37,13 +37,13 @@ public class NganhdaotaoServiceImpl implements NganhdaotaoService {
 
     @Transactional
     @Override
-    public void update(Nganhdaotao nganhdaotao) {
-        nganhDaoTaoDAO.update(nganhdaotao);
+    public boolean update(Nganhdaotao nganhdaotao) {
+        return nganhDaoTaoDAO.update(nganhdaotao);
     }
 
     @Transactional
     @Override
-    public void delete(String maNganhdaotao) {
-        nganhDaoTaoDAO.delete(maNganhdaotao);
+    public boolean delete(String maNganhdaotao) {
+        return nganhDaoTaoDAO.delete(maNganhdaotao);
     }
 }

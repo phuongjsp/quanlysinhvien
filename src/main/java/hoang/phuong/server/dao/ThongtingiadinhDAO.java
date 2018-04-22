@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Thongtingiadinh;
 import java.util.List;
 
 public interface ThongtingiadinhDAO {
-    void save(Thongtingiadinh thongtingiadinh);
+    Thongtingiadinh save(Thongtingiadinh thongtingiadinh);
 
     Thongtingiadinh getByID(int id);
 

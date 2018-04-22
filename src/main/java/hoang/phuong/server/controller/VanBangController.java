@@ -3,7 +3,6 @@ package hoang.phuong.server.controller;
 import hoang.phuong.server.model.Vanbang;
 import hoang.phuong.server.service.VanBangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -14,8 +13,8 @@ public class VanBangController {
 
     /*---Add new vanbang---*/
     @PostMapping("/vanbang")
-    public void save(@RequestBody Vanbang vanbang) {
-         vanBangService.save(vanbang);
+    public Vanbang save(@RequestBody Vanbang vanbang) {
+        return vanBangService.save(vanbang);
     }
 
     /*---Get a vanbang by id---*/
@@ -41,8 +40,8 @@ public class VanBangController {
         if (vanBangService.getbyId(vanbang.getId()) == null) {
             return false   ;
         }
-        vanBangService.update(vanbang);
-        return true;
+        return vanBangService.update(vanbang);
+
     }
 
     /*---Delete a vanbang by maVB---*/
@@ -52,7 +51,7 @@ public class VanBangController {
             return false;
         }
 
-        vanBangService.delete(vanBangService.getByMaVB(maVB).getId());
-        return true;
+        return vanBangService.delete(vanBangService.getByMaVB(maVB).getId());
+
     }
 }

@@ -16,7 +16,7 @@ public class VanBangServiceImpl implements VanBangService {
 
     @Transactional
     @Override
-    public boolean save(Vanbang vanbang) {
+    public Vanbang save(Vanbang vanbang) {
         return vanBangDAO.save(vanbang);
     }
 
@@ -36,12 +36,12 @@ public class VanBangServiceImpl implements VanBangService {
     }
     @Transactional
     @Override
-    public void update(Vanbang vanbang) {
-        vanBangDAO.update(vanbang);
+    public boolean update(Vanbang vanbang) {
+        return vanBangDAO.update(vanbang);
     }
     @Transactional
     @Override
-    public void delete(int id) {
-        vanBangDAO.delete(id);
+    public boolean delete(int id) {
+        return vanBangDAO.delete(id);
     }
 }

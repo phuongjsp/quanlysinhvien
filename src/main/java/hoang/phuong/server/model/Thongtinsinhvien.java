@@ -2,8 +2,6 @@ package hoang.phuong.server.model;
 
 import javax.persistence.*;
 import java.sql.Date;
-import java.util.ArrayList;
-import java.util.List;
 
 @Entity
 public class Thongtinsinhvien {
@@ -15,6 +13,7 @@ public class Thongtinsinhvien {
     private String ten;
     private Date ngayVaoHoc;
     private Integer khoaHoc;
+
     private Date ngaySinh;
     private Integer nganhDk;
     @Column(name = "anhThe", columnDefinition = "longtext")
@@ -24,21 +23,6 @@ public class Thongtinsinhvien {
     private Integer noiSinh;
     private Integer hoKhauThuongChu;
     private Integer lop;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "khoaHoc", referencedColumnName = "id", insertable = false, updatable = false)
-    private Khoa khoaByKhoaHoc;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "nganhDK", referencedColumnName = "id", insertable = false, updatable = false)
-    private Nganhdaotao nganhdaotaoByNganhDk;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "noiSinh", referencedColumnName = "id", insertable = false, updatable = false)
-    private Diachi diachiByNoiSinh;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "hoKhauThuongChu", referencedColumnName = "id", insertable = false, updatable = false)
-    private Diachi diachiByHoKhauThuongChu;
-    @ManyToOne(optional = false)
-    @JoinColumn(name = "Lop", referencedColumnName = "id", insertable = false, updatable = false)
-    private Lopsv lopsvByLop;
 
 
     public void setId(int id) {
@@ -95,7 +79,6 @@ public class Thongtinsinhvien {
     public Date getNgaySinh() {
         return ngaySinh;
     }
-
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
@@ -202,45 +185,4 @@ public class Thongtinsinhvien {
     }
 
 
-    public Khoa getKhoaByKhoaHoc() {
-        return khoaByKhoaHoc;
-    }
-
-    public void setKhoaByKhoaHoc(Khoa khoaByKhoaHoc) {
-        this.khoaByKhoaHoc = khoaByKhoaHoc;
-    }
-
-    public Nganhdaotao getNganhdaotaoByNganhDk() {
-        return nganhdaotaoByNganhDk;
-    }
-
-    public void setNganhdaotaoByNganhDk(Nganhdaotao nganhdaotaoByNganhDk) {
-        this.nganhdaotaoByNganhDk = nganhdaotaoByNganhDk;
-    }
-
-    public Diachi getDiachiByNoiSinh() {
-        return diachiByNoiSinh;
-    }
-
-    public void setDiachiByNoiSinh(Diachi diachiByNoiSinh) {
-        this.diachiByNoiSinh = diachiByNoiSinh;
-    }
-
-
-    public Diachi getDiachiByHoKhauThuongChu() {
-        return diachiByHoKhauThuongChu;
-    }
-
-    public void setDiachiByHoKhauThuongChu(Diachi diachiByHoKhauThuongChu) {
-        this.diachiByHoKhauThuongChu = diachiByHoKhauThuongChu;
-    }
-
-
-    public Lopsv getLopsvByLop() {
-        return lopsvByLop;
-    }
-
-    public void setLopsvByLop(Lopsv lopsvByLop) {
-        this.lopsvByLop = lopsvByLop;
-    }
 }

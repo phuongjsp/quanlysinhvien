@@ -6,7 +6,7 @@ import hoang.phuong.server.service.ThongtingiadinhService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import hoang.phuong.server.service.ThongtinthemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -25,8 +25,8 @@ public class ThongtinsinhvienController {
 private SvCoVbService svCoVbService;
     /*---Add new thongtinsinhvien---*/
     @PostMapping("/thongtinsinhvien")
-    public void save(@RequestBody Thongtinsinhvien thongtinsinhvien) {
-        thongtinsinhvienService.save(thongtinsinhvien);;
+    public Thongtinsinhvien save(@RequestBody @DateTimeFormat Thongtinsinhvien thongtinsinhvien) {
+        return thongtinsinhvienService.save(thongtinsinhvien);
 //        return ResponseEntity.ok().body("New thong tin sinh vien has been saved with ID:" + id);
     }
 

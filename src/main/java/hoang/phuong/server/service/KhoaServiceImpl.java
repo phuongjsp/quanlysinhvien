@@ -16,7 +16,7 @@ public class KhoaServiceImpl implements KhoaService {
 
     @Transactional
     @Override
-    public boolean save(Khoa khoa) {
+    public Khoa save(Khoa khoa) {
         return khoaDAO.save(khoa);
     }
 

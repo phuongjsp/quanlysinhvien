@@ -9,12 +9,12 @@ import java.util.List;
 @Repository
 public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDAO {
     @Override
-    public boolean save(Lopsv lopsv) {
+    public Lopsv save(Lopsv lopsv) {
         if(getByMaLop(lopsv.getMaLop())==null) {
              saveDAO(lopsv);
-             return true;
+            return lopsv;
         }
-        return false;
+        return null;
     }
 
     @Override

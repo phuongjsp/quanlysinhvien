@@ -16,7 +16,7 @@ public class LopsvServiceImpl implements LopsvService {
 
     @Transactional
     @Override
-    public boolean save(Lopsv lopsv) {
+    public Lopsv save(Lopsv lopsv) {
         return lopsvDAO.save(lopsv);
     }
 
@@ -32,13 +32,13 @@ public class LopsvServiceImpl implements LopsvService {
 
     @Transactional
     @Override
-    public void update(Lopsv lopsv) {
-        lopsvDAO.update(lopsv);
+    public boolean update(Lopsv lopsv) {
+        return lopsvDAO.update(lopsv);
     }
 
     @Transactional
     @Override
-    public void delete(String maLop) {
-        lopsvDAO.delete(maLop);
+    public boolean delete(String maLop) {
+        return lopsvDAO.delete(maLop);
     }
 }

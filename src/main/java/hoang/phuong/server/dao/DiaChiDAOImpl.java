@@ -13,16 +13,27 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
     @Override
     public Diachi save(Diachi diachi) {
         Criteria criteria = createEntityCriteria();
-        criteria.add(Restrictions.eq("tinh",diachi.getTinh()).ignoreCase())
-                .add(Restrictions.eq("quanHuyen",diachi.getQuanHuyen()).ignoreCase())
-                .add(Restrictions.eq("xaPhuong",diachi.getXaPhuong()).ignoreCase())
-                .add(Restrictions.eq("thonXom",diachi.getThonXom()).ignoreCase());
+        if (diachi.getTinh() != null)
+            criteria.add(Restrictions.eq("tinh", diachi.getTinh()).ignoreCase());
+        else
+            criteria.add(Restrictions.isNull("tinh"));
+        if (diachi.getQuanHuyen() != null)
+            criteria.add(Restrictions.eq("quanHuyen", diachi.getQuanHuyen()).ignoreCase());
+        else
+            criteria.add(Restrictions.isNull("quanHuyen"));
+        if (diachi.getXaPhuong() != null)
+            criteria.add(Restrictions.eq("xaPhuong", diachi.getXaPhuong()).ignoreCase());
+        else
+            criteria.add(Restrictions.isNull("xaPhuong"));
+        if (diachi.getThonXom() != null)
+            criteria.add(Restrictions.eq("thonXom", diachi.getThonXom()).ignoreCase());
+        else
+            criteria.add(Restrictions.isNull("thonXom"));
         Diachi result = (Diachi) criteria.uniqueResult();
-        if(result==null){
+        if (result == null) {
             saveDAO(diachi);
             return diachi;
-        }
-        else return result;
+        } else return result;
     }
 
     @Override
@@ -38,8 +49,8 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
     @Override
     public List<Diachi> listByProperties(Map<String, String> map) {
         Criteria criteria = createEntityCriteria();
-        map.forEach((k,v)->{
-            criteria.add(Restrictions.ilike(k,"%"+v+"%"));
+        map.forEach((k, v) -> {
+            criteria.add(Restrictions.ilike(k, "%" + v + "%"));
         });
 
         return criteria.list();
@@ -48,13 +59,13 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
     @Override
     public boolean update(Diachi diachi) {
 
-        if(getByID(diachi.getId())!=null) {
-           Diachi diachi2 = getByID(diachi.getId());
-          if(diachi.getTinh()!=null) diachi2.setTinh(diachi.getTinh());
-            if(diachi.getQuanHuyen()!=null) diachi2.setQuanHuyen(diachi.getQuanHuyen());
-            if(diachi.getXaPhuong()!=null)  diachi2.setXaPhuong(diachi.getXaPhuong());
-            if(diachi.getThonXom()!=null)  diachi2.setThonXom(diachi.getThonXom());
-           getSession().flush();
+        if (getByID(diachi.getId()) != null) {
+            Diachi diachi2 = getByID(diachi.getId());
+            if (diachi.getTinh() != null) diachi2.setTinh(diachi.getTinh());
+            if (diachi.getQuanHuyen() != null) diachi2.setQuanHuyen(diachi.getQuanHuyen());
+            if (diachi.getXaPhuong() != null) diachi2.setXaPhuong(diachi.getXaPhuong());
+            if (diachi.getThonXom() != null) diachi2.setThonXom(diachi.getThonXom());
+            getSession().flush();
             return true;
         }
         return false;
@@ -62,10 +73,10 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
 
     @Override
     public boolean delete(int id) {
-       if(getByID(id)!=null) {
-           deleteDAO(id);
-           return true;
-       }
-       return false;
+        if (getByID(id) != null) {
+            deleteDAO(id);
+            return true;
+        }
+        return false;
     }
 }

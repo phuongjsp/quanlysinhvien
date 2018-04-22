@@ -21,16 +21,16 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
 
     @Override
     public List<Thongtinsinhvien> list() {
-        return createEntityCriteria().list();
+        return listDAO();
     }
 
     @Override
-    public boolean save(Thongtinsinhvien thongtinsinhvien) {
+    public Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien) {
        if(getByMaSV(thongtinsinhvien.getMaSv())==null){
            saveDAO(thongtinsinhvien);
-           return true;
+           return thongtinsinhvien;
        }
-       return false;
+        return null;
     }
 
     @Override

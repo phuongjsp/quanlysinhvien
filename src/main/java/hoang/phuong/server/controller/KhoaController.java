@@ -2,10 +2,7 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Khoa;
 import hoang.phuong.server.service.KhoaService;
-import javafx.application.Application;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -17,8 +14,8 @@ public class KhoaController {
 
     /*---Add new Khoa--- , produces = "application/json;charset=UTF-8"*/
     @PostMapping(path = "/khoa")
-    public void save(@RequestBody Khoa khoa) {
-        khoaService.save(khoa);
+    public Khoa save(@RequestBody Khoa khoa) {
+        return khoaService.save(khoa);
     }
 
     /*---Get a Khoa by id---*/

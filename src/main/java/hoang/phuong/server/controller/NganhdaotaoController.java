@@ -3,7 +3,6 @@ package hoang.phuong.server.controller;
 import hoang.phuong.server.model.Nganhdaotao;
 import hoang.phuong.server.service.NganhdaotaoService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +14,8 @@ public class NganhdaotaoController {
 
     /*---Add new nganhdaotao---*/
     @PostMapping("/nganhdaotao")
-    public void save(@RequestBody Nganhdaotao nganhdaotao) {
-        nganhdaotaoService.save(nganhdaotao);
+    public Nganhdaotao save(@RequestBody Nganhdaotao nganhdaotao) {
+        return nganhdaotaoService.save(nganhdaotao);
     }
 
     /*---Get a nganhdaotao by id---*/
@@ -42,8 +41,8 @@ public class NganhdaotaoController {
         if (nganhdaotaoService.getByID(id) == null) {
             return false;
         }
-        nganhdaotaoService.update(nganhdaotao);
-        return true;
+        return nganhdaotaoService.update(nganhdaotao);
+
     }
 
     /*---Delete a nganhdaotao by maNganh---*/
@@ -52,7 +51,7 @@ public class NganhdaotaoController {
         if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
             return false;
         }
-        nganhdaotaoService.delete(maNganh);
-        return true;
+        return nganhdaotaoService.delete(maNganh);
+
     }
 }

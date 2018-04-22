@@ -17,8 +17,8 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
 
     @Transactional
     @Override
-    public void save(Thongtinthem thongtinthem) {
-          thongtinthemDAO.save(thongtinthem);
+    public Thongtinthem save(Thongtinthem thongtinthem) {
+        return thongtinthemDAO.save(thongtinthem);
     }
 
     @Override
@@ -38,13 +38,13 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
 
     @Transactional
     @Override
-    public void update(Thongtinthem thongtinthem) {
-        thongtinthemDAO.update(thongtinthem);
+    public boolean update(Thongtinthem thongtinthem) {
+        return thongtinthemDAO.update(thongtinthem);
     }
 
     @Transactional
     @Override
-    public void delete(int id) {
-        thongtinthemDAO.delete(id);
+    public boolean delete(int id) {
+        return thongtinthemDAO.delete(id);
     }
 }

@@ -15,8 +15,8 @@ public class SvCoVbServiceImpl implements SvCoVbService {
 
     @Transactional
     @Override
-    public void save(Svcovb svcovb) {
-         svCoVbDAO.save(svcovb);
+    public Svcovb save(Svcovb svcovb) {
+        return svCoVbDAO.save(svcovb);
     }
 
     @Override
@@ -45,12 +45,12 @@ public class SvCoVbServiceImpl implements SvCoVbService {
     }
     @Transactional
     @Override
-    public void update(Svcovb svcovb) {
-        svCoVbDAO.update(svcovb);
+    public boolean update(Svcovb svcovb) {
+        return svCoVbDAO.update(svcovb);
     }
     @Transactional
     @Override
-    public void delete(int id) {
-        svCoVbDAO.delete(id);
+    public boolean delete(int id) {
+        return svCoVbDAO.delete(id);
     }
 }

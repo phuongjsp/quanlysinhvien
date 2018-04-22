@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Thongtingiadinh;
 import java.util.List;
 
 public interface ThongtingiadinhService {
-    void save(Thongtingiadinh thongtingiadinh);
+    Thongtingiadinh save(Thongtingiadinh thongtingiadinh);
 
     Thongtingiadinh getByID(int id);
 
@@ -13,7 +13,7 @@ public interface ThongtingiadinhService {
 
     List<Thongtingiadinh> listByIDSv(int idSv);
 
-    void update(Thongtingiadinh thongtingiadinh);
+    boolean update(Thongtingiadinh thongtingiadinh);
 
-    void delete(int id);
+    boolean delete(int id);
 }

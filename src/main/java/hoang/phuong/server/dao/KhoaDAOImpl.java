@@ -9,12 +9,12 @@ import java.util.List;
 @Repository
 public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
     @Override
-    public boolean save(Khoa khoa) {
+    public Khoa save(Khoa khoa) {
         if (getByMaKhoa(khoa.getMaKhoa()) == null) {
              saveDAO(khoa);
-            return true;
+            return khoa;
         }
-        return false;
+        return null;
     }
 
     @Override

@@ -3,7 +3,6 @@ package hoang.phuong.server.controller;
 import hoang.phuong.server.model.Lopsv;
 import hoang.phuong.server.service.LopsvService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -15,8 +14,8 @@ public class LopController {
 
     /*---Add new lopsv---*/
     @PostMapping("/lopsv")
-    public void save(@RequestBody Lopsv lopsv) {
-      lopsvService.save(lopsv);
+    public Lopsv save(@RequestBody Lopsv lopsv) {
+        return lopsvService.save(lopsv);
     }
 
     /*---get all maLop---*/

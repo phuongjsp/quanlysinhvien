@@ -9,12 +9,12 @@ import java.util.List;
 @Repository
 public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implements NganhDaoTaoDAO {
     @Override
-    public boolean save(Nganhdaotao nganhDaoTao) {
+    public Nganhdaotao save(Nganhdaotao nganhDaoTao) {
         if(getByMaNganhdaotao(nganhDaoTao.getMaNganh())==null){
             saveDAO(nganhDaoTao);
-            return true;
+            return nganhDaoTao;
         }
-        return false;
+        return null;
     }
 
     @Override

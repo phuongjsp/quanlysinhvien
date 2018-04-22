@@ -1,12 +1,10 @@
 package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Svcovb;
-import hoang.phuong.server.model.Vanbang;
 import hoang.phuong.server.service.SvCoVbService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import hoang.phuong.server.service.VanBangService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +18,8 @@ private ThongtinsinhvienService thongtinsinhvienService;
 private VanBangService vanBangService;
     /*---Add new book---*/
     @PostMapping("/svcovb")
-    public void save(@RequestBody Svcovb svcovb) {
-        svCoVbService.save(svcovb);
+    public Svcovb save(@RequestBody Svcovb svcovb) {
+        return svCoVbService.save(svcovb);
     }
 
     /*---Get a book by id---*/
@@ -59,8 +57,8 @@ private VanBangService vanBangService;
         if (svCoVbService.getById(id) == null) {
             return false;
         }
-        svCoVbService.update(svcovb);
-        return true;
+        return svCoVbService.update(svcovb);
+
     }
 
     /*---Delete a book by id---*/
@@ -69,7 +67,7 @@ private VanBangService vanBangService;
         if (svCoVbService.getById(id) == null) {
             return false;
         }
-        svCoVbService.delete(id);
-        return true;
+        return svCoVbService.delete(id);
+
     }
 }

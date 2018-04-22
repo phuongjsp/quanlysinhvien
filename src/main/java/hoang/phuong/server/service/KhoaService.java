@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Khoa;
 import java.util.List;
 
 public interface KhoaService {
-    boolean save(Khoa khoa);
+    Khoa save(Khoa khoa);
 
     Khoa getByID(int id);
 

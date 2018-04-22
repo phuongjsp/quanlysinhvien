@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Svcovb;
 import java.util.List;
 
 public interface SvCoVbDAO {
-    void save(Svcovb svcovb);
+    Svcovb save(Svcovb svcovb);
     Svcovb getById(int id);
     List<Svcovb> list();
     List<Svcovb> listByIdSv(int idSv);

@@ -8,12 +8,12 @@ import java.util.List;
 @Repository
 public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanBangDAO {
     @Override
-    public boolean save(Vanbang vanbang) {
+    public Vanbang save(Vanbang vanbang) {
        if(getByMaVB(vanbang.getMaVanBang())==null) {
            saveDAO(vanbang);
-           return true;
+           return vanbang;
        }
-       return false;
+        return null;
     }
 
     @Override

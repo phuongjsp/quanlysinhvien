@@ -5,7 +5,6 @@ import hoang.phuong.server.model.Thongtinthem;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import hoang.phuong.server.service.ThongtinthemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -20,8 +19,8 @@ public class ThongtinthemController {
 
     /*---Add new thongtinthem---*/
     @PostMapping("/thongtinthem")
-    public void save(@RequestBody Thongtinthem thongtinthem) {
-          thongtinthemService.save(thongtinthem);
+    public Thongtinthem save(@RequestBody Thongtinthem thongtinthem) {
+        return thongtinthemService.save(thongtinthem);
     }
 
     /*---Get a thongtinthem by id---*/
@@ -49,8 +48,8 @@ public class ThongtinthemController {
         if (thongtinthemService.getByID(id) == null) {
             return false;
         }
-        thongtinthemService.update(thongtinthem);
-        return true;
+        return thongtinthemService.update(thongtinthem);
+
     }
 
     /*---Delete a thongtinthem by id---*/
@@ -59,7 +58,7 @@ public class ThongtinthemController {
         if (thongtinthemService.getByID(id) == null) {
             return false;
         }
-        thongtinthemService.delete(id);
-        return true;
+        return thongtinthemService.delete(id);
+
     }
 }

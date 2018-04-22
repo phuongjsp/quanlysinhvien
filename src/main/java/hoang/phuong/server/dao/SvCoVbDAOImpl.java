@@ -8,8 +8,13 @@ import java.util.List;
 @Repository
 public class SvCoVbDAOImpl extends AbstractDAO<Integer,Svcovb> implements SvCoVbDAO {
     @Override
-    public void save(Svcovb svcovb) {
-        saveDAO(svcovb);
+    public Svcovb save(Svcovb svcovb) {
+        try {
+            saveDAO(svcovb);
+            return svcovb;
+        } catch (Exception e) {
+            return null;
+        }
     }
 
     @Override

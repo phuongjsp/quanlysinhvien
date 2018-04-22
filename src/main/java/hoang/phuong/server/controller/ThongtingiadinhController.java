@@ -1,11 +1,9 @@
 package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Thongtingiadinh;
-import hoang.phuong.server.model.Thongtinsinhvien;
 import hoang.phuong.server.service.ThongtingiadinhService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -19,8 +17,8 @@ public class ThongtingiadinhController {
 
     /*---Add new thongtingiadinh---*/
     @PostMapping("/thongtingiadinh")
-    public void save(@RequestBody Thongtingiadinh thongtingiadinh) {
-        thongtingiadinhService.save(thongtingiadinh);
+    public Thongtingiadinh save(@RequestBody Thongtingiadinh thongtingiadinh) {
+        return thongtingiadinhService.save(thongtingiadinh);
     }
 
     /*---Get a thongtingiadinh by id---*/
@@ -47,8 +45,8 @@ public class ThongtingiadinhController {
         if (thongtingiadinhService.getByID(id) == null) {
             return false;
         }
-        thongtingiadinhService.update(thongtingiadinh);
-        return true;
+        return thongtingiadinhService.update(thongtingiadinh);
+
     }
 
     /*---Delete a thongtingiadinh by id---*/
@@ -57,7 +55,7 @@ public class ThongtingiadinhController {
         if (thongtingiadinhService.getByID(id) == null) {
             return false;
         }
-        thongtingiadinhService.delete(id);
-        return true;
+        return thongtingiadinhService.delete(id);
+
     }
 }

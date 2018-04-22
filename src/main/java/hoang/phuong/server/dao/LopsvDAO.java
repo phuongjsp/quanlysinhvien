@@ -5,7 +5,7 @@ import hoang.phuong.server.model.Lopsv;
 import java.util.List;
 
 public interface LopsvDAO {
-    boolean save(Lopsv lopsv);
+    Lopsv save(Lopsv lopsv);
 
     Lopsv getByMaLop(String maLop);
 

@@ -12,7 +12,7 @@ public interface ThongtinsinhvienService {
 
     List<Thongtinsinhvien> list();
 
-    boolean save(Thongtinsinhvien thongtinsinhvien);
+    Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);
 
     void update(Thongtinsinhvien thongtinsinhvien);
 

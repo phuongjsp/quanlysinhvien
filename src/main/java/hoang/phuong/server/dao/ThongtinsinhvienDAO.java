@@ -16,7 +16,7 @@ public interface ThongtinsinhvienDAO {
 
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 
-    boolean save(Thongtinsinhvien thongtinsinhvien);
+    Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);
 
     void update(Thongtinsinhvien thongtinsinhvien);
 
