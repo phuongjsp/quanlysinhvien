@@ -23,6 +23,11 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
     }
 
     @Override
+    public Lopsv getbyId(int id) {
+        return getByKey(id);
+    }
+
+    @Override
     public List<Lopsv> list() {
         return listDAO();
     }

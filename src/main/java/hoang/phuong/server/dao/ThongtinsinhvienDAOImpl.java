@@ -75,6 +75,7 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
         return createEntityCriteria().setFirstResult(min).setMaxResults(max).list();
     }
 
+
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
 

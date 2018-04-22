@@ -18,12 +18,15 @@ public class LopController {
         return lopsvService.save(lopsv);
     }
 
-    /*---get all maLop---*/
     @GetMapping("/lopsv/maLop-{maLop}")
     public  Lopsv get(@PathVariable("maLop") String maLop) {
         return lopsvService.getByMaLop(maLop);
     }
 
+    @GetMapping("/lopsv/{id}")
+    public Lopsv getById(@PathVariable("id") int id) {
+        return lopsvService.getbyId(id);
+    }
     /*---get all lopsv---*/
     @GetMapping("/lopsv")
     public List<Lopsv> list() {

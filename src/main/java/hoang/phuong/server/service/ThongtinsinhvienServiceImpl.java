@@ -53,6 +53,7 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
         return thongtinsinhvienDAO.listLimit(min, max);
     }
 
+
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
         return thongtinsinhvienDAO.listOrderBy(mapOrder, min, max);

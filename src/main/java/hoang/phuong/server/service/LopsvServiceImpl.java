@@ -26,6 +26,11 @@ public class LopsvServiceImpl implements LopsvService {
     }
 
     @Override
+    public Lopsv getbyId(int id) {
+        return lopsvDAO.getbyId(id);
+    }
+
+    @Override
     public List<Lopsv> list() {
         return lopsvDAO.list();
     }

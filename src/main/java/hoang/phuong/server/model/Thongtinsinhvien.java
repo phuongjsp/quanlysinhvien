@@ -13,7 +13,6 @@ public class Thongtinsinhvien {
     private String ten;
     private Date ngayVaoHoc;
     private Integer khoaHoc;
-
     private Date ngaySinh;
     private Integer nganhDk;
     @Column(name = "anhThe", columnDefinition = "longtext")
@@ -23,7 +22,21 @@ public class Thongtinsinhvien {
     private Integer noiSinh;
     private Integer hoKhauThuongChu;
     private Integer lop;
-
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "khoaHoc", referencedColumnName = "id", insertable = false, updatable = false)
+    private Khoa khoaByKhoaHoc;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "nganhDK", referencedColumnName = "id", insertable = false, updatable = false)
+    private Nganhdaotao nganhdaotaoByNganhDk;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "noiSinh", referencedColumnName = "id", insertable = false, updatable = false)
+    private Diachi diachiByNoiSinh;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "hoKhauThuongChu", referencedColumnName = "id", insertable = false, updatable = false)
+    private Diachi diachiByHoKhauThuongChu;
+    @ManyToOne(fetch = FetchType.EAGER)
+    @JoinColumn(name = "Lop", referencedColumnName = "id", insertable = false, updatable = false)
+    private Lopsv lopsvByLop;
 
     public void setId(int id) {
         this.id = id;
@@ -185,4 +198,45 @@ public class Thongtinsinhvien {
     }
 
 
+    public Khoa getKhoaByKhoaHoc() {
+        return khoaByKhoaHoc;
+    }
+
+    public void setKhoaByKhoaHoc(Khoa khoaByKhoaHoc) {
+        this.khoaByKhoaHoc = khoaByKhoaHoc;
+    }
+
+    public Nganhdaotao getNganhdaotaoByNganhDk() {
+        return nganhdaotaoByNganhDk;
+    }
+
+    public void setNganhdaotaoByNganhDk(Nganhdaotao nganhdaotaoByNganhDk) {
+        this.nganhdaotaoByNganhDk = nganhdaotaoByNganhDk;
+    }
+
+    public Diachi getDiachiByNoiSinh() {
+        return diachiByNoiSinh;
+    }
+
+    public void setDiachiByNoiSinh(Diachi diachiByNoiSinh) {
+        this.diachiByNoiSinh = diachiByNoiSinh;
+    }
+
+
+    public Diachi getDiachiByHoKhauThuongChu() {
+        return diachiByHoKhauThuongChu;
+    }
+
+    public void setDiachiByHoKhauThuongChu(Diachi diachiByHoKhauThuongChu) {
+        this.diachiByHoKhauThuongChu = diachiByHoKhauThuongChu;
+    }
+
+
+    public Lopsv getLopsvByLop() {
+        return lopsvByLop;
+    }
+
+    public void setLopsvByLop(Lopsv lopsvByLop) {
+        this.lopsvByLop = lopsvByLop;
+    }
 }

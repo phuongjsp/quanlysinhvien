@@ -19,6 +19,5 @@ public interface ThongtinsinhvienService {
     void delete(String maSv);
 
     List<Thongtinsinhvien> listLimit(int min, int max);
-
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 }
