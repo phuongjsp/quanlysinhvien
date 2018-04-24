@@ -92,7 +92,7 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
                 if (map.get("type").equals("in"))
                     criteria.add(Restrictions.in("tt." + map.get("property").toString(), map.get("value")));
                 if (map.get("type").equals("between"))
-                    criteria.add(Restrictions.between("tt." + map.get("property").toString(), map.get("valuelow"), map.get("valuehight")));
+                    criteria.add(Restrictions.between("tt." + map.get("property").toString(), java.sql.Date.valueOf(map.get("valuelow").toString()), java.sql.Date.valueOf(map.get("valuehight").toString())));
             }
         });
         if(min!=max)criteria.setFirstResult(min).setMaxResults(max);
