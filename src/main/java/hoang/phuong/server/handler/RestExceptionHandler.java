@@ -17,7 +17,7 @@ import org.springframework.web.servlet.NoHandlerFoundException;
 import javax.servlet.http.HttpServletRequest;
 import java.nio.file.AccessDeniedException;
 
-//import org.springframework.security.access.AccessDeniedException;
+//import org.springframework.security.access.AccessDeniedException;2
 
 @ControllerAdvice(annotations = RestController.class)
 public class RestExceptionHandler extends AbstractExceptionHandler {
