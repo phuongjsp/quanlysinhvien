@@ -4,18 +4,21 @@ import hoang.phuong.server.model.Thongtinsinhvien;
 import hoang.phuong.server.model.Thongtinthem;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import hoang.phuong.server.service.ThongtinthemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class ThongtinthemController {
-    @Autowired
     private ThongtinthemService thongtinthemService;
-
-    @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
+
+    @Inject
+    public ThongtinthemController(ThongtinthemService thongtinthemService, ThongtinsinhvienService thongtinsinhvienService) {
+        this.thongtinthemService = thongtinthemService;
+        this.thongtinsinhvienService = thongtinsinhvienService;
+    }
 
     /*---Add new thongtinthem---*/
     @PostMapping("/thongtinthem")

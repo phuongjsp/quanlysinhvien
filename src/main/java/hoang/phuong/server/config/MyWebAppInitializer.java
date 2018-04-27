@@ -4,6 +4,7 @@ import org.springframework.web.filter.CharacterEncodingFilter;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
 import javax.servlet.Filter;
+import javax.servlet.ServletRegistration;
 
 public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
 
@@ -16,6 +17,10 @@ public class MyWebAppInitializer extends AbstractAnnotationConfigDispatcherServl
 
     }
 
+    @Override
+    public void customizeRegistration(ServletRegistration.Dynamic registration) {
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
+    }
     @Override
     protected Class<?>[] getRootConfigClasses() {
         return new Class[]{AppConfig.class};

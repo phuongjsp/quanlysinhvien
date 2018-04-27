@@ -1,7 +1,5 @@
 package hoang.phuong.server.config;
 
-import org.springframework.jdbc.datasource.DriverManagerDataSource;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.*;
 import org.springframework.core.env.Environment;
 import org.springframework.orm.hibernate5.HibernateTransactionManager;
@@ -9,7 +7,6 @@ import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
-import javax.sql.DataSource;
 import java.util.Properties;
 
 import static org.hibernate.cfg.Environment.*;
@@ -17,14 +14,14 @@ import static org.hibernate.cfg.Environment.*;
 @Configuration
 @PropertySource("classpath:db.properties")
 @EnableTransactionManagement
-@ComponentScans(value = {@ComponentScan("hoang.phuong.server.dao"),
-        @ComponentScan("hoang.phuong.server.service"),
-        @ComponentScan("hoang.phuong.server.model"),
-        @ComponentScan("hoang.phuong.server.controller")})
+@ComponentScans(value = {@ComponentScan("hoang.phuong.server")})
 public class AppConfig {
 
-    @Autowired
     private Environment env;
+
+    public AppConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     @Resource(name = "getSessionFactory")

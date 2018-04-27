@@ -2,17 +2,21 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.NganhDaoTaoDAO;
 import hoang.phuong.server.model.Nganhdaotao;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 public class NganhdaotaoServiceImpl implements NganhdaotaoService {
-    @Autowired
     private NganhDaoTaoDAO nganhDaoTaoDAO;
+
+    @Inject
+    public NganhdaotaoServiceImpl(NganhDaoTaoDAO nganhDaoTaoDAO) {
+        this.nganhDaoTaoDAO = nganhDaoTaoDAO;
+    }
 
     @Transactional
     @Override

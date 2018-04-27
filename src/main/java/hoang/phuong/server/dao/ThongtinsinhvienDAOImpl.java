@@ -1,14 +1,22 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Thongtinsinhvien;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvien> implements ThongtinsinhvienDAO {
+    @Inject
+    public ThongtinsinhvienDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Thongtinsinhvien getByMaSV(String maSV) {
         return (Thongtinsinhvien) createEntityCriteria().add(Restrictions.eq("maSv", maSV)).uniqueResult();
@@ -19,24 +27,21 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
         return getByKey(ID);
     }
 
-    @Override
-    public List<Thongtinsinhvien> list() {
-        return listDAO();
-    }
 
+    @Deprecated
     @Override
     public Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien) {
-       if(getByMaSV(thongtinsinhvien.getMaSv())==null){
-           saveDAO(thongtinsinhvien);
-           return thongtinsinhvien;
-       }
+        if (getByMaSV(thongtinsinhvien.getMaSv()) == null) {
+            saveDAO(thongtinsinhvien);
+            return thongtinsinhvien;
+        }
         return null;
     }
 
     @Override
     public void update(Thongtinsinhvien thongtinsinhvien) {
         Thongtinsinhvien thongtinsinhvien2 = getById(thongtinsinhvien.getId());
-        if(thongtinsinhvien.getMaSv()!=null && thongtinsinhvien.getMaSv()!=thongtinsinhvien2.getMaSv())
+        if (thongtinsinhvien.getMaSv() != null && !thongtinsinhvien.getMaSv().equals(thongtinsinhvien2.getMaSv()))
             thongtinsinhvien2.setMaSv(thongtinsinhvien.getMaSv());
         if (thongtinsinhvien.getNgayVaoHoc() != null )
             thongtinsinhvien2.setNgayVaoHoc(thongtinsinhvien.getNgayVaoHoc());
@@ -65,17 +70,14 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
         getSession().flush();
     }
 
+    @Deprecated
     @Override
     public void delete(String maSv) {
         deleteDAO(getByMaSV(maSv));
     }
 
-    @Override
-    public List<Thongtinsinhvien> listLimit(int min, int max) {
-        return createEntityCriteria().setFirstResult(min).setMaxResults(max).list();
-    }
 
-
+    @Deprecated
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
 

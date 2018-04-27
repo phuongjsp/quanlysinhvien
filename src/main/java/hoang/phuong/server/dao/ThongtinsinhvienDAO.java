@@ -10,9 +10,6 @@ public interface ThongtinsinhvienDAO {
 
     Thongtinsinhvien getById(int ID);
 
-    List<Thongtinsinhvien> list();
-
-    List<Thongtinsinhvien> listLimit(int min, int max);
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 
     Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);

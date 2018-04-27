@@ -2,15 +2,19 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Khoa;
 import hoang.phuong.server.service.KhoaService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class KhoaController {
-    @Autowired
     private KhoaService khoaService;
+
+    @Inject
+    public KhoaController(KhoaService khoaService) {
+        this.khoaService = khoaService;
+    }
 
     /*---Add new Khoa--- , produces = "application/json;charset=UTF-8"*/
     @PostMapping(path = "/khoa")

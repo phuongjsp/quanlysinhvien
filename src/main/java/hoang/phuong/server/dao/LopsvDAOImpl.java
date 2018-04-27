@@ -1,22 +1,32 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Lopsv;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDAO {
+
+    @Inject
+    public LopsvDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Lopsv save(Lopsv lopsv) {
         if(getByMaLop(lopsv.getMaLop())==null) {
-             saveDAO(lopsv);
+            saveDAO(lopsv);
             return lopsv;
         }
         return null;
     }
 
+    @Deprecated
     @Override
     public Lopsv getByMaLop(String maLop) {
         return (Lopsv) createEntityCriteria().add(Restrictions.eq("maLop", maLop)).uniqueResult();
@@ -27,11 +37,13 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
         return getByKey(id);
     }
 
+    @Deprecated
     @Override
     public List<Lopsv> list() {
         return listDAO();
     }
 
+    @Deprecated
     @Override
     public boolean update(Lopsv lopsv) {
 
@@ -43,11 +55,13 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
         }return false  ;
     }
 
+    @Deprecated
     @Override
     public boolean delete(String maLop) {
-       if(getByMaLop(maLop)!=null){
-           deleteDAO(getByMaLop(maLop));
-           return true;
-       }return false;
+        if (getByMaLop(maLop) != null) {
+            deleteDAO(getByMaLop(maLop));
+            return true;
+        }
+        return false;
     }
 }

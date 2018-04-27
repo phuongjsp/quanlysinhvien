@@ -1,18 +1,26 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Vanbang;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 @Repository
 public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanBangDAO {
+    @Inject
+    public VanBangDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Vanbang save(Vanbang vanbang) {
-       if(getByMaVB(vanbang.getMaVanBang())==null) {
-           saveDAO(vanbang);
-           return vanbang;
-       }
+        if (getByMaVB(vanbang.getMaVanBang()) == null) {
+            saveDAO(vanbang);
+            return vanbang;
+        }
         return null;
     }
 
@@ -21,11 +29,13 @@ public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanB
         return getByKey(id);
     }
 
+    @Deprecated
     @Override
     public Vanbang getByMaVB(String maVB) {
         return (Vanbang) createEntityCriteria().add(Restrictions.eq("maVanBang",maVB)).uniqueResult();
     }
 
+    @Deprecated
     @Override
     public List<Vanbang> list() {
         return listDAO();

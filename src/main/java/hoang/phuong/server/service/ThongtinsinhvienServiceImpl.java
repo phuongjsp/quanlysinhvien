@@ -2,18 +2,22 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.ThongtinsinhvienDAO;
 import hoang.phuong.server.model.Thongtinsinhvien;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
 public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
-    @Autowired
     private ThongtinsinhvienDAO thongtinsinhvienDAO;
+
+    @Inject
+    public ThongtinsinhvienServiceImpl(ThongtinsinhvienDAO thongtinsinhvienDAO) {
+        this.thongtinsinhvienDAO = thongtinsinhvienDAO;
+    }
 
     @Override
     public Thongtinsinhvien getByMaSV(String maSV) {
@@ -25,10 +29,6 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
         return thongtinsinhvienDAO.getById(ID);
     }
 
-    @Override
-    public List<Thongtinsinhvien> list() {
-        return thongtinsinhvienDAO.list();
-    }
 
     @Transactional
     @Override
@@ -48,10 +48,6 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
         thongtinsinhvienDAO.delete(maSv);
     }
 
-    @Override
-    public List<Thongtinsinhvien> listLimit(int min, int max) {
-        return thongtinsinhvienDAO.listLimit(min, max);
-    }
 
 
     @Override

@@ -1,13 +1,21 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Nganhdaotao;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implements NganhDaoTaoDAO {
+    @Inject
+    public NganhDaoTaoDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Nganhdaotao save(Nganhdaotao nganhDaoTao) {
         if(getByMaNganhdaotao(nganhDaoTao.getMaNganh())==null){
@@ -21,13 +29,13 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
     public Nganhdaotao getByID(int id) {
         return getByKey(id);
     }
-
     @Override
+    @Deprecated
     public Nganhdaotao getByMaNganhdaotao(String maNganhdaotao) {
         return (Nganhdaotao) createEntityCriteria().add(Restrictions.eq("maNganh", maNganhdaotao)).uniqueResult();
     }
-
     @Override
+    @Deprecated
     public List<Nganhdaotao> list() {
         return listDAO();
     }
@@ -46,12 +54,13 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
         return false;
     }
 
+    @Deprecated
     @Override
     public boolean delete(String maNganhdaotao) {
-       if(getByMaNganhdaotao(maNganhdaotao)!=null){
-           deleteDAO(getByMaNganhdaotao(maNganhdaotao));
-           return true;
-       }
-       return false;
+        if (getByMaNganhdaotao(maNganhdaotao) != null) {
+            deleteDAO(getByMaNganhdaotao(maNganhdaotao));
+            return true;
+        }
+        return false;
     }
 }

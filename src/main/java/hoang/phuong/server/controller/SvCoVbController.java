@@ -4,18 +4,23 @@ import hoang.phuong.server.model.Svcovb;
 import hoang.phuong.server.service.SvCoVbService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import hoang.phuong.server.service.VanBangService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 @RestController
 public class SvCoVbController {
-    @Autowired
     private SvCoVbService svCoVbService;
-@Autowired
 private ThongtinsinhvienService thongtinsinhvienService;
-@Autowired
 private VanBangService vanBangService;
+
+    @Inject
+    public SvCoVbController(SvCoVbService svCoVbService, ThongtinsinhvienService thongtinsinhvienService, VanBangService vanBangService) {
+        this.svCoVbService = svCoVbService;
+        this.thongtinsinhvienService = thongtinsinhvienService;
+        this.vanBangService = vanBangService;
+    }
+
     /*---Add new book---*/
     @PostMapping("/svcovb")
     public Svcovb save(@RequestBody Svcovb svcovb) {

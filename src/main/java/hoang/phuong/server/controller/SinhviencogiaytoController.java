@@ -3,18 +3,22 @@ package hoang.phuong.server.controller;
 import hoang.phuong.server.model.Sinhviencogiayto;
 import hoang.phuong.server.service.SinhviencogiaytoService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class SinhviencogiaytoController {
 
-    @Autowired
     private SinhviencogiaytoService sinhviencogiaytoService;
-    @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
+
+    @Inject
+    public SinhviencogiaytoController(SinhviencogiaytoService sinhviencogiaytoService, ThongtinsinhvienService thongtinsinhvienService) {
+        this.sinhviencogiaytoService = sinhviencogiaytoService;
+        this.thongtinsinhvienService = thongtinsinhvienService;
+    }
 
     @PostMapping(path = "/sinhviencogiayto")
     public Sinhviencogiayto save(@RequestBody Sinhviencogiayto sinhviencogiayto) {
@@ -38,17 +42,11 @@ public class SinhviencogiaytoController {
 
     @PutMapping("/sinhviencogiayto")
     public boolean update(@RequestBody Sinhviencogiayto sinhviencogiayto) {
-        if (sinhviencogiaytoService.update(sinhviencogiayto)) {
-            return true;
-        }
-        return false;
+        return sinhviencogiaytoService.update(sinhviencogiayto);
     }
 
     @DeleteMapping("/sinhviencogiayto/{id}")
     public boolean delete(@PathVariable("id") int id) {
-        if (sinhviencogiaytoService.delete(id)) {
-            return true;
-        }
-        return false;
+        return sinhviencogiaytoService.delete(id);
     }
 }

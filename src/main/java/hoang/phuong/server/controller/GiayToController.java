@@ -5,21 +5,25 @@ import hoang.phuong.server.model.Sinhviencogiayto;
 import hoang.phuong.server.service.GiayToService;
 import hoang.phuong.server.service.SinhviencogiaytoService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;
 
 @RestController
 public class GiayToController {
 
-    @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
-    @Autowired
     private SinhviencogiaytoService sinhviencogiaytoService;
-    @Autowired
     private GiayToService giayToService;
+
+    @Inject
+    public GiayToController(ThongtinsinhvienService thongtinsinhvienService, SinhviencogiaytoService sinhviencogiaytoService, GiayToService giayToService) {
+        this.thongtinsinhvienService = thongtinsinhvienService;
+        this.sinhviencogiaytoService = sinhviencogiaytoService;
+        this.giayToService = giayToService;
+    }
 
     @PostMapping(path = "/giayto")
     public Giayto save(@RequestBody Giayto giayto) {
@@ -52,25 +56,19 @@ public class GiayToController {
                 if (sinhviencogiayto.getIdGiayTo() == giayto.getId()) listReturn.add(giayto);
             }
         }
-        listReturn.forEach(giayto -> {
-            listfull.remove(giayto);
-        });
+        listReturn.forEach(listfull::remove);
         return listfull;
     }
 
     @PutMapping("/giayto")
     public boolean update(@RequestBody Giayto giayto) {
-        if (giayToService.Update(giayto)) {
-            return true;
-        }
-        return false;
+        return giayToService.Update(giayto);
+
     }
 
     @DeleteMapping("/giayto/{id}")
     public boolean delete(@PathVariable("id") int id) {
-        if (giayToService.delete(id)) {
-            return true;
-        }
-        return false;
+        return giayToService.delete(id);
+
     }
 }

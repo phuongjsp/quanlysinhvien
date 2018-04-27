@@ -1,23 +1,30 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Giayto;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class GiayToDAOImpl extends AbstractDAO<Integer, Giayto> implements GiayToDAO {
+    @Inject
+    public GiayToDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public Giayto getById(int id) {
         return getByKey(id);
     }
 
+    @Deprecated
     @Override
     public Giayto getBymaGT(String maGT) {
         try {
-            Giayto giayto = (Giayto) createEntityCriteria().add(Restrictions.eq("maGiayTo", maGT)).uniqueResult();
-            return giayto;
+            return (Giayto) createEntityCriteria().add(Restrictions.eq("maGiayTo", maGT)).uniqueResult();
         } catch (Exception e) {
             return null;
         }
@@ -57,6 +64,7 @@ public class GiayToDAOImpl extends AbstractDAO<Integer, Giayto> implements GiayT
         }
     }
 
+    @Deprecated
     @Override
     public List<Giayto> list() {
         return listDAO();

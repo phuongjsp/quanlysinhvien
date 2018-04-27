@@ -2,15 +2,19 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Lopsv;
 import hoang.phuong.server.service.LopsvService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class LopController {
-    @Autowired
     private LopsvService lopsvService;
+
+    @Inject
+    public LopController(LopsvService lopsvService) {
+        this.lopsvService = lopsvService;
+    }
 
     /*---Add new lopsv---*/
     @PostMapping("/lopsv")

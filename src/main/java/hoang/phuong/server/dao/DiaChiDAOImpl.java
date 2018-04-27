@@ -2,14 +2,23 @@ package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Diachi;
 import org.hibernate.Criteria;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Repository
 public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaChiDAO {
+
+    @Inject
+    public DiaChiDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Diachi save(Diachi diachi) {
         Criteria criteria = createEntityCriteria();
@@ -41,17 +50,18 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
         return getByKey(id);
     }
 
+    @Deprecated
     @Override
     public List<Diachi> list() {
         return listDAO();
     }
 
+    @SuppressWarnings("unchecked")
+    @Deprecated
     @Override
     public List<Diachi> listByProperties(Map<String, String> map) {
         Criteria criteria = createEntityCriteria();
-        map.forEach((k, v) -> {
-            criteria.add(Restrictions.ilike(k, "%" + v + "%"));
-        });
+        map.forEach((k, v) -> criteria.add(Restrictions.ilike(k, "%" + v + "%")));
 
         return criteria.list();
     }

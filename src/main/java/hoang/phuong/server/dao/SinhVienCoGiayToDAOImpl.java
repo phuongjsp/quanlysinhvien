@@ -1,13 +1,21 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Sinhviencogiayto;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class SinhVienCoGiayToDAOImpl extends AbstractDAO<Integer, Sinhviencogiayto> implements SinhVienCoGiayToDAO {
+
+    @Inject
+    public SinhVienCoGiayToDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public Sinhviencogiayto getbyId(int id) {
         return getByKey(id);
@@ -47,11 +55,14 @@ public class SinhVienCoGiayToDAOImpl extends AbstractDAO<Integer, Sinhviencogiay
         }
     }
 
+    @Deprecated
     @Override
     public List<Sinhviencogiayto> list() {
         return listDAO();
     }
 
+    @Deprecated
+    @SuppressWarnings("unchecked")
     @Override
     public List<Sinhviencogiayto> listByIdSv(int idSv) {
         return createEntityCriteria().add(Restrictions.eq("idSv", idSv)).list();

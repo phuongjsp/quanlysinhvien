@@ -2,14 +2,18 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Vanbang;
 import hoang.phuong.server.service.VanBangService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 @RestController
 public class VanBangController {
-    @Autowired
     private VanBangService vanBangService;
+
+    @Inject
+    public VanBangController(VanBangService vanBangService) {
+        this.vanBangService = vanBangService;
+    }
 
     /*---Add new vanbang---*/
     @PostMapping("/vanbang")

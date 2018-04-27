@@ -2,18 +2,22 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.DiaChiDAO;
 import hoang.phuong.server.model.Diachi;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Service
 @Transactional(readOnly = true)
 public class DiaChiServiceImpl implements DiaChiService {
-    @Autowired
     private DiaChiDAO diaChiDAO;
+
+    @Inject
+    public DiaChiServiceImpl(DiaChiDAO diaChiDAO) {
+        this.diaChiDAO = diaChiDAO;
+    }
 
     @Transactional
     @Override

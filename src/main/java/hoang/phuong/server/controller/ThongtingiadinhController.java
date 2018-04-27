@@ -3,17 +3,21 @@ package hoang.phuong.server.controller;
 import hoang.phuong.server.model.Thongtingiadinh;
 import hoang.phuong.server.service.ThongtingiadinhService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class ThongtingiadinhController {
-    @Autowired
     private ThongtingiadinhService thongtingiadinhService;
-    @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
+
+    @Inject
+    public ThongtingiadinhController(ThongtingiadinhService thongtingiadinhService, ThongtinsinhvienService thongtinsinhvienService) {
+        this.thongtingiadinhService = thongtingiadinhService;
+        this.thongtinsinhvienService = thongtinsinhvienService;
+    }
 
     /*---Add new thongtingiadinh---*/
     @PostMapping("/thongtingiadinh")

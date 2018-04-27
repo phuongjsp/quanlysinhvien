@@ -2,15 +2,19 @@ package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Nganhdaotao;
 import hoang.phuong.server.service.NganhdaotaoService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @RestController
 public class NganhdaotaoController {
-    @Autowired
     private NganhdaotaoService nganhdaotaoService;
+
+    @Inject
+    public NganhdaotaoController(NganhdaotaoService nganhdaotaoService) {
+        this.nganhdaotaoService = nganhdaotaoService;
+    }
 
     /*---Add new nganhdaotao---*/
     @PostMapping("/nganhdaotao")

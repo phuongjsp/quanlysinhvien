@@ -2,18 +2,22 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.ThongtinthemDAO;
 import hoang.phuong.server.model.Thongtinthem;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Service
 @Transactional(readOnly = true)
 public class ThongtinthemServiceImpl implements ThongtinthemService {
 
-    @Autowired
     private ThongtinthemDAO thongtinthemDAO;
+
+    @Inject
+    public ThongtinthemServiceImpl(ThongtinthemDAO thongtinthemDAO) {
+        this.thongtinthemDAO = thongtinthemDAO;
+    }
 
     @Transactional
     @Override
@@ -26,6 +30,7 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
         return thongtinthemDAO.getByID(id);
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Thongtinthem> list() {
         return thongtinthemDAO.list();

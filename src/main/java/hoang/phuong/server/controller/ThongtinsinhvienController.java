@@ -1,28 +1,23 @@
 package hoang.phuong.server.controller;
 
 import hoang.phuong.server.model.Thongtinsinhvien;
-import hoang.phuong.server.service.SvCoVbService;
-import hoang.phuong.server.service.ThongtingiadinhService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
-import hoang.phuong.server.service.ThongtinthemService;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.web.bind.annotation.*;
 
+import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @RestController
 public class ThongtinsinhvienController {
-    @Autowired
     private ThongtinsinhvienService thongtinsinhvienService;
 
-    @Autowired
-    private ThongtinthemService thongtinthemService;
-    @Autowired
-    private ThongtingiadinhService thongtingiadinhService;
-@Autowired
-private SvCoVbService svCoVbService;
+    @Inject
+    public ThongtinsinhvienController(ThongtinsinhvienService thongtinsinhvienService) {
+        this.thongtinsinhvienService = thongtinsinhvienService;
+    }
+
     /*---Add new thongtinsinhvien---*/
     @PostMapping("/thongtinsinhvien")
     public Thongtinsinhvien save(@RequestBody @DateTimeFormat Thongtinsinhvien thongtinsinhvien) {
@@ -33,8 +28,7 @@ private SvCoVbService svCoVbService;
     /*---Get a thongtinsinhvien by id---*/
     @GetMapping("/thongtinsinhvien/{id}")
     public Thongtinsinhvien get(@PathVariable("id") int id) {
-        Thongtinsinhvien thongtinsinhvien = thongtinsinhvienService.getById(id);
-        return thongtinsinhvien;
+        return thongtinsinhvienService.getById(id);
     }
     /*---Get a thongtinsinhvien by maSV---*/
     @GetMapping("/thongtinsinhvien/maSV-{maSV}")
@@ -42,16 +36,6 @@ private SvCoVbService svCoVbService;
         return thongtinsinhvienService.getByMaSV(maSV);
     }
 
-    /*---get all thongtinsinhvien---*/
-    @GetMapping("/thongtinsinhvien")
-    public  List<Thongtinsinhvien> list() {
-        return  thongtinsinhvienService.list();
-    }
-    /*---get all thongtinsinhvien limit---*/
-    @GetMapping("/thongtinsinhvien/{min}/{max}")
-    public  List<Thongtinsinhvien> listLimit(@PathVariable("min") int min, @PathVariable("max") int max) {
-        return thongtinsinhvienService.listLimit(min, max);
-    }
 
     //get fliter?msv vd
 /*

@@ -2,16 +2,20 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.SvCoVbDAO;
 import hoang.phuong.server.model.Svcovb;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class SvCoVbServiceImpl implements SvCoVbService {
-    @Autowired
     private SvCoVbDAO svCoVbDAO;
+
+    @Inject
+    public SvCoVbServiceImpl(SvCoVbDAO svCoVbDAO) {
+        this.svCoVbDAO = svCoVbDAO;
+    }
 
     @Transactional
     @Override

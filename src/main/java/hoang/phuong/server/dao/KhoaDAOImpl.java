@@ -1,17 +1,25 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Khoa;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
+    @Inject
+    public KhoaDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
+    @Deprecated
     @Override
     public Khoa save(Khoa khoa) {
         if (getByMaKhoa(khoa.getMaKhoa()) == null) {
-             saveDAO(khoa);
+            saveDAO(khoa);
             return khoa;
         }
         return null;
@@ -22,11 +30,13 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
         return getByKey(id);
     }
 
+    @Deprecated
     @Override
     public Khoa getByMaKhoa(String maKhoa) {
         return (Khoa) createEntityCriteria().add(Restrictions.eq("maKhoa", maKhoa)).uniqueResult();
     }
 
+    @Deprecated
     @Override
     public List<Khoa> list() {
         return listDAO();

@@ -1,13 +1,20 @@
 package hoang.phuong.server.dao;
 
 import hoang.phuong.server.model.Thongtinthem;
+import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
 
+import javax.inject.Inject;
 import java.util.List;
 
 @Repository
 public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> implements ThongtinthemDAO {
+    @Inject
+    public ThongtinthemDAOImpl(SessionFactory sessionFactory) {
+        super(sessionFactory);
+    }
+
     @Override
     public Thongtinthem save(Thongtinthem thongtinthem) {
         try {
@@ -23,11 +30,15 @@ public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> impl
         return getByKey(id);
     }
 
+    @SuppressWarnings("unchecked")
+    @Deprecated
     @Override
     public List<Thongtinthem> list() {
         return createEntityCriteria().list();
     }
 
+    @SuppressWarnings("unchecked")
+    @Deprecated
     @Override
     public List<Thongtinthem> listByIDSv(int idSv) {
         return createEntityCriteria().add(Restrictions.eq("idSv", idSv)).list();

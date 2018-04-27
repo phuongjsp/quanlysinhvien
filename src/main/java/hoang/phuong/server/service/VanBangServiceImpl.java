@@ -2,17 +2,21 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.VanBangDAO;
 import hoang.phuong.server.model.Vanbang;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import javax.inject.Inject;
 import java.util.List;
 @Service
 @Transactional(readOnly = true)
 public class VanBangServiceImpl implements VanBangService {
 
-    @Autowired
     private VanBangDAO vanBangDAO;
+
+    @Inject
+    public VanBangServiceImpl(VanBangDAO vanBangDAO) {
+        this.vanBangDAO = vanBangDAO;
+    }
 
     @Transactional
     @Override
