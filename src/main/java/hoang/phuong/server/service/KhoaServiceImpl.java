@@ -2,6 +2,7 @@ package hoang.phuong.server.service;
 
 import hoang.phuong.server.dao.KhoaDAO;
 import hoang.phuong.server.model.Khoa;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -18,6 +19,8 @@ public class KhoaServiceImpl implements KhoaService {
         this.khoaDAO = khoaDAO;
     }
 
+    @PreAuthorize("hasRole('ROLE_ADMIN') OR" +
+            " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
     @Transactional
     @Override
     public Khoa save(Khoa khoa) {
