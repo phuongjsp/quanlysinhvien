@@ -6,7 +6,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Transactional(readOnly = true)
+@Transactional
 public interface UserRepository {
     User save(User user);
 

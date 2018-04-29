@@ -103,7 +103,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .loginProcessingUrl("/api/login")
                 .successHandler(restAuthenticationSuccessHandler)
                 .failureHandler(restAuthenticationFailureHandler)
-                .usernameParameter("username")
+                .usernameParameter("email")
                 .passwordParameter("password")
                 .and()
                 .logout()

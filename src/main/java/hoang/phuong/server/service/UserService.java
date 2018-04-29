@@ -24,10 +24,15 @@ public interface UserService {
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
     void updatePassword(Integer id, String currentPassword, String newPassword);
 
-    void resetPassword(String email);
+    User resetPassword(String keyCode, String password);
 
     void confirmUser(Activeuser activeuser);
 
+    void ConfirmResetPassword(String email);
+
+    void deleteConfirmResetPassword(String email);
+
+    void deleteActiveUser(String email);
     User isActiveUser(String keyCode);
     @PreAuthorize("hasRole('ROLE_ADMIN') OR" +
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")

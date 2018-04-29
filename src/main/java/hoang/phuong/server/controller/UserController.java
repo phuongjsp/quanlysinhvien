@@ -36,7 +36,7 @@ public class UserController {
         userService.confirmUser(activeuser);
     }
 
-    @PostMapping(value = "/{keyCode}")
+    @PostMapping(value = "/active/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User CreateUser(@PathVariable(value = "keyCode") String keyCode
             , @RequestParam(value = "password") String password) {
@@ -45,6 +45,7 @@ public class UserController {
         }
         User user = userService.isActiveUser(keyCode);
         user.setPassword(password);
+        userService.deleteActiveUser(user.getEmail());
         return userService.save(user);
     }
     @PutMapping(value = "/{id}",
@@ -56,9 +57,21 @@ public class UserController {
     @PatchMapping
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void resetPassword(@RequestParam(value = "email") String email) {
-        userService.resetPassword(email);
+        userService.ConfirmResetPassword(email);
     }
 
+    @PostMapping(value = "/reset/{keyCode}")
+    @ResponseStatus(HttpStatus.CREATED)
+    public User resetPassword(@PathVariable(value = "keyCode") String keyCode
+            , @RequestParam(value = "password") String password) {
+        if (userService.resetPassword(keyCode, password) == null) {
+            return new User();
+        }
+        User user = userService.resetPassword(keyCode, password);
+        user.setPassword(password);
+        userService.deleteConfirmResetPassword(user.getEmail());
+        return userService.update(user.getId(), user);
+    }
     @PatchMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePassword(@PathVariable Integer id,

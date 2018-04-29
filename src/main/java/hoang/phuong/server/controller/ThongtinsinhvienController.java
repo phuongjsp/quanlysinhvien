@@ -55,9 +55,8 @@ public class ThongtinsinhvienController {
         return thongtinsinhvienService.listOrderBy(mapparameters, min, max);
     }
 
-    @PutMapping("/{id}")
-    public boolean update(@PathVariable("id") int id, @RequestBody Thongtinsinhvien thongtinsinhvien) {
-
+    @PutMapping("")
+    public boolean update(@RequestBody Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienService.update(thongtinsinhvien);
     }
 

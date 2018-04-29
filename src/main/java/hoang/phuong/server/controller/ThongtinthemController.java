@@ -48,7 +48,7 @@ public class ThongtinthemController {
 
     }
 
-    @DeleteMapping("/thongtinthem/{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
         return thongtinthemService.delete(id);
 

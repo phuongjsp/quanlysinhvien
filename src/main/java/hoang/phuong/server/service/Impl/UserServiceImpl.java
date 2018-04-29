@@ -1,11 +1,13 @@
 package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.ActiveuserDAO;
+import hoang.phuong.server.dao.ConfirmresetpasswordDAO;
 import hoang.phuong.server.dao.UserRepository;
 import hoang.phuong.server.exception.EntityAlreadyExistsException;
 import hoang.phuong.server.exception.EntityNotFoundException;
 import hoang.phuong.server.exception.ValidationException;
 import hoang.phuong.server.model.Activeuser;
+import hoang.phuong.server.model.Confirmresetpassword;
 import hoang.phuong.server.model.Role;
 import hoang.phuong.server.model.User;
 import hoang.phuong.server.service.EmailService;
@@ -34,14 +36,16 @@ public class UserServiceImpl implements UserService {
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
+    private final ConfirmresetpasswordDAO confirmresetpasswordDAO;
 
     @Inject
     public UserServiceImpl(ActiveuserDAO activeuserDAO, UserRepository userRepository, EmailService emailService,
-                           BCryptPasswordEncoder bCryptPasswordEncoder) {
+                           BCryptPasswordEncoder bCryptPasswordEncoder, ConfirmresetpasswordDAO confirmresetpasswordDAO) {
         this.activeuserDAO = activeuserDAO;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
+        this.confirmresetpasswordDAO = confirmresetpasswordDAO;
     }
 
     @Override
@@ -120,22 +124,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void resetPassword(String email) {
-        if (!EMAIL_PATTERN.matcher(email).matches()) {
-            throw new ValidationException(
-                    String.format("Could not reset password, invalid email %s", email));
+    public User resetPassword(String keyCode, String password) {
+        if (confirmresetpasswordDAO.getByKeyCode(keyCode) != null) {
+            Confirmresetpassword confirmresetpassword = confirmresetpasswordDAO.getByKeyCode(keyCode);
+            User user = userRepository.findByEmail(confirmresetpassword.getEmail());
+            user.setPassword(password);
+            return user;
         }
-        User user = userRepository.findByEmail(email);
-        if (user == null) {
-            throw new EntityNotFoundException(
-                    String.format("Could not reset password, user with email %s not found", email));
-        }
-        String newPassword = UUID.randomUUID().toString().replace("-", "P$");
-        user.setPassword(bCryptPasswordEncoder.encode(newPassword));
-        LOG.info("New Password is :" + newPassword);
-        emailService.sendEmail(email, String.format(
-                "Password reset in QUAN LY SINH VIEN your new password: %s", newPassword));
-        LOG.debug("User with email {} reset password", email);
+        return null;
     }
 
     //TODO how todo?
@@ -153,11 +149,44 @@ public class UserServiceImpl implements UserService {
             activeuserDAO.deleteActiveuser(activeuser.getEmail());
         }
         String createKey = UUID.randomUUID().toString().replace("-", "P$");
-        String keyCode = createKeyCode(createKey);
+        String keyCode = createKeyCodeActive(createKey);
         activeuser.setKeyCode(keyCode);
         activeuserDAO.create(activeuser);
+        //TODO can phai xem lai noi dung tin nhan
         emailService.sendEmail(activeuser.getEmail(), "HELLO please click to link have config your Account \n" +
-                "http://localhost:9966/api/user/" + activeuser.getKeyCode());
+                "http://localhost:9966/api/users/active/" + activeuser.getKeyCode());
+    }
+
+    @Override
+    public void ConfirmResetPassword(String email) {
+        if (!EMAIL_PATTERN.matcher(email).matches()) {
+            throw new ValidationException(
+                    String.format("Could not reset password, invalid email %s", email));
+        }
+        User user = userRepository.findByEmail(email);
+        if (user == null) {
+            throw new EntityNotFoundException(
+                    String.format("Could not reset password, user with email %s not found", email));
+        }
+        String createKey = UUID.randomUUID().toString().replace("-", "P$");
+        Confirmresetpassword confirmresetpassword = new Confirmresetpassword();
+        confirmresetpassword.setEmail(email);
+        confirmresetpassword.setKeyCode(createKeyCodeResetPassword(createKey));
+        //TODO can phai xem lai noi dung tin nhan
+        emailService.sendEmail(confirmresetpassword.getEmail(), "HELLO please click to link have config your Account \n" +
+                "http://localhost:9966/api/users/reset/" + confirmresetpassword.getKeyCode());
+        LOG.debug("User with email {} reset password", email);
+    }
+
+    @Override
+    public void deleteConfirmResetPassword(String email) {
+        confirmresetpasswordDAO.deleteByKeyCode(confirmresetpasswordDAO.getByByEmail(email).getKeyCode());
+    }
+
+    @Override
+    public void deleteActiveUser(String email) {
+        activeuserDAO.deleteActiveuser(email);
+
     }
 
     @Override
@@ -174,10 +203,18 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    String createKeyCode(String keyCode) {
+    String createKeyCodeActive(String keyCode) {
         if (activeuserDAO.getByKeyCode(keyCode) != null) {
             keyCode = UUID.randomUUID().toString().replace("-", "P$");
-            createKeyCode(keyCode);
+            createKeyCodeActive(keyCode);
+        }
+        return keyCode;
+    }
+
+    String createKeyCodeResetPassword(String keyCode) {
+        if (confirmresetpasswordDAO.getByKeyCode(keyCode) != null) {
+            keyCode = UUID.randomUUID().toString().replace("-", "P$");
+            createKeyCodeResetPassword(keyCode);
         }
         return keyCode;
     }
