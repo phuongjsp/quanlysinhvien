@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.*;
 import javax.inject.Inject;
 import java.util.List;
 @RestController
+@RequestMapping("/qlsv/vanbang")
 public class VanBangController {
     private VanBangService vanBangService;
 
@@ -15,46 +16,34 @@ public class VanBangController {
         this.vanBangService = vanBangService;
     }
 
-    /*---Add new vanbang---*/
-    @PostMapping("/vanbang")
+    @PostMapping("")
     public Vanbang save(@RequestBody Vanbang vanbang) {
         return vanBangService.save(vanbang);
     }
 
-    /*---Get a vanbang by id---*/
-    @GetMapping("/vanbang/{id}")
+    @GetMapping("/{id}")
     public  Vanbang  get(@PathVariable("id") int id) {
         return vanBangService.getbyId(id);
     }
-    /*---Get a vanbang by maVB---*/
-    @GetMapping("/vanbang/maVB-{maVB}")
+
+    @GetMapping("/maVB-{maVB}")
     public  Vanbang get(@PathVariable("maVB") String maVB) {
         return vanBangService.getByMaVB(maVB);
     }
 
-    /*---get all vanbang---*/
-    @GetMapping("/vanbang")
+    @GetMapping("")
     public List<Vanbang>  list() {
         return vanBangService.list();
     }
 
-    /*---Update a book by maVB---*/
-    @PutMapping("/vanbang/update")
+    @PutMapping("")
     public boolean update( @RequestBody Vanbang vanbang) {
-        if (vanBangService.getbyId(vanbang.getId()) == null) {
-            return false   ;
-        }
         return vanBangService.update(vanbang);
 
     }
 
-    /*---Delete a vanbang by maVB---*/
-    @DeleteMapping("/vanbang/maVB-{maVB}")
+    @DeleteMapping("/maVB-{maVB}")
     public boolean delete(@PathVariable("maVB") String maVB) {
-        if (vanBangService.getByMaVB(maVB) == null) {
-            return false;
-        }
-
         return vanBangService.delete(vanBangService.getByMaVB(maVB).getId());
 
     }

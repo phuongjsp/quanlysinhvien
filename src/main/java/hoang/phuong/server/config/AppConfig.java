@@ -45,15 +45,22 @@ public class AppConfig {
                                                  String mailSmtpSocketFactoryPort) {
         JavaMailSenderImpl javaMailSender = new JavaMailSenderImpl();
         Properties props = new Properties();
-        props.put("mail.smtp.auth", mailSmtpAuth);
-        props.put("mail.smtp.port", mailSmtpPort);
-        props.put("mail.smtp.socketFactory.class", mailSmtpSocketFactoryClass);
-        props.put("mail.smtp.socketFactory.port", mailSmtpSocketFactoryPort);
+//        props.put("mail.smtp.auth", mailSmtpAuth);
+//        props.put("mail.smtp.port", mailSmtpPort);
+//        props.put("mail.smtp.socketFactory.class", mailSmtpSocketFactoryClass);
+//        props.put("mail.smtp.socketFactory.port", mailSmtpSocketFactoryPort);
+        props.put("mail.transport.protocol", "smtp");
+        props.put("mail.smtp.auth", "true");
+        props.put("mail.smtp.starttls.enable", "true");
+        props.put("mail.debug", "true");
+        props.put("mail.smtp.quitwait", "false");
         javaMailSender.setJavaMailProperties(props);
         javaMailSender.setHost(mailHost);
         javaMailSender.setPort(mailPort);
         javaMailSender.setUsername(mailUsername);
         javaMailSender.setPassword(mailPassword);
+        javaMailSender.setProtocol("smtp");
+
         return javaMailSender;
     }
 

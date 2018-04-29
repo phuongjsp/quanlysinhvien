@@ -5,20 +5,17 @@ import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 public interface KhoaService {
-    @PreAuthorize(value = "hasRole('ROLE_ADMIN') OR" +
-            " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
-    Khoa save(Khoa khoa);
 
-    @PreAuthorize("hasRole('ROLE_QTV')")
+    Khoa save(Khoa khoa);
     Khoa getByID(int id);
 
     Khoa getByMaKhoa(String maKhoa);
 
-    @PreAuthorize("hasRole('ROLE_ADMIN')")
     List<Khoa> list();
 
-    void update(Khoa khoa);
+    boolean update(Khoa khoa);
 
-    void delete(int id);
+    boolean delete(int id);
 }

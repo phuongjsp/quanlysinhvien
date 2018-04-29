@@ -1,9 +1,11 @@
 package hoang.phuong.server.service;
 
+import hoang.phuong.server.dao.ActiveuserDAO;
 import hoang.phuong.server.dao.UserRepository;
 import hoang.phuong.server.exception.EntityAlreadyExistsException;
 import hoang.phuong.server.exception.EntityNotFoundException;
 import hoang.phuong.server.exception.ValidationException;
+import hoang.phuong.server.model.Activeuser;
 import hoang.phuong.server.model.Role;
 import hoang.phuong.server.model.User;
 import org.slf4j.Logger;
@@ -26,14 +28,15 @@ import static hoang.phuong.server.model.User.PASSWORD_PATTERN;
 public class UserServiceImpl implements UserService {
 
     private static final Logger LOG = LoggerFactory.getLogger(UserServiceImpl.class);
-
+    private final ActiveuserDAO activeuserDAO;
     private final UserRepository userRepository;
     private final EmailService emailService;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Inject
-    public UserServiceImpl(UserRepository userRepository, EmailService emailService,
+    public UserServiceImpl(ActiveuserDAO activeuserDAO, UserRepository userRepository, EmailService emailService,
                            BCryptPasswordEncoder bCryptPasswordEncoder) {
+        this.activeuserDAO = activeuserDAO;
         this.userRepository = userRepository;
         this.emailService = emailService;
         this.bCryptPasswordEncoder = bCryptPasswordEncoder;
@@ -56,10 +59,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User save(User user) {
-        if (userRepository.isEmailAlreadyExists(user.getEmail())) {
-            throw new EntityAlreadyExistsException(
-                    String.format("Could not create user, email %s already exist", user.getEmail()));
-        }
         user.setEmail(user.getEmail().toLowerCase());
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
@@ -139,10 +138,47 @@ public class UserServiceImpl implements UserService {
 
     //TODO how todo?
     @Override
-    public void confirmNewPassword(Integer id, String email) {
-
+    public void confirmUser(Activeuser activeuser) {
+        if (!EMAIL_PATTERN.matcher(activeuser.getEmail()).matches()) {
+            throw new ValidationException(
+                    String.format("Could not reset password, invalid email %s", activeuser.getEmail()));
+        }
+        if (userRepository.isEmailAlreadyExists(activeuser.getEmail())) {
+            throw new EntityAlreadyExistsException(
+                    String.format("Could not create user, email %s already exist", activeuser.getEmail()));
+        }
+        if (activeuserDAO.getByEmail(activeuser.getEmail()) != null) {
+            activeuserDAO.deleteActiveuser(activeuser.getEmail());
+        }
+        String createKey = UUID.randomUUID().toString().replace("-", "P$");
+        String keyCode = createKeyCode(createKey);
+        activeuser.setKeyCode(keyCode);
+        activeuserDAO.create(activeuser);
+        emailService.sendEmail(activeuser.getEmail(), "HELLO please click to link have config your Account \n" +
+                "http://localhost:9966/api/user/" + activeuser.getKeyCode());
     }
 
+    @Override
+    public User isActiveUser(String keyCode) {
+        if (activeuserDAO.getByKeyCode(keyCode) != null) {
+            User user = new User();
+            Activeuser activeuser = activeuserDAO.getByKeyCode(keyCode);
+            user.setUserName(activeuser.getUsername());
+            user.setUserLastName(activeuser.getUserLastName());
+            user.setEmail(activeuser.getEmail());
+            return user;
+        }
+        return null;
+    }
+
+
+    String createKeyCode(String keyCode) {
+        if (activeuserDAO.getByKeyCode(keyCode) != null) {
+            keyCode = UUID.randomUUID().toString().replace("-", "P$");
+            createKeyCode(keyCode);
+        }
+        return keyCode;
+    }
     @Override
     public void delete(Integer id, String password) {
         if (!PASSWORD_PATTERN.matcher(password).matches()) {

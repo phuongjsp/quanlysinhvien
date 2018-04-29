@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/sinhviencogiayto")
 public class SinhviencogiaytoController {
 
     private SinhviencogiaytoService sinhviencogiaytoService;
@@ -20,32 +21,32 @@ public class SinhviencogiaytoController {
         this.thongtinsinhvienService = thongtinsinhvienService;
     }
 
-    @PostMapping(path = "/sinhviencogiayto")
+    @PostMapping(path = "")
     public Sinhviencogiayto save(@RequestBody Sinhviencogiayto sinhviencogiayto) {
         return sinhviencogiaytoService.save(sinhviencogiayto);
     }
 
-    @GetMapping("/sinhviencogiayto/{id}")
+    @GetMapping("/{id}")
     public Sinhviencogiayto get(@PathVariable("id") int id) {
         return sinhviencogiaytoService.getbyId(id);
     }
 
-    @GetMapping("/sinhviencogiayto")
+    @GetMapping("")
     public List<Sinhviencogiayto> list() {
         return sinhviencogiaytoService.list();
     }
 
-    @GetMapping("/sinhviencogiayto/maSv-{maSv}")
+    @GetMapping("/maSv-{maSv}")
     public List<Sinhviencogiayto> listByMaSv(@PathVariable("maSv") String maSv) {
         return sinhviencogiaytoService.listByIdSv(thongtinsinhvienService.getByMaSV(maSv).getId());
     }
 
-    @PutMapping("/sinhviencogiayto")
+    @PutMapping("")
     public boolean update(@RequestBody Sinhviencogiayto sinhviencogiayto) {
         return sinhviencogiaytoService.update(sinhviencogiayto);
     }
 
-    @DeleteMapping("/sinhviencogiayto/{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
         return sinhviencogiaytoService.delete(id);
     }

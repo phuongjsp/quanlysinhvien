@@ -38,14 +38,14 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
 
     @Transactional
     @Override
-    public void update(Thongtinsinhvien thongtinsinhvien) {
-        thongtinsinhvienDAO.update(thongtinsinhvien);
+    public boolean update(Thongtinsinhvien thongtinsinhvien) {
+        return thongtinsinhvienDAO.update(thongtinsinhvien);
     }
 
     @Transactional
     @Override
-    public void delete(String maSv) {
-        thongtinsinhvienDAO.delete(maSv);
+    public boolean delete(String maSv) {
+        return thongtinsinhvienDAO.delete(maSv);
     }
 
 

@@ -9,6 +9,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/thongtingiadinh")
 public class ThongtingiadinhController {
     private ThongtingiadinhService thongtingiadinhService;
     private ThongtinsinhvienService thongtinsinhvienService;
@@ -19,46 +20,34 @@ public class ThongtingiadinhController {
         this.thongtinsinhvienService = thongtinsinhvienService;
     }
 
-    /*---Add new thongtingiadinh---*/
-    @PostMapping("/thongtingiadinh")
+    @PostMapping("")
     public Thongtingiadinh save(@RequestBody Thongtingiadinh thongtingiadinh) {
         return thongtingiadinhService.save(thongtingiadinh);
     }
 
-    /*---Get a thongtingiadinh by id---*/
-    @GetMapping("/thongtingiadinh/{id}")
+    @GetMapping("/{id}")
     public Thongtingiadinh  get(@PathVariable("id") int id) {
         return thongtingiadinhService.getByID(id);
     }
-    /*---Get a thongtingiadinh by id-sv--*/
-    @GetMapping("/thongtingiadinh/IDSV-{idsv}")
+
+    @GetMapping("/IDSV-{idsv}")
     public  List<Thongtingiadinh> getListByIDSv(@PathVariable("idsv") int idsv) {
         return thongtingiadinhService.listByIDSv(idsv);
     }
 
-    /*---get all thongtingiadinh---*/
-    @GetMapping("/thongtingiadinh")
+    @GetMapping("")
     public  List<Thongtingiadinh>  list() {
         return thongtingiadinhService.list();
     }
 
-    /*---Update a thongtingiadinh by id---*/
-    @PutMapping("/thongtingiadinh/{id}")
+    @PutMapping("/{id}")
     public boolean update(@PathVariable("id") int id, @RequestBody Thongtingiadinh thongtingiadinh) {
-        thongtingiadinh.setId(id);
-        if (thongtingiadinhService.getByID(id) == null) {
-            return false;
-        }
         return thongtingiadinhService.update(thongtingiadinh);
 
     }
 
-    /*---Delete a thongtingiadinh by id---*/
-    @DeleteMapping("/thongtingiadinh/{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
-        if (thongtingiadinhService.getByID(id) == null) {
-            return false;
-        }
         return thongtingiadinhService.delete(id);
 
     }

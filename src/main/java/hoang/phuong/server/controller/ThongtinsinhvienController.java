@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/qlsv/thongtinsinhvien")
 public class ThongtinsinhvienController {
     private ThongtinsinhvienService thongtinsinhvienService;
 
@@ -18,20 +19,17 @@ public class ThongtinsinhvienController {
         this.thongtinsinhvienService = thongtinsinhvienService;
     }
 
-    /*---Add new thongtinsinhvien---*/
-    @PostMapping("/thongtinsinhvien")
+    @PostMapping("")
     public Thongtinsinhvien save(@RequestBody @DateTimeFormat Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienService.save(thongtinsinhvien);
-//        return ResponseEntity.ok().body("New thong tin sinh vien has been saved with ID:" + id);
     }
 
-    /*---Get a thongtinsinhvien by id---*/
-    @GetMapping("/thongtinsinhvien/{id}")
+    @GetMapping("/{id}")
     public Thongtinsinhvien get(@PathVariable("id") int id) {
         return thongtinsinhvienService.getById(id);
     }
-    /*---Get a thongtinsinhvien by maSV---*/
-    @GetMapping("/thongtinsinhvien/maSV-{maSV}")
+
+    @GetMapping("/maSV-{maSV}")
     public  Thongtinsinhvien  get(@PathVariable("maSV") String maSV) {
         return thongtinsinhvienService.getByMaSV(maSV);
     }
@@ -51,30 +49,23 @@ public class ThongtinsinhvienController {
     }
 ]
  */
-    /*---get all thongtinsinhvien limit and fliter---*/
-    @PostMapping("/thongtinsinhvien/fliter/{min}/{max}")
+    @PostMapping("/fliter/{min}/{max}")
     public List<Thongtinsinhvien> listFliter(@RequestBody List<Map<String, Object>> mapparameters,
                                                              @PathVariable("min") int min, @PathVariable("max") int max) {
         return thongtinsinhvienService.listOrderBy(mapparameters, min, max);
     }
 
-    /*---Update a thongtinsinhvien by maSV---*/
-    @PutMapping("/thongtinsinhvien/{id}")
+    @PutMapping("/{id}")
     public boolean update(@PathVariable("id") int id, @RequestBody Thongtinsinhvien thongtinsinhvien) {
-        if (thongtinsinhvienService.getById(id) == null) {
-            return false;
-        }
-        thongtinsinhvienService.update(thongtinsinhvien);
-        return true;
+
+        return thongtinsinhvienService.update(thongtinsinhvien);
     }
 
     /*---Delete a thongtinsinhvien by maSV---*/
-    @DeleteMapping("/thongtinsinhvien/maSV-{maSV}")
+    @DeleteMapping("/maSV-{maSV}")
     public boolean delete(@PathVariable("maSV") String maSV) {
-        if (thongtinsinhvienService.getByMaSV(maSV) == null) {
-            return false;
-        }
-        thongtinsinhvienService.delete(maSV);
-        return true;
+
+        return thongtinsinhvienService.delete(maSV);
+
     }
 }

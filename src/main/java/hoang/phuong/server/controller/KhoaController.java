@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/khoa")
 public class KhoaController {
     private KhoaService khoaService;
 
@@ -16,45 +17,35 @@ public class KhoaController {
         this.khoaService = khoaService;
     }
 
-    /*---Add new Khoa--- , produces = "application/json;charset=UTF-8"*/
-    @PostMapping(path = "/khoa")
+    @PostMapping(path = "")
     public Khoa save(@RequestBody Khoa khoa) {
         return khoaService.save(khoa);
     }
 
-    /*---Get a Khoa by id---*/
-    @GetMapping("/khoa/{id}")
+    @GetMapping("/{id}")
     public Khoa get(@PathVariable("id") int id) {
         return khoaService.getByID(id);
     }
 
-    @GetMapping("/khoa/maKhoa-{maKhoa}")
+    @GetMapping("/maKhoa-{maKhoa}")
     public Khoa get(@PathVariable("maKhoa") String maKhoa) {
         return khoaService.getByMaKhoa(maKhoa);
     }
 
-    /*---get all Khoa---*/
-    @GetMapping("/khoa")
+    @GetMapping("")
     public List<Khoa> list() {
         return khoaService.list();
     }
-    /*---Update a book by id---*/
-    @PutMapping("/khoa/{id}")
-    public boolean update(@PathVariable("id") int id, @RequestBody Khoa khoa) {
-        khoa.setId(id);
-        if (khoaService.getByID(id) == null) {
-            return false;
-        }
-        khoaService.update(khoa);
-        return true;
+
+    @PutMapping("")
+    public boolean update(@RequestBody Khoa khoa) {
+        return khoaService.update(khoa);
     }
-    /*---Delete a Khoa by id---*/
-    @DeleteMapping("/khoa/{id}")
+
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
-        if (khoaService.getByID(id) == null) {
-            return false;
-        }
-        khoaService.delete(id);
-        return true;
+
+        return khoaService.delete(id);
+
     }
 }

@@ -14,7 +14,7 @@ public interface ThongtinsinhvienDAO {
 
     Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);
 
-    void update(Thongtinsinhvien thongtinsinhvien);
+    boolean update(Thongtinsinhvien thongtinsinhvien);
 
-    void delete(String maSv);
+    boolean delete(String maSv);
 }

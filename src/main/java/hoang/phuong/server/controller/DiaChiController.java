@@ -9,6 +9,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
+@RequestMapping("/qlsv/diachi")
 public class DiaChiController {
 
     private DiaChiService diaChiService;
@@ -18,40 +19,33 @@ public class DiaChiController {
         this.diaChiService = diaChiService;
     }
 
-    /*---Add new diachi---*/
-    @PostMapping("/diachi")
+    @PostMapping("")
     public Diachi save(@RequestBody Diachi diachi) {
        return   diaChiService.save(diachi);
     }
 
-    /*---Get a diachi by id---*/
-    @GetMapping("/diachi/{id}")
+    @GetMapping("/{id}")
     public Diachi get(@PathVariable("id") int id) {
         return diaChiService.getByID(id);
     }
 
-    /*---get all diachi---*/
-    @GetMapping("/diachi")
+    @GetMapping("")
     public  List<Diachi> list() {
         return diaChiService.list();
     }
-    /*---get all diachi by Properties---*/
-    @PostMapping("/diachi/fliter")
+
+    @PostMapping("/fliter")
     public  List<Diachi> listByProperties(@RequestBody  Map<String, String> mapparameters) {
         return diaChiService.listByProperties(mapparameters);
     }
-    /*---Update a diachi by id---*/
-    @PutMapping("/diachi/{id}")
-    public boolean update(@PathVariable("id") int id, @RequestBody Diachi diachi) {
-        diachi.setId(id);
-        if (diaChiService.getByID(id) == null) {
-            return false;
-        }
-        diaChiService.update(diachi);
-        return true;
+
+    @PutMapping("")
+    public boolean update(@RequestBody Diachi diachi) {
+        return diaChiService.update(diachi);
+
     }
     /*---Delete a diachi by id---*/
-    @DeleteMapping("/diachi/{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
         if (diaChiService.getByID(id) == null) {
             return false;

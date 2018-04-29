@@ -1,10 +1,12 @@
 package hoang.phuong.server.service;
 
 import hoang.phuong.server.model.Thongtinsinhvien;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.Map;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 public interface ThongtinsinhvienService {
     Thongtinsinhvien getByMaSV(String maSV);
 
@@ -13,9 +15,9 @@ public interface ThongtinsinhvienService {
 
     Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);
 
-    void update(Thongtinsinhvien thongtinsinhvien);
+    boolean update(Thongtinsinhvien thongtinsinhvien);
 
-    void delete(String maSv);
+    boolean delete(String maSv);
 
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 }

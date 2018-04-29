@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/giayto")
 public class GiayToController {
 
     private ThongtinsinhvienService thongtinsinhvienService;
@@ -25,28 +26,28 @@ public class GiayToController {
         this.giayToService = giayToService;
     }
 
-    @PostMapping(path = "/giayto")
+    @PostMapping(path = "")
     public Giayto save(@RequestBody Giayto giayto) {
         return giayToService.save(giayto);
     }
 
-    @GetMapping("/giayto/{id}")
+    @GetMapping("/{id}")
     public Giayto get(@PathVariable("id") int id) {
         return giayToService.getById(id);
     }
 
-    @GetMapping("/giayto/maGT-{maGT}")
+    @GetMapping("/maGT-{maGT}")
     public Giayto getByMaGT(@PathVariable("maGT") String maGT) {
         return giayToService.getBymaGT(maGT);
     }
 
-    @GetMapping("/giayto")
+    @GetMapping("")
     public List<Giayto> list() {
         return giayToService.list();
     }
 
     //TODO xem cho thong tin van bang sinh vien
-    @GetMapping("/giayto/SVisEmpty-{maSv}")
+    @GetMapping("/SVisEmpty-{maSv}")
     public List<Giayto> getSvKhongCo(@PathVariable("maSv") String maSv) {
         List<Giayto> listfull = giayToService.list();
         List<Giayto> listReturn = new ArrayList<>();
@@ -60,13 +61,13 @@ public class GiayToController {
         return listfull;
     }
 
-    @PutMapping("/giayto")
+    @PutMapping("")
     public boolean update(@RequestBody Giayto giayto) {
         return giayToService.Update(giayto);
 
     }
 
-    @DeleteMapping("/giayto/{id}")
+    @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {
         return giayToService.delete(id);
 

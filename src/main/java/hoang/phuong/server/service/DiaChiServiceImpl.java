@@ -42,13 +42,13 @@ public class DiaChiServiceImpl implements DiaChiService {
 
     @Transactional
     @Override
-    public void update(Diachi diachi) {
-        diaChiDAO.update(diachi);
+    public boolean update(Diachi diachi) {
+        return diaChiDAO.update(diachi);
     }
 
     @Transactional
     @Override
-    public void delete(int id) {
-        diaChiDAO.delete(id);
+    public boolean delete(int id) {
+        return diaChiDAO.delete(id);
     }
 }

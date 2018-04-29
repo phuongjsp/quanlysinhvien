@@ -1,9 +1,11 @@
 package hoang.phuong.server.service;
 
 import hoang.phuong.server.model.Svcovb;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 public interface SvCoVbService {
     Svcovb save(Svcovb svcovb);
     Svcovb getById(int id);

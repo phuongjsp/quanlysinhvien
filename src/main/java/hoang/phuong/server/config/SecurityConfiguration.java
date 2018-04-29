@@ -76,7 +76,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         Map<String, String[]> requireCsrfPatterns = new HashMap<>();
         requireCsrfPatterns.put("/api/users/**", new String[]{"GET", "PUT", "DELETE"});
-        requireCsrfPatterns.put("/khoa**", new String[]{"GET", "POST", "PUT", "DELETE"});
+        requireCsrfPatterns.put("/qlsv**", new String[]{"GET", "POST", "PUT", "DELETE"});
         requireCsrfPatterns.put("/api/logout", new String[]{"POST"});
 
         http.addFilterBefore(exUsernamePasswordAuthenticationFilter(),
@@ -89,6 +89,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 .antMatchers(HttpMethod.POST, "/api/login").anonymous()
                 .antMatchers(HttpMethod.POST, "/api/users/").anonymous()
+                .antMatchers(HttpMethod.POST, "/api/users/**").anonymous()
                 .antMatchers(HttpMethod.PATCH, "/api/users").anonymous()
 //                .antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
 //                .antMatchers("/khoa**").hasAnyRole("USER", "ADMIN")

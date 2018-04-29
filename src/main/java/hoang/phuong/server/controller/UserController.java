@@ -1,5 +1,6 @@
 package hoang.phuong.server.controller;
 
+import hoang.phuong.server.model.Activeuser;
 import hoang.phuong.server.model.User;
 import hoang.phuong.server.service.UserService;
 import org.springframework.http.HttpStatus;
@@ -19,7 +20,7 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "/", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
     public List<User> getAll() {
         return userService.findAll();
     }
@@ -29,12 +30,23 @@ public class UserController {
         return userService.getOne(id);
     }
 
-    @PostMapping(value = "/", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void create(@RequestBody User user) {
-        userService.save(user);
+    public void ConfirmEmail(@RequestBody Activeuser activeuser) {
+        userService.confirmUser(activeuser);
     }
 
+    @PostMapping(value = "/{keyCode}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @ResponseStatus(HttpStatus.CREATED)
+    public User CreateUser(@PathVariable(value = "keyCode") String keyCode
+            , @RequestParam(value = "password") String password) {
+        if (userService.isActiveUser(keyCode) == null) {
+            return new User();
+        }
+        User user = userService.isActiveUser(keyCode);
+        user.setPassword(password);
+        return userService.save(user);
+    }
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public User update(@PathVariable Integer id, @RequestBody User user) {

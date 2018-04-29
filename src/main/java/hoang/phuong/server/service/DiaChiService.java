@@ -1,10 +1,12 @@
 package hoang.phuong.server.service;
 
 import hoang.phuong.server.model.Diachi;
+import org.springframework.security.access.prepost.PreAuthorize;
 
 import java.util.List;
 import java.util.Map;
 
+@PreAuthorize("hasRole('ROLE_USER')")
 public interface DiaChiService {
     Diachi save(Diachi diachi);
 
@@ -12,7 +14,8 @@ public interface DiaChiService {
 
     List<Diachi> list();
     List<Diachi> listByProperties(Map<String,String> map);
-    void update(Diachi diachi);
 
-    void delete(int id);
+    boolean update(Diachi diachi);
+
+    boolean delete(int id);
 }

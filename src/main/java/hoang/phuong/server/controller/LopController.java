@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/lopsv")
 public class LopController {
     private LopsvService lopsvService;
 
@@ -16,45 +17,34 @@ public class LopController {
         this.lopsvService = lopsvService;
     }
 
-    /*---Add new lopsv---*/
-    @PostMapping("/lopsv")
+    @PostMapping("")
     public Lopsv save(@RequestBody Lopsv lopsv) {
         return lopsvService.save(lopsv);
     }
 
-    @GetMapping("/lopsv/maLop-{maLop}")
+    @GetMapping("/maLop-{maLop}")
     public  Lopsv get(@PathVariable("maLop") String maLop) {
         return lopsvService.getByMaLop(maLop);
     }
 
-    @GetMapping("/lopsv/{id}")
+    @GetMapping("/{id}")
     public Lopsv getById(@PathVariable("id") int id) {
         return lopsvService.getbyId(id);
     }
-    /*---get all lopsv---*/
-    @GetMapping("/lopsv")
+
+    @GetMapping("")
     public List<Lopsv> list() {
         return lopsvService.list();
     }
 
-    /*---Update a lopsv by maLop---*/
-    @PutMapping("/lopsv/maLop-{maLop}")
-    public boolean update(@PathVariable("maLop") String maLop, @RequestBody Lopsv lopsv) {
-        lopsv.setMaLop(maLop);
-        if (lopsvService.getByMaLop(maLop) == null) {
-            return false   ;
-        }
-        lopsvService.update(lopsv);
-        return true;
+    @PutMapping("")
+    public boolean update(@RequestBody Lopsv lopsv) {
+        return lopsvService.update(lopsv);
+
     }
 
-    /*---Delete a lopsv by maLop---*/
-    @DeleteMapping("/lopsv/maLop-{maLop}")
+    @DeleteMapping("/maLop-{maLop}")
     public boolean delete(@PathVariable("maLop") String maLop) {
-        if (lopsvService.getByMaLop(maLop) == null) {
-            return false;
-        }
-        lopsvService.delete(maLop);
-        return true;
+        return lopsvService.delete(maLop);
     }
 }

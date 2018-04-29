@@ -44,13 +44,13 @@ public class KhoaServiceImpl implements KhoaService {
 
     @Transactional
     @Override
-    public void update(Khoa khoa) {
-        khoaDAO.update(khoa);
+    public boolean update(Khoa khoa) {
+        return khoaDAO.update(khoa);
     }
 
     @Transactional
     @Override
-    public void delete(int id) {
-        khoaDAO.delete(id);
+    public boolean delete(int id) {
+        return khoaDAO.delete(id);
     }
 }

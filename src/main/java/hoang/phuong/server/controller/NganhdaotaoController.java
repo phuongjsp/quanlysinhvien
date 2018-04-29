@@ -8,6 +8,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @RestController
+@RequestMapping("/qlsv/nganhdaotao")
 public class NganhdaotaoController {
     private NganhdaotaoService nganhdaotaoService;
 
@@ -16,45 +17,34 @@ public class NganhdaotaoController {
         this.nganhdaotaoService = nganhdaotaoService;
     }
 
-    /*---Add new nganhdaotao---*/
-    @PostMapping("/nganhdaotao")
+    @PostMapping("")
     public Nganhdaotao save(@RequestBody Nganhdaotao nganhdaotao) {
         return nganhdaotaoService.save(nganhdaotao);
     }
 
-    /*---Get a nganhdaotao by id---*/
-    @GetMapping("/nganhdaotao/{id}")
+    @GetMapping("/{id}")
     public  Nganhdaotao get(@PathVariable("id") int id) {
         return nganhdaotaoService.getByID(id);
     }
-    /*---Get a nganhdaotao by maNganh---*/
-    @GetMapping("/nganhdaotao/maNganh-{maNganh}")
+
+    @GetMapping("/maNganh-{maNganh}")
     public Nganhdaotao get(@PathVariable("maNganh") String maNganh) {
         return nganhdaotaoService.getByMaNganhdaotao(maNganh);
     }
 
-    /*---get all nganhdaotao---*/
-    @GetMapping("/nganhdaotao")
+    @GetMapping("")
     public  List<Nganhdaotao> list() {
         return  nganhdaotaoService.list();
     }
 
-    /*---Update a nganhdaotao by id---*/
-    @PutMapping("/nganhdaotao/id-{id}")
-    public boolean update(@PathVariable("id") int id, @RequestBody Nganhdaotao nganhdaotao) {
-        if (nganhdaotaoService.getByID(id) == null) {
-            return false;
-        }
+    @PutMapping("")
+    public boolean update(@RequestBody Nganhdaotao nganhdaotao) {
         return nganhdaotaoService.update(nganhdaotao);
 
     }
 
-    /*---Delete a nganhdaotao by maNganh---*/
-    @DeleteMapping("/nganhdaotao/maNganh-{maNganh}")
+    @DeleteMapping("/maNganh-{maNganh}")
     public boolean delete(@PathVariable("maNganh") String maNganh) {
-        if (nganhdaotaoService.getByMaNganhdaotao(maNganh) == null) {
-            return false;
-        }
         return nganhdaotaoService.delete(maNganh);
 
     }
