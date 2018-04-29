@@ -18,7 +18,7 @@ This is a student information management API project
 - MySQL 
 - Logback 
 ### METHOD USING
-````| DiaChi                               |                                           |              |                                                        |                             |                                                                    |                    |               |                    | 
+| DiaChi                               |                                           |              |                                                        |                             |                                                                    |                    |               |                    | 
 |--------------------------------------|-------------------------------------------|--------------|--------------------------------------------------------|-----------------------------|--------------------------------------------------------------------|--------------------|---------------|--------------------| 
 | Method                               | Path                                      | Header       | RequestParam                                           | RequestBody                 | Description                                                        | Permission         | ResponseCode  | ResponseBody       | 
 | POST                                 | /qlsv/diachi                              | X-XSRF-TOKEN |                                                        | DiaChi                      | Insert Dia Chi                                                     | USER               |               | Dia Chi            | 
@@ -130,7 +130,7 @@ This is a student information management API project
 | DELETE                               | /api/users/{id}                           | X-XSRF-TOKEN | "int idUser,String password"                           |                             | Delete User using User password                                    | "ADMIN,USER(this)" |               |                    | 
 | PATCH                                | /api/users                                |              | String email                                           |                             | Reset User password and send confirm link to email                 |                    |               |                    | 
 | POST                                 | /api/users/reset/{KeyCode}                |              | "String KeyCode,String password"                       |                             | Reset and Update Password for user                                 |                    |               | USER               | 
-````
+
 ### Exceptions response 
 | Exception                              | ResponseCode | ResponseBody                                          |
 |----------------------------------------|:------------:|-------------------------------------------------------|
