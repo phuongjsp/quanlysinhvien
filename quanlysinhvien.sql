@@ -9,6 +9,15 @@ create table quanlysinhvien.activeuser
   primary key
 );
 
+create table quanlysinhvien.confirmresetpassword
+(
+  id      int auto_increment
+  constraint `PRIMARY`
+  primary key,
+  email   varchar(100) null,
+  keyCode varchar(100) null
+);
+
 create table quanlysinhvien.diachi
 (
   id        int auto_increment
@@ -285,6 +294,8 @@ create table quanlysinhvien.users
   enabled        tinyint(1)   null,
   is_admin       tinyint(1)   null,
   registered     date         null,
+  constraint UK_6dotkott2kjsp8vw4d0m25fb7
+  unique (email),
   constraint users_email_uindex
   unique (email)
 );
