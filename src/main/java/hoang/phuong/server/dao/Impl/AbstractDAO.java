@@ -1,4 +1,4 @@
-package hoang.phuong.server.dao;
+package hoang.phuong.server.dao.Impl;
 
 import org.hibernate.Criteria;
 import org.hibernate.Session;

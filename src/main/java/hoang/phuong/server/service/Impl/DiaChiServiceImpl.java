@@ -1,7 +1,8 @@
-package hoang.phuong.server.service;
+package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.DiaChiDAO;
 import hoang.phuong.server.model.Diachi;
+import hoang.phuong.server.service.DiaChiService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

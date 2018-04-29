@@ -1,7 +1,8 @@
-package hoang.phuong.server.service;
+package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.SvCoVbDAO;
 import hoang.phuong.server.model.Svcovb;
+import hoang.phuong.server.service.SvCoVbService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

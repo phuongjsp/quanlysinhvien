@@ -1,5 +1,6 @@
-package hoang.phuong.server.dao;
+package hoang.phuong.server.dao.Impl;
 
+import hoang.phuong.server.dao.GiayToDAO;
 import hoang.phuong.server.model.Giayto;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;

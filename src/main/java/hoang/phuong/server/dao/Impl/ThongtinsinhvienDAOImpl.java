@@ -1,5 +1,6 @@
-package hoang.phuong.server.dao;
+package hoang.phuong.server.dao.Impl;
 
+import hoang.phuong.server.dao.ThongtinsinhvienDAO;
 import hoang.phuong.server.model.Thongtinsinhvien;
 import org.hibernate.Criteria;
 import org.hibernate.SessionFactory;

@@ -1,5 +1,6 @@
-package hoang.phuong.server.dao;
+package hoang.phuong.server.dao.Impl;
 
+import hoang.phuong.server.dao.ActiveuserDAO;
 import hoang.phuong.server.model.Activeuser;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;

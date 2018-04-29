@@ -1,7 +1,8 @@
-package hoang.phuong.server.service;
+package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.LopsvDAO;
 import hoang.phuong.server.model.Lopsv;
+import hoang.phuong.server.service.LopsvService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

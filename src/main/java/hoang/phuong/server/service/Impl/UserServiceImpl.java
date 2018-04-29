@@ -1,4 +1,4 @@
-package hoang.phuong.server.service;
+package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.ActiveuserDAO;
 import hoang.phuong.server.dao.UserRepository;
@@ -8,6 +8,8 @@ import hoang.phuong.server.exception.ValidationException;
 import hoang.phuong.server.model.Activeuser;
 import hoang.phuong.server.model.Role;
 import hoang.phuong.server.model.User;
+import hoang.phuong.server.service.EmailService;
+import hoang.phuong.server.service.UserService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.security.access.AccessDeniedException;

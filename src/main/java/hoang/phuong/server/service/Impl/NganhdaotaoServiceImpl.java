@@ -1,7 +1,8 @@
-package hoang.phuong.server.service;
+package hoang.phuong.server.service.Impl;
 
 import hoang.phuong.server.dao.NganhDaoTaoDAO;
 import hoang.phuong.server.model.Nganhdaotao;
+import hoang.phuong.server.service.NganhdaotaoService;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 

@@ -1,5 +1,6 @@
-package hoang.phuong.server.dao;
+package hoang.phuong.server.dao.Impl;
 
+import hoang.phuong.server.dao.VanBangDAO;
 import hoang.phuong.server.model.Vanbang;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
