@@ -66,7 +66,7 @@ public class UserServiceImpl implements UserService {
         user.setRegistered(LocalDate.now());
         user.setRoles(Collections.singleton(Role.ROLE_USER));
         User user2 = userRepository.save(user);
-//        emailService.sendEmail(user.getEmail(), "Welcome to Task Manager");
+        emailService.sendEmail(user.getEmail(), "Welcome to QUAN LY SINH VIEN");
         LOG.debug("Registered new user with email {}", user.getEmail());
         return user2;
     }
@@ -131,8 +131,8 @@ public class UserServiceImpl implements UserService {
         String newPassword = UUID.randomUUID().toString().replace("-", "P$");
         user.setPassword(bCryptPasswordEncoder.encode(newPassword));
         LOG.info("New Password is :" + newPassword);
-//        emailService.sendEmail(email, String.format(
-//                "Password reset in Task Manager, your new password: %s", newPassword));
+        emailService.sendEmail(email, String.format(
+                "Password reset in QUAN LY SINH VIEN your new password: %s", newPassword));
         LOG.debug("User with email {} reset password", email);
     }
 
@@ -191,7 +191,7 @@ public class UserServiceImpl implements UserService {
                     String.format("Could not delete user with id %d, incorrect password", id));
         }
         userRepository.delete(user);
-//        emailService.sendEmail(user.getEmail(), "Your account has been deleted in Task Manager");
+        emailService.sendEmail(user.getEmail(), "Your account has been deleted in QUAN LY SINH VIEN");
         LOG.debug("Delete user with id {}", id);
     }
 }

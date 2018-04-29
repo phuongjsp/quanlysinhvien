@@ -26,17 +26,19 @@ public class Activeuser implements Serializable {
     @SafeHtml
     @Column(name = "email", nullable = true, length = 100)
     private String email;
-    @Basic
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z\\s']{3,250}$")
+    @SafeHtml
     @Column(name = "username", nullable = true, length = 50)
     private String username;
-    @Basic
+    @NotNull
+    @Pattern(regexp = "[a-zA-Z\\s']{3,250}$")
+    @SafeHtml
     @Column(name = "userLastName", nullable = true, length = 50)
     private String userLastName;
     @Basic
     @Column(name = "KeyCode", nullable = true, length = 100)
     private String keyCode;
-    private String id;
-    private int idActive;
 
     public Integer getId_active() {
         return id_active;
@@ -46,8 +48,6 @@ public class Activeuser implements Serializable {
         this.id_active = id_active;
     }
 
-    @Basic
-    @Column(name = "email", nullable = true, length = 100)
     public String getEmail() {
         return email;
     }
@@ -56,8 +56,6 @@ public class Activeuser implements Serializable {
         this.email = email;
     }
 
-    @Basic
-    @Column(name = "username", nullable = true, length = 50)
     public String getUsername() {
         return username;
     }
@@ -66,8 +64,6 @@ public class Activeuser implements Serializable {
         this.username = username;
     }
 
-    @Basic
-    @Column(name = "userLastName", nullable = true, length = 50)
     public String getUserLastName() {
         return userLastName;
     }
@@ -76,8 +72,6 @@ public class Activeuser implements Serializable {
         this.userLastName = userLastName;
     }
 
-    @Basic
-    @Column(name = "KeyCode", nullable = true, length = 100)
     public String getKeyCode() {
         return keyCode;
     }
@@ -93,30 +87,23 @@ public class Activeuser implements Serializable {
 
         Activeuser that = (Activeuser) o;
 
-        if (email != null ? !email.equals(that.email) : that.email != null) return false;
-        if (username != null ? !username.equals(that.username) : that.username != null) return false;
-        if (userLastName != null ? !userLastName.equals(that.userLastName) : that.userLastName != null) return false;
-        if (keyCode != null ? !keyCode.equals(that.keyCode) : that.keyCode != null) return false;
-
-        return true;
+        if (getId_active() != null ? !getId_active().equals(that.getId_active()) : that.getId_active() != null)
+            return false;
+        if (getEmail() != null ? !getEmail().equals(that.getEmail()) : that.getEmail() != null) return false;
+        if (getUsername() != null ? !getUsername().equals(that.getUsername()) : that.getUsername() != null)
+            return false;
+        if (getUserLastName() != null ? !getUserLastName().equals(that.getUserLastName()) : that.getUserLastName() != null)
+            return false;
+        return getKeyCode() != null ? getKeyCode().equals(that.getKeyCode()) : that.getKeyCode() == null;
     }
 
     @Override
     public int hashCode() {
-        int result = email != null ? email.hashCode() : 0;
-        result = 31 * result + (username != null ? username.hashCode() : 0);
-        result = 31 * result + (userLastName != null ? userLastName.hashCode() : 0);
-        result = 31 * result + (keyCode != null ? keyCode.hashCode() : 0);
+        int result = getId_active() != null ? getId_active().hashCode() : 0;
+        result = 31 * result + (getEmail() != null ? getEmail().hashCode() : 0);
+        result = 31 * result + (getUsername() != null ? getUsername().hashCode() : 0);
+        result = 31 * result + (getUserLastName() != null ? getUserLastName().hashCode() : 0);
+        result = 31 * result + (getKeyCode() != null ? getKeyCode().hashCode() : 0);
         return result;
-    }
-
-    @Id
-    @Column(name = "id_active", nullable = false)
-    public int getIdActive() {
-        return idActive;
-    }
-
-    public void setIdActive(int idActive) {
-        this.idActive = idActive;
     }
 }

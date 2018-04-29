@@ -20,12 +20,12 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "")
     public List<User> getAll() {
         return userService.findAll();
     }
 
-    @GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+    @GetMapping(value = "/{id}")
     public User getOne(@PathVariable Integer id) {
         return userService.getOne(id);
     }
@@ -36,7 +36,7 @@ public class UserController {
         userService.confirmUser(activeuser);
     }
 
-    @PostMapping(value = "/{keyCode}", consumes = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User CreateUser(@PathVariable(value = "keyCode") String keyCode
             , @RequestParam(value = "password") String password) {

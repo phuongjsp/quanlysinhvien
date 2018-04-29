@@ -19,7 +19,7 @@ public class EmailServiceImpl implements EmailService {
     private final JavaMailSender javaMailSender;
     @Value("${mail.from}")
     private String from;
-    private String subject = "Task Manager";
+    private String subject = "QUAN LY SINH VIEN";
 
     @Inject
     public EmailServiceImpl(JavaMailSender javaMailSender) {
