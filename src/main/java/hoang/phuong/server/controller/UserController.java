@@ -60,6 +60,10 @@ public class UserController {
         userService.ConfirmResetPassword(email);
     }
 
+    @GetMapping("/reset/{keyCode}")
+    public boolean isKeyCodeResetPassword(@PathVariable(value = "keyCode") String keyCode) {
+        return userService.isKeyCodeResetPassword(keyCode);
+    }
     @PostMapping(value = "/reset/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User resetPassword(@PathVariable(value = "keyCode") String keyCode

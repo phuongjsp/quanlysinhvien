@@ -11,11 +11,10 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
 import java.io.Serializable;
-import java.time.LocalDate;
+import java.sql.Date;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
-
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -67,8 +66,9 @@ public class User implements Serializable {
     private Boolean isAdmin;
 
     @Column(name = "registered")
+
     @JsonProperty(access = JsonProperty.Access.READ_ONLY)
-    private LocalDate registered;
+    private Date registered;
 
     @Column(name = "role")
     @JsonIgnore
@@ -82,7 +82,7 @@ public class User implements Serializable {
     }
 
     public User(Integer id, String userName, String userLastName, String password, String email,
-                Boolean enabled, Boolean isAdmin, LocalDate registered) {
+                Boolean enabled, Boolean isAdmin, Date registered) {
         this.id = id;
         this.userName = userName;
         this.userLastName = userLastName;
@@ -149,11 +149,11 @@ public class User implements Serializable {
         isAdmin = admin;
     }
 
-    public LocalDate getRegistered() {
+    public Date getRegistered() {
         return registered;
     }
 
-    public void setRegistered(LocalDate registered) {
+    public void setRegistered(Date registered) {
         this.registered = registered;
     }
 
@@ -184,7 +184,6 @@ public class User implements Serializable {
                 "id=" + id +
                 ", userName='" + userName + '\'' +
                 ", userLastName='" + userLastName + '\'' +
-                ", password='" + password + '\'' +
                 ", email='" + email + '\'' +
                 ", enabled=" + enabled +
                 ", isAdmin=" + isAdmin +

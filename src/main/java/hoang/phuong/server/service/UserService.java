@@ -28,6 +28,7 @@ public interface UserService {
 
     void confirmUser(Activeuser activeuser);
 
+    boolean isKeyCodeResetPassword(String keyCode);
     void ConfirmResetPassword(String email);
 
     void deleteConfirmResetPassword(String email);

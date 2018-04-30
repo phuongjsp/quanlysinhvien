@@ -69,7 +69,7 @@ public class UserServiceImpl implements UserService {
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEnabled(true);
         user.setAdmin(false);
-        user.setRegistered(LocalDate.now());
+        user.setRegistered(java.sql.Date.valueOf(LocalDate.now()));
         user.setRoles(Collections.singleton(Role.ROLE_USER));
         User user2 = userRepository.save(user);
         emailService.sendEmail(user.getEmail(), "Welcome to QUAN LY SINH VIEN");
@@ -124,8 +124,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User resetPassword(String keyCode, String password) {
+    public boolean isKeyCodeResetPassword(String keyCode) {
         if (confirmresetpasswordDAO.getByKeyCode(keyCode) != null) {
+            return true;
+        }
+        return false;
+    }
+    @Override
+    public User resetPassword(String keyCode, String password) {
+        if (isKeyCodeResetPassword(keyCode)) {
             Confirmresetpassword confirmresetpassword = confirmresetpasswordDAO.getByKeyCode(keyCode);
             User user = userRepository.findByEmail(confirmresetpassword.getEmail());
             user.setPassword(password);
@@ -156,6 +163,7 @@ public class UserServiceImpl implements UserService {
         emailService.sendEmail(activeuser.getEmail(), "HELLO please click to link have config your Account \n" +
                 "http://localhost:9966/api/users/active/" + activeuser.getKeyCode());
     }
+
 
     @Override
     public void ConfirmResetPassword(String email) {

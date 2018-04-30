@@ -108,8 +108,8 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .and()
                 .logout()
                 .logoutRequestMatcher(new AntPathRequestMatcher("/api/logout", "POST"))
-                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
-                .deleteCookies("JSESSIONID");
+                .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler());
+//                .deleteCookies("JSESSIONID"); //I don't know what happen when i deleted this
     }
 
 }
