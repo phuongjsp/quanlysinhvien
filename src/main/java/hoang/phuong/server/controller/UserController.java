@@ -32,10 +32,15 @@ public class UserController {
 
     @PostMapping(value = "", consumes = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.CREATED)
-    public void ConfirmEmail(@RequestBody Activeuser activeuser) {
-        userService.confirmUser(activeuser);
+    public void ConfirmEmail(@RequestBody Activeuser activeuser
+            , @RequestParam(value = "path") String path) {
+        userService.confirmUser(activeuser, path);
     }
 
+    @GetMapping("/active/{keyCode}")
+    public boolean isKeyCodeCreateUser(@PathVariable(value = "keyCode") String keyCode) {
+        return userService.isKeyCodeActive(keyCode);
+    }
     @PostMapping(value = "/active/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User CreateUser(@PathVariable(value = "keyCode") String keyCode
@@ -54,10 +59,17 @@ public class UserController {
         return userService.update(id, user);
     }
 
-    @PatchMapping
+    @GetMapping("/isemail")
+    public boolean isemail(@RequestParam(value = "email") String email) {
+        System.out.println("email is " + email);
+        return userService.isEmail(email);
+    }
+
+    @PostMapping(value = "/forgetpass")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void resetPassword(@RequestParam(value = "email") String email) {
-        userService.ConfirmResetPassword(email);
+    public void ConfirmresetPassword(@RequestParam(value = "email") String email
+            , @RequestParam(value = "path") String path) {
+        userService.ConfirmResetPassword(email, path);
     }
 
     @GetMapping("/reset/{keyCode}")
@@ -68,15 +80,15 @@ public class UserController {
     @ResponseStatus(HttpStatus.CREATED)
     public User resetPassword(@PathVariable(value = "keyCode") String keyCode
             , @RequestParam(value = "password") String password) {
-        if (userService.resetPassword(keyCode, password) == null) {
+        User user = userService.resetPassword(keyCode, password);
+        if (user == null) {
             return new User();
         }
-        User user = userService.resetPassword(keyCode, password);
-        user.setPassword(password);
         userService.deleteConfirmResetPassword(user.getEmail());
-        return userService.update(user.getId(), user);
+        return user;
     }
-    @PatchMapping("/{id}")
+
+    @PostMapping(value = "/newpassword/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
     public void updatePassword(@PathVariable Integer id,
                                @RequestParam(value = "currentPassword") String currentPassword,

@@ -6,7 +6,6 @@ import hoang.phuong.server.config.security.UserDetailsService;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -75,7 +74,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(HttpSecurity http) throws Exception {
         Map<String, String[]> requireCsrfPatterns = new HashMap<>();
-        requireCsrfPatterns.put("/api/users/**", new String[]{"GET", "PUT", "DELETE"});
+//        requireCsrfPatterns.put("/api/users/**", new String[]{"GET", "PUT", "DELETE"});
         requireCsrfPatterns.put("/qlsv**", new String[]{"GET", "POST", "PUT", "DELETE"});
         requireCsrfPatterns.put("/api/logout", new String[]{"POST"});
 
@@ -84,13 +83,14 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .csrf()
                 .csrfTokenRepository(CookieCsrfTokenRepository.withHttpOnlyFalse())
                 .requireCsrfProtectionMatcher(new CsrfRequestMatcher(requireCsrfPatterns))
-                .ignoringAntMatchers("/api/users")
-                .and()
-                .authorizeRequests()
-                .antMatchers(HttpMethod.POST, "/api/login").anonymous()
-                .antMatchers(HttpMethod.POST, "/api/users/").anonymous()
-                .antMatchers(HttpMethod.POST, "/api/users/**").anonymous()
-                .antMatchers(HttpMethod.PATCH, "/api/users").anonymous()
+//                .ignoringAntMatchers("/api/users")
+//                .and()
+//                .authorizeRequests()
+//                .antMatchers(HttpMethod.POST , "/api/login")        .anonymous()
+//                .antMatchers(HttpMethod.POST , "/api/users/")       .anonymous()
+//                .antMatchers(HttpMethod.POST , "/api/users/**")     .anonymous()
+//                .antMatchers(HttpMethod.PATCH, "/api/users")        .anonymous()
+//                .antMatchers(HttpMethod.GET , "/api/users/reset**") .anonymous()
 //                .antMatchers("/api/users/**").hasAnyRole("USER", "ADMIN")
 //                .antMatchers("/khoa**").hasAnyRole("USER", "ADMIN")
 //                .antMatchers("/**").permitAll()

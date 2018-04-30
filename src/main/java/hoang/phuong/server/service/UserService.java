@@ -14,7 +14,16 @@ public interface UserService {
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     List<User> findAll();
 
+    //ADd new User
+    void confirmUser(Activeuser activeuser, String path);
+
+    boolean isKeyCodeActive(String keyCode);
+
+    User isActiveUser(String keyCode);
     User save(User user);
+
+    void deleteActiveUser(String email);
+
 
     @PreAuthorize("hasRole('ROLE_ADMIN') OR" +
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
@@ -24,17 +33,16 @@ public interface UserService {
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
     void updatePassword(Integer id, String currentPassword, String newPassword);
 
-    User resetPassword(String keyCode, String password);
+    //Reset Password
+    boolean isEmail(String email);
 
-    void confirmUser(Activeuser activeuser);
+    void ConfirmResetPassword(String email, String path);
 
     boolean isKeyCodeResetPassword(String keyCode);
-    void ConfirmResetPassword(String email);
-
+    User resetPassword(String keyCode, String password);
     void deleteConfirmResetPassword(String email);
 
-    void deleteActiveUser(String email);
-    User isActiveUser(String keyCode);
+
     @PreAuthorize("hasRole('ROLE_ADMIN') OR" +
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
     void delete(Integer id, String password);

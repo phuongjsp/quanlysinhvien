@@ -14,6 +14,7 @@ public interface UserRepository {
 
     User update(User user);
 
+    User updatePassword(String email, String newPassword);
     User findByEmail(String email);
 
     List<User> findAll();

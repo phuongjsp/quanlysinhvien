@@ -64,10 +64,18 @@ public class UserRepositoryImpl extends AbstractDAO<Integer, User> implements Us
         User user1 = getById(user.getId());
         if (user1.getUserName() != user.getUserName()) user1.setUserName(user.getUserName());
         if (user1.getUserLastName() != user.getUserLastName()) user1.setUserLastName(user.getUserLastName());
-        if (user1.getPassword() != user.getPassword()) user1.setPassword(user.getPassword());
         if (user1.getEnabled() != user.getEnabled()) user1.setEnabled(user.getEnabled());
         if (user1.getRoles() != user.getRoles()) user1.setRoles(user.getRoles());
         if (user1.getAdmin() != user.getAdmin()) user1.setAdmin(user.getAdmin());
+        getSession().flush();
+        return user1;
+    }
+
+    @Deprecated
+    @Override
+    public User updatePassword(String email, String newPassword) {
+        User user1 = findByEmail(email);
+        user1.setPassword(newPassword);
         getSession().flush();
         return user1;
     }

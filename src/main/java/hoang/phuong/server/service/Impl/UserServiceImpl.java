@@ -104,8 +104,6 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(Integer id, String currentPassword, String newPassword) {
-        System.out.println("currentPassword is" + currentPassword);
-        System.out.println("newPassword is" + newPassword);
         //!PASSWORD_PATTERN.matcher(currentPassword).matches() ||
         if (
                 !PASSWORD_PATTERN.matcher(newPassword).matches()) {
@@ -118,9 +116,20 @@ public class UserServiceImpl implements UserService {
                     String.format("Could not update password, user with id %d has not confirmed password", id));
         }
         user.setPassword(bCryptPasswordEncoder.encode(newPassword));
-        userRepository.update(user);
+        userRepository.updatePassword(user.getEmail(), user.getPassword());
 //        emailService.sendEmail(user.getEmail(), "Your password is updated in Task Manager");
         LOG.debug("User with id {} update password", id);
+    }
+
+    @Override
+    public boolean isEmail(String email) {
+        try {
+            User user = userRepository.findByEmail(email);
+            if (user != null) return true;
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 
     @Override
@@ -132,18 +141,29 @@ public class UserServiceImpl implements UserService {
     }
     @Override
     public User resetPassword(String keyCode, String password) {
-        if (isKeyCodeResetPassword(keyCode)) {
-            Confirmresetpassword confirmresetpassword = confirmresetpasswordDAO.getByKeyCode(keyCode);
-            User user = userRepository.findByEmail(confirmresetpassword.getEmail());
-            user.setPassword(password);
-            return user;
+        try {
+            if (isKeyCodeResetPassword(keyCode)) {
+                Confirmresetpassword confirmresetpassword = confirmresetpasswordDAO.getByKeyCode(keyCode);
+                User user = userRepository.findByEmail(confirmresetpassword.getEmail());
+                if (
+                        !PASSWORD_PATTERN.matcher(password).matches()) {
+                    throw new ValidationException(
+                            String.format("Could not update password for user  %d , invalid password", user.getUserName()));
+                }
+                System.out.println("USER IS " + user);
+                user.setPassword(bCryptPasswordEncoder.encode(password));
+                userRepository.updatePassword(user.getEmail(), user.getPassword());
+                return user;
+            }
+        } catch (Exception e) {
+            return null;
         }
         return null;
     }
 
     //TODO how todo?
     @Override
-    public void confirmUser(Activeuser activeuser) {
+    public void confirmUser(Activeuser activeuser, String path) {
         if (!EMAIL_PATTERN.matcher(activeuser.getEmail()).matches()) {
             throw new ValidationException(
                     String.format("Could not reset password, invalid email %s", activeuser.getEmail()));
@@ -161,12 +181,23 @@ public class UserServiceImpl implements UserService {
         activeuserDAO.create(activeuser);
         //TODO can phai xem lai noi dung tin nhan
         emailService.sendEmail(activeuser.getEmail(), "HELLO please click to link have config your Account \n" +
-                "http://localhost:9966/api/users/active/" + activeuser.getKeyCode());
+                path + activeuser.getKeyCode());
+    }
+
+    @Override
+    public boolean isKeyCodeActive(String keyCode) {
+        try {
+            Activeuser activeuser = activeuserDAO.getByKeyCode(keyCode);
+            if (activeuser != null) return true;
+        } catch (Exception e) {
+            return false;
+        }
+        return false;
     }
 
 
     @Override
-    public void ConfirmResetPassword(String email) {
+    public void ConfirmResetPassword(String email, String path) {
         if (!EMAIL_PATTERN.matcher(email).matches()) {
             throw new ValidationException(
                     String.format("Could not reset password, invalid email %s", email));
@@ -180,9 +211,10 @@ public class UserServiceImpl implements UserService {
         Confirmresetpassword confirmresetpassword = new Confirmresetpassword();
         confirmresetpassword.setEmail(email);
         confirmresetpassword.setKeyCode(createKeyCodeResetPassword(createKey));
+        confirmresetpasswordDAO.create(confirmresetpassword);
         //TODO can phai xem lai noi dung tin nhan
         emailService.sendEmail(confirmresetpassword.getEmail(), "HELLO please click to link have config your Account \n" +
-                "http://localhost:9966/api/users/reset/" + confirmresetpassword.getKeyCode());
+                path + confirmresetpassword.getKeyCode());
         LOG.debug("User with email {} reset password", email);
     }
 
@@ -199,7 +231,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User isActiveUser(String keyCode) {
-        if (activeuserDAO.getByKeyCode(keyCode) != null) {
+        if (isKeyCodeActive(keyCode)) {
             User user = new User();
             Activeuser activeuser = activeuserDAO.getByKeyCode(keyCode);
             user.setUserName(activeuser.getUsername());
