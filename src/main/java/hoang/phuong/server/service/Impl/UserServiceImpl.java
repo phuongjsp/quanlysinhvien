@@ -103,7 +103,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void updatePassword(Integer id, String currentPassword, String newPassword) {
+    public boolean updatePassword(Integer id, String currentPassword, String newPassword) {
         //!PASSWORD_PATTERN.matcher(currentPassword).matches() ||
         if (
                 !PASSWORD_PATTERN.matcher(newPassword).matches()) {
@@ -117,8 +117,10 @@ public class UserServiceImpl implements UserService {
         }
         user.setPassword(bCryptPasswordEncoder.encode(newPassword));
         userRepository.updatePassword(user.getEmail(), user.getPassword());
+
 //        emailService.sendEmail(user.getEmail(), "Your password is updated in Task Manager");
         LOG.debug("User with id {} update password", id);
+        return true;
     }
 
     @Override

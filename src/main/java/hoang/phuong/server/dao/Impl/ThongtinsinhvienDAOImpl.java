@@ -89,13 +89,10 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
         }
 
     }
-
-
     @Deprecated
     @SuppressWarnings("unchecked")
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
-
         Criteria criteria = createEntityCriteria();
         if (!mapOrder.isEmpty()) mapOrder.forEach((map) -> {
             if (map.get("diachi") != null) {

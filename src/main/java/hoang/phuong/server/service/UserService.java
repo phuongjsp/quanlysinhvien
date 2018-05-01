@@ -31,7 +31,7 @@ public interface UserService {
 
     @PreAuthorize("hasRole('ROLE_ADMIN') OR" +
             " @permissionEvaluator.hasPermissionForUser(authentication, #id)")
-    void updatePassword(Integer id, String currentPassword, String newPassword);
+    boolean updatePassword(Integer id, String currentPassword, String newPassword);
 
     //Reset Password
     boolean isEmail(String email);

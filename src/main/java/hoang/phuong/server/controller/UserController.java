@@ -90,10 +90,10 @@ public class UserController {
 
     @PostMapping(value = "/newpassword/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void updatePassword(@PathVariable Integer id,
-                               @RequestParam(value = "currentPassword") String currentPassword,
-                               @RequestParam(value = "newPassword") String newPassword) {
-        userService.updatePassword(id, currentPassword, newPassword);
+    public boolean updatePassword(@PathVariable Integer id,
+                                  @RequestParam(value = "currentPassword") String currentPassword,
+                                  @RequestParam(value = "newPassword") String newPassword) {
+        return userService.updatePassword(id, currentPassword, newPassword);
     }
 
     @DeleteMapping("/{id}")

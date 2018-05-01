@@ -1,0 +1,46 @@
+package hoang.phuong.server.controller;
+
+import hoang.phuong.server.model.Dinhchisinhvien;
+import hoang.phuong.server.service.DinhchiSinhVienService;
+import org.springframework.web.bind.annotation.*;
+
+import javax.inject.Inject;
+import java.util.List;
+
+@RestController
+@RequestMapping("/qlsv/dinhchisinhvien")
+public class DinhchiSinhvienController {
+    private final DinhchiSinhVienService dinhchiSinhVienService;
+
+    @Inject
+    public DinhchiSinhvienController(DinhchiSinhVienService dinhchiSinhVienService) {
+        this.dinhchiSinhVienService = dinhchiSinhVienService;
+    }
+
+
+    @PostMapping(path = "")
+    public Dinhchisinhvien save(@RequestBody Dinhchisinhvien dinhchisinhvien) {
+        return dinhchiSinhVienService.save(dinhchisinhvien);
+    }
+
+    @GetMapping("/{id}")
+    public Dinhchisinhvien get(@PathVariable("id") int id) {
+        return dinhchiSinhVienService.getOne(id);
+    }
+
+
+    @GetMapping("")
+    public List<Dinhchisinhvien> list() {
+        return dinhchiSinhVienService.findAll();
+    }
+
+    @PutMapping("")
+    public Dinhchisinhvien update(@RequestBody Dinhchisinhvien dinhchisinhvien) {
+        return dinhchiSinhVienService.update(dinhchisinhvien);
+    }
+
+    @DeleteMapping("/{id}")
+    public boolean delete(@PathVariable("id") int id) {
+        return dinhchiSinhVienService.delete(id);
+    }
+}
