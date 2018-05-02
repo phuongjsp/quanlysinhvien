@@ -11,7 +11,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class KhoaServiceImpl implements KhoaService {
     private KhoaDAO khoaDAO;
 

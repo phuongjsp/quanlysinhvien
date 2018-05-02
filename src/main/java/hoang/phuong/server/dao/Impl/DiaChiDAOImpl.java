@@ -51,7 +51,6 @@ public class DiaChiDAOImpl extends AbstractDAO<Integer, Diachi> implements DiaCh
         return getByKey(id);
     }
 
-    @Deprecated
     @Override
     public List<Diachi> list() {
         return listDAO();

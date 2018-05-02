@@ -10,7 +10,6 @@ import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
@@ -58,19 +57,22 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
 
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
-        List<Thongtinsinhvien> thongtinsinhvienList = thongtinsinhvienDAO.listOrderBy(mapOrder, min, max);
-        List<Dinhchisinhvien> dinhchisinhvienList = dinhchiSinhVienService.findAll();
-        List<Thongtinsinhvien> listBiDinhChi = new ArrayList<>();
-        thongtinsinhvienList.forEach(thongtinsinhvien -> {
-            dinhchisinhvienList.forEach(dinhchisinhvien -> {
-                if (dinhchisinhvien.getIdSv() == thongtinsinhvien.getId() && dinhchisinhvien.getDenNgay().before(new Date())) {
-                    listBiDinhChi.add(thongtinsinhvien);
-                }
-            });
+        return getThongtinsinhviens(mapOrder, min, max, false);
+    }
+
+    private List<Thongtinsinhvien> getThongtinsinhviens(List<Map<String, Object>> mapOrder, int min, int max, boolean b) {
+        List<Dinhchisinhvien> dinhchisinhvienList = dinhchiSinhVienService.listConDinhChi();
+        List<Integer> listIdSvbiDinhChi = new ArrayList<>();
+        dinhchisinhvienList.forEach(dinhchisinhvien -> {
+            listIdSvbiDinhChi.add(dinhchisinhvien.getIdSv());
         });
-        listBiDinhChi.forEach(thongtinsinhvien -> {
-            thongtinsinhvienList.remove(thongtinsinhvien);
-        });
-        return thongtinsinhvienList;
+
+        return thongtinsinhvienDAO.listOrderBy(mapOrder, listIdSvbiDinhChi, b, min, max);
+    }
+
+    @Override
+    public List<Thongtinsinhvien> listBiDinhChiOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
+        return getThongtinsinhviens(mapOrder, min, max, true);
+
     }
 }

@@ -19,10 +19,17 @@ public class DinhchiSinhVienDAOImpl extends AbstractDAO<Integer, Dinhchisinhvien
         return dinhchisinhvien;
     }
 
-    @Deprecated
     @Override
     public List<Dinhchisinhvien> findAll() {
         return listDAO();
+    }
+
+    @Override
+    public List<Dinhchisinhvien> listConDinhChi() {
+        List<Dinhchisinhvien> dinhchisinhviens = getSession()
+                .createQuery("from Dinhchisinhvien where tuNgay<=current_date() and denNgay>=current_date() ")
+                .getResultList();
+        return dinhchisinhviens;
     }
 
     @Override

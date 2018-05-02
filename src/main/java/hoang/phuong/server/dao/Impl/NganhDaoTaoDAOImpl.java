@@ -36,7 +36,6 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
         return (Nganhdaotao) createEntityCriteria().add(Restrictions.eq("maNganh", maNganhdaotao)).uniqueResult();
     }
     @Override
-    @Deprecated
     public List<Nganhdaotao> list() {
         return listDAO();
     }

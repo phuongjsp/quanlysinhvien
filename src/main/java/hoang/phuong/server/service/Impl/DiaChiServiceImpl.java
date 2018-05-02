@@ -11,7 +11,7 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class DiaChiServiceImpl implements DiaChiService {
     private DiaChiDAO diaChiDAO;
 

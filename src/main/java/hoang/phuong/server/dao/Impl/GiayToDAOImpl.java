@@ -65,7 +65,6 @@ public class GiayToDAOImpl extends AbstractDAO<Integer, Giayto> implements GiayT
         }
     }
 
-    @Deprecated
     @Override
     public List<Giayto> list() {
         return listDAO();

@@ -45,7 +45,6 @@ public class SvCoVbDAOImpl extends AbstractDAO<Integer,Svcovb> implements SvCoVb
     }
 
     @SuppressWarnings("unchecked")
-    @Deprecated
     @Override
     public List<Svcovb> listByLoaiVB(int idLoaiVb) {
         return createEntityCriteria()

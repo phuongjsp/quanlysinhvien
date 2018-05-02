@@ -37,7 +37,6 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
         return (Khoa) createEntityCriteria().add(Restrictions.eq("maKhoa", maKhoa)).uniqueResult();
     }
 
-    @Deprecated
     @Override
     public List<Khoa> list() {
         return listDAO();

@@ -1,8 +1,10 @@
 package hoang.phuong.server.dao.Impl;
 
 import org.hibernate.Criteria;
+import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.query.Query;
 
 import javax.inject.Inject;
 import java.io.Serializable;
@@ -22,13 +24,20 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
     }
 
     protected Session getSession() {
-        return sessionFactory.getCurrentSession();
+        Session session;
+        try {
+            session = sessionFactory.getCurrentSession();
+        } catch (HibernateException e) {
+            session = sessionFactory.openSession();
+        }
+        return session;
     }
 
-    @SuppressWarnings("unchecked")
-    @Deprecated
+    //    @SuppressWarnings("unchecked")
+//    @Deprecated
     protected List<T> listDAO() {
-        return createEntityCriteria().list();
+        Query query = getSession().createQuery("FROM " + persistentClass.getSimpleName());
+        return query.getResultList();
     }
 
     @SuppressWarnings("unchecked")

@@ -55,6 +55,12 @@ public class ThongtinsinhvienController {
         return thongtinsinhvienService.listOrderBy(mapparameters, min, max);
     }
 
+    @PostMapping("/fliterDinhChi/{min}/{max}")
+    public List<Thongtinsinhvien> listFliterDinhChi(@RequestBody List<Map<String, Object>> mapparameters,
+                                                    @PathVariable("min") int min, @PathVariable("max") int max) {
+        return thongtinsinhvienService.listBiDinhChiOrderBy(mapparameters, min, max);
+    }
+
     @PutMapping("")
     public boolean update(@RequestBody Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienService.update(thongtinsinhvien);

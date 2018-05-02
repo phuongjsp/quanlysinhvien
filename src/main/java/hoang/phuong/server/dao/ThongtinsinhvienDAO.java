@@ -10,7 +10,7 @@ public interface ThongtinsinhvienDAO {
 
     Thongtinsinhvien getById(int ID);
 
-    List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
+    List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, List<Integer> idSvDinhChi, boolean dinhChi, int min, int max);
     Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien);
 
     boolean update(Thongtinsinhvien thongtinsinhvien);

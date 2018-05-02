@@ -20,4 +20,6 @@ public interface ThongtinsinhvienService {
     boolean delete(String maSv);
 
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
+
+    List<Thongtinsinhvien> listBiDinhChiOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 }

@@ -36,7 +36,6 @@ public class VanBangDAOImpl extends AbstractDAO<Integer,Vanbang> implements VanB
         return (Vanbang) createEntityCriteria().add(Restrictions.eq("maVanBang",maVB)).uniqueResult();
     }
 
-    @Deprecated
     @Override
     public List<Vanbang> list() {
         return listDAO();

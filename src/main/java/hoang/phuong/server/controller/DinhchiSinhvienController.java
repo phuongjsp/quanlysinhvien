@@ -34,6 +34,10 @@ public class DinhchiSinhvienController {
         return dinhchiSinhVienService.findAll();
     }
 
+    @GetMapping("/condinhchi")
+    public List<Dinhchisinhvien> listcondinhchi() {
+        return dinhchiSinhVienService.listConDinhChi();
+    }
     @PutMapping("")
     public Dinhchisinhvien update(@RequestBody Dinhchisinhvien dinhchisinhvien) {
         return dinhchiSinhVienService.update(dinhchisinhvien);

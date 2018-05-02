@@ -10,7 +10,7 @@ import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class NganhdaotaoServiceImpl implements NganhdaotaoService {
     private NganhDaoTaoDAO nganhDaoTaoDAO;
 

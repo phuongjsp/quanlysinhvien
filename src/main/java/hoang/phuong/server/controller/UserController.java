@@ -61,7 +61,6 @@ public class UserController {
 
     @GetMapping("/isemail")
     public boolean isemail(@RequestParam(value = "email") String email) {
-        System.out.println("email is " + email);
         return userService.isEmail(email);
     }
 

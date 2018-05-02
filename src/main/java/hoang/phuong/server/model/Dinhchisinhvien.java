@@ -92,4 +92,15 @@ public class Dinhchisinhvien {
         result = 31 * result + (denNgay != null ? denNgay.hashCode() : 0);
         return result;
     }
+
+    @Override
+    public String toString() {
+        return "Dinhchisinhvien{" +
+                "id=" + id +
+                ", idSv=" + idSv +
+                ", lyDo='" + lyDo + '\'' +
+                ", tuNgay=" + tuNgay +
+                ", denNgay=" + denNgay +
+                '}';
+    }
 }

@@ -86,10 +86,9 @@ public class UserRepositoryImpl extends AbstractDAO<Integer, User> implements Us
         return (User) createEntityCriteria().add(Restrictions.eq("email", email)).uniqueResult();
     }
 
-    @Deprecated
     @Override
     public List<User> findAll() {
-        return createEntityCriteria().list();
+        return listDAO();
     }
 
     @Override

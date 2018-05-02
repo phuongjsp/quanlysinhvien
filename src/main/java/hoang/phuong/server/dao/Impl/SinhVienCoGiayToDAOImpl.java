@@ -56,7 +56,6 @@ public class SinhVienCoGiayToDAOImpl extends AbstractDAO<Integer, Sinhviencogiay
         }
     }
 
-    @Deprecated
     @Override
     public List<Sinhviencogiayto> list() {
         return listDAO();

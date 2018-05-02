@@ -38,7 +38,6 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
         return getByKey(id);
     }
 
-    @Deprecated
     @Override
     public List<Lopsv> list() {
         return listDAO();

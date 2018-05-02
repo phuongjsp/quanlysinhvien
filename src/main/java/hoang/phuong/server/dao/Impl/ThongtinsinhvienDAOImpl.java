@@ -92,7 +92,7 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
     @Deprecated
     @SuppressWarnings("unchecked")
     @Override
-    public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
+    public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, List<Integer> idSvDinhChi, boolean dinhChi, int min, int max) {
         Criteria criteria = createEntityCriteria();
         if (!mapOrder.isEmpty()) mapOrder.forEach((map) -> {
             if (map.get("diachi") != null) {
@@ -127,6 +127,11 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
                     criteria.add(Restrictions.between("tt." + map.get("property").toString(), java.sql.Date.valueOf(map.get("valuelow").toString()), java.sql.Date.valueOf(map.get("valuehight").toString())));
             }
         });
+        if (dinhChi) {
+            if (!idSvDinhChi.isEmpty()) criteria.add(Restrictions.in("id", idSvDinhChi));
+        } else {
+            if (!idSvDinhChi.isEmpty()) criteria.add(Restrictions.not(Restrictions.in("id", idSvDinhChi)));
+        }
         if (min != max) criteria.setFirstResult(min).setMaxResults(max);
         return criteria.list();
     }

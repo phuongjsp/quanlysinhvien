@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 import javax.inject.Inject;
 import java.util.List;
 @Service
-@Transactional(readOnly = true)
+@Transactional
 public class VanBangServiceImpl implements VanBangService {
 
     private VanBangDAO vanBangDAO;

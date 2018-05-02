@@ -11,6 +11,7 @@ public interface DinhchiSinhVienService {
 
     List<Dinhchisinhvien> findAll();
 
+    List<Dinhchisinhvien> listConDinhChi();
     Dinhchisinhvien getOne(int id);
 
     Dinhchisinhvien update(Dinhchisinhvien dinhchisinhvien);

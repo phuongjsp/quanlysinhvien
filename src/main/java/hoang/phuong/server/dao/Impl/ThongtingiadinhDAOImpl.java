@@ -32,10 +32,9 @@ public class ThongtingiadinhDAOImpl extends AbstractDAO<Integer, Thongtingiadinh
     }
 
     @SuppressWarnings("unchecked")
-    @Deprecated
     @Override
     public List<Thongtingiadinh> list() {
-        return createEntityCriteria().list();
+        return listDAO();
     }
 
     @SuppressWarnings("unchecked")
