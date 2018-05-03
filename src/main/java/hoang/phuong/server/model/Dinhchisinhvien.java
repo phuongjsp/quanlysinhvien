@@ -26,6 +26,17 @@ public class Dinhchisinhvien {
     @Column(name = "denNgay", nullable = true)
     private Date denNgay;
 
+    @ManyToOne(optional = false, cascade = CascadeType.ALL)
+    @JoinColumn(name = "idSv", referencedColumnName = "id", insertable = false, updatable = false)
+    private Thongtinsinhvien thongtinsinhvienbyDinhchisinhvien;
+
+    public Thongtinsinhvien getThongtinsinhvienbyDinhchisinhvien() {
+        return thongtinsinhvienbyDinhchisinhvien;
+    }
+
+    public void setThongtinsinhvienbyDinhchisinhvien(Thongtinsinhvien thongtinsinhvienbyDinhchisinhvien) {
+        this.thongtinsinhvienbyDinhchisinhvien = thongtinsinhvienbyDinhchisinhvien;
+    }
 
     public int getId() {
         return id;

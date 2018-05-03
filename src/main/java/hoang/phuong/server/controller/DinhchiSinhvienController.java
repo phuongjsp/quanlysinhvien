@@ -23,7 +23,7 @@ public class DinhchiSinhvienController {
         return dinhchiSinhVienService.save(dinhchisinhvien);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Dinhchisinhvien get(@PathVariable("id") int id) {
         return dinhchiSinhVienService.getOne(id);
     }
@@ -39,8 +39,10 @@ public class DinhchiSinhvienController {
         return dinhchiSinhVienService.listConDinhChi();
     }
     @PutMapping("")
-    public Dinhchisinhvien update(@RequestBody Dinhchisinhvien dinhchisinhvien) {
-        return dinhchiSinhVienService.update(dinhchisinhvien);
+    public boolean update(@RequestBody Dinhchisinhvien dinhchisinhvien) {
+        Dinhchisinhvien dinhchisinhvien1 = dinhchiSinhVienService.update(dinhchisinhvien);
+        if (dinhchisinhvien1 != null) return true;
+        return false;
     }
 
     @DeleteMapping("/{id}")

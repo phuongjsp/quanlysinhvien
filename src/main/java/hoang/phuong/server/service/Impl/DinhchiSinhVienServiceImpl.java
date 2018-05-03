@@ -36,7 +36,7 @@ public class DinhchiSinhVienServiceImpl implements DinhchiSinhVienService {
 
     @Override
     public Dinhchisinhvien getOne(int id) {
-        return null;
+        return dinhchiSinhVienDAO.getOne(id);
     }
 
     @Override

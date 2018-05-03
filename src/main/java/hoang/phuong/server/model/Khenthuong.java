@@ -1,20 +1,36 @@
 package hoang.phuong.server.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.sql.Date;
 
 @Entity
 public class Khenthuong {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
+
+    @Basic
+    @Column(name = "idSv", nullable = false)
     private int idSv;
+    @Basic
+    @Column(name = "lyDo", nullable = true, length = 255)
     private String lyDo;
+    @Basic
+    @Column(name = "ngay", nullable = true)
     private Date ngay;
 
-    @Id
-    @Column(name = "id", nullable = false)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "idSv", referencedColumnName = "id", insertable = false, updatable = false)
+    private Thongtinsinhvien thongtinsinhvien;
+
+    public Thongtinsinhvien getThongtinsinhvien() {
+        return thongtinsinhvien;
+    }
+
+    public void setThongtinsinhvien(Thongtinsinhvien thongtinsinhvien) {
+        this.thongtinsinhvien = thongtinsinhvien;
+    }
+
     public int getId() {
         return id;
     }
@@ -23,8 +39,6 @@ public class Khenthuong {
         this.id = id;
     }
 
-    @Basic
-    @Column(name = "idSv", nullable = false)
     public int getIdSv() {
         return idSv;
     }
@@ -33,8 +47,7 @@ public class Khenthuong {
         this.idSv = idSv;
     }
 
-    @Basic
-    @Column(name = "lyDo", nullable = true, length = 255)
+
     public String getLyDo() {
         return lyDo;
     }
@@ -43,8 +56,7 @@ public class Khenthuong {
         this.lyDo = lyDo;
     }
 
-    @Basic
-    @Column(name = "ngay", nullable = true)
+
     public Date getNgay() {
         return ngay;
     }
