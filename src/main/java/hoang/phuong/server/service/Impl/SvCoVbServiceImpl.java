@@ -4,12 +4,10 @@ import hoang.phuong.server.dao.SvCoVbDAO;
 import hoang.phuong.server.model.Svcovb;
 import hoang.phuong.server.service.SvCoVbService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 @Service
-@Transactional
 public class SvCoVbServiceImpl implements SvCoVbService {
     private SvCoVbDAO svCoVbDAO;
 
@@ -18,7 +16,6 @@ public class SvCoVbServiceImpl implements SvCoVbService {
         this.svCoVbDAO = svCoVbDAO;
     }
 
-    @Transactional
     @Override
     public Svcovb save(Svcovb svcovb) {
         return svCoVbDAO.save(svcovb);
@@ -48,12 +45,10 @@ public class SvCoVbServiceImpl implements SvCoVbService {
     public List<Svcovb> listbyIdSvAndLoaiVb(int idSv, int idLoaiVb) {
         return svCoVbDAO.listbyIdSvAndLoaiVb(idSv,idLoaiVb);
     }
-    @Transactional
     @Override
     public boolean update(Svcovb svcovb) {
         return svCoVbDAO.update(svcovb);
     }
-    @Transactional
     @Override
     public boolean delete(int id) {
         return svCoVbDAO.delete(id);

@@ -1,11 +1,10 @@
 package hoang.phuong.server.model;
 
 import javax.persistence.*;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "confirmresetpassword")
-public class Confirmresetpassword implements Serializable {
+public class Confirmresetpassword {
     private int id;
     private String email;
     private String keyCode;
@@ -22,7 +21,7 @@ public class Confirmresetpassword implements Serializable {
     }
 
     @Basic
-    @Column(name = "email", nullable = true, length = 100)
+    @Column(name = "email", length = 100)
     public String getEmail() {
         return email;
     }
@@ -32,7 +31,7 @@ public class Confirmresetpassword implements Serializable {
     }
 
     @Basic
-    @Column(name = "keyCode", nullable = true, length = 100)
+    @Column(name = "keyCode", length = 100)
     public String getKeyCode() {
         return keyCode;
     }

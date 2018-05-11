@@ -6,7 +6,6 @@ import hoang.phuong.server.model.Thongtinsinhvien;
 import hoang.phuong.server.service.DinhchiSinhVienService;
 import hoang.phuong.server.service.ThongtinsinhvienService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.ArrayList;
@@ -14,7 +13,6 @@ import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional(readOnly = true)
 public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
     private ThongtinsinhvienDAO thongtinsinhvienDAO;
     private DinhchiSinhVienService dinhchiSinhVienService;
@@ -35,19 +33,16 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
     }
 
 
-    @Transactional
     @Override
     public Thongtinsinhvien save(Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienDAO.save(thongtinsinhvien);
     }
 
-    @Transactional
     @Override
     public boolean update(Thongtinsinhvien thongtinsinhvien) {
         return thongtinsinhvienDAO.update(thongtinsinhvien);
     }
 
-    @Transactional
     @Override
     public boolean delete(String maSv) {
         return thongtinsinhvienDAO.delete(maSv);
@@ -64,9 +59,7 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
         List<Dinhchisinhvien> dinhchisinhvienList = dinhchiSinhVienService.listConDinhChi();
         //doto chage to set or linked
         List<Integer> listIdSvbiDinhChi = new ArrayList<>();
-        dinhchisinhvienList.forEach(dinhchisinhvien -> {
-            listIdSvbiDinhChi.add(dinhchisinhvien.getIdSv());
-        });
+        dinhchisinhvienList.forEach((Dinhchisinhvien dinhchisinhvien) -> listIdSvbiDinhChi.add(dinhchisinhvien.getIdSv()));
 
         return thongtinsinhvienDAO.listOrderBy(mapOrder, listIdSvbiDinhChi, b, min, max);
     }

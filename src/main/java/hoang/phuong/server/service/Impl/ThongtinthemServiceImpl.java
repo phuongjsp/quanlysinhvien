@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.ThongtinthemDAO;
 import hoang.phuong.server.model.Thongtinthem;
 import hoang.phuong.server.service.ThongtinthemService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class ThongtinthemServiceImpl implements ThongtinthemService {
 
     private ThongtinthemDAO thongtinthemDAO;
@@ -20,7 +18,6 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
         this.thongtinthemDAO = thongtinthemDAO;
     }
 
-    @Transactional
     @Override
     public Thongtinthem save(Thongtinthem thongtinthem) {
         return thongtinthemDAO.save(thongtinthem);
@@ -42,13 +39,11 @@ public class ThongtinthemServiceImpl implements ThongtinthemService {
         return thongtinthemDAO.listByIDSv(idSv);
     }
 
-    @Transactional
     @Override
     public boolean update(Thongtinthem thongtinthem) {
         return thongtinthemDAO.update(thongtinthem);
     }
 
-    @Transactional
     @Override
     public boolean delete(int id) {
         return thongtinthemDAO.delete(id);

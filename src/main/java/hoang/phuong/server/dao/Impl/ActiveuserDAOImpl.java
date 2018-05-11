@@ -5,11 +5,12 @@ import hoang.phuong.server.model.Activeuser;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
 
 @Repository
-@Transactional
 public class ActiveuserDAOImpl extends AbstractDAO<Integer, Activeuser> implements ActiveuserDAO {
+    @Inject
     public ActiveuserDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

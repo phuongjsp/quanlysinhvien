@@ -5,12 +5,14 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.List;
 
+@Transactional
 public abstract class AbstractDAO<PK extends Serializable, T> {
 
     private final Class<T> persistentClass;
@@ -33,7 +35,7 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
         return session;
     }
 
-    //    @SuppressWarnings("unchecked")
+    @SuppressWarnings("unchecked")
 //    @Deprecated
     protected List<T> listDAO() {
         Query query = getSession().createQuery("FROM " + persistentClass.getSimpleName());
@@ -46,8 +48,7 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
     }
 
     protected void saveDAO(T entity) {
-
-            getSession().save(entity);
+        getSession().save(entity);
     }
 
 //    protected void persistDAO(T entity) {

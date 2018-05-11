@@ -4,14 +4,12 @@ import hoang.phuong.server.dao.DiaChiDAO;
 import hoang.phuong.server.model.Diachi;
 import hoang.phuong.server.service.DiaChiService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 import java.util.Map;
 
 @Service
-@Transactional
 public class DiaChiServiceImpl implements DiaChiService {
     private DiaChiDAO diaChiDAO;
 
@@ -20,7 +18,6 @@ public class DiaChiServiceImpl implements DiaChiService {
         this.diaChiDAO = diaChiDAO;
     }
 
-    @Transactional
     @Override
     public Diachi save(Diachi diachi) {
         return diaChiDAO.save(diachi);
@@ -41,13 +38,11 @@ public class DiaChiServiceImpl implements DiaChiService {
         return diaChiDAO.listByProperties(map);
     }
 
-    @Transactional
     @Override
     public boolean update(Diachi diachi) {
         return diaChiDAO.update(diachi);
     }
 
-    @Transactional
     @Override
     public boolean delete(int id) {
         return diaChiDAO.delete(id);

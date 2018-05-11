@@ -6,12 +6,10 @@ import org.hibernate.validator.constraints.SafeHtml;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 
 @Entity
 @Table(name = "activeuser")
-public class Activeuser implements Serializable {
-    private static final long serialVersionUID = 1L;
+public class Activeuser {
     private static final String EMAIL_REGEX =
             "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
     public static final java.util.regex.Pattern EMAIL_PATTERN =

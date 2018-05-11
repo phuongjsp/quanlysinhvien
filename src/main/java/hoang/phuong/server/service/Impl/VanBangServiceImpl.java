@@ -4,12 +4,10 @@ import hoang.phuong.server.dao.VanBangDAO;
 import hoang.phuong.server.model.Vanbang;
 import hoang.phuong.server.service.VanBangService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 @Service
-@Transactional
 public class VanBangServiceImpl implements VanBangService {
 
     private VanBangDAO vanBangDAO;
@@ -19,7 +17,6 @@ public class VanBangServiceImpl implements VanBangService {
         this.vanBangDAO = vanBangDAO;
     }
 
-    @Transactional
     @Override
     public Vanbang save(Vanbang vanbang) {
         return vanBangDAO.save(vanbang);
@@ -39,12 +36,10 @@ public class VanBangServiceImpl implements VanBangService {
     public List<Vanbang> list() {
         return vanBangDAO.list();
     }
-    @Transactional
     @Override
     public boolean update(Vanbang vanbang) {
         return vanBangDAO.update(vanbang);
     }
-    @Transactional
     @Override
     public boolean delete(int id) {
         return vanBangDAO.delete(id);

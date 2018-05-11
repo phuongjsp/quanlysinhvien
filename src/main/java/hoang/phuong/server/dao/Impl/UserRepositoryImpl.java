@@ -5,12 +5,10 @@ import hoang.phuong.server.model.User;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Repository
-@Transactional()
 public class UserRepositoryImpl extends AbstractDAO<Integer, User> implements UserRepository {
 
 
@@ -62,8 +60,8 @@ public class UserRepositoryImpl extends AbstractDAO<Integer, User> implements Us
     @Override
     public User update(User user) {
         User user1 = getById(user.getId());
-        if (user1.getUserName() != user.getUserName()) user1.setUserName(user.getUserName());
-        if (user1.getUserLastName() != user.getUserLastName()) user1.setUserLastName(user.getUserLastName());
+        if (!user1.getUserName().equals(user.getUserName())) user1.setUserName(user.getUserName());
+        if (!user1.getUserLastName().equals(user.getUserLastName())) user1.setUserLastName(user.getUserLastName());
         if (user1.getEnabled() != user.getEnabled()) user1.setEnabled(user.getEnabled());
         if (user1.getRoles() != user.getRoles()) user1.setRoles(user.getRoles());
         if (user1.getAdmin() != user.getAdmin()) user1.setAdmin(user.getAdmin());

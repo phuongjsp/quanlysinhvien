@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.NganhDaoTaoDAO;
 import hoang.phuong.server.model.Nganhdaotao;
 import hoang.phuong.server.service.NganhdaotaoService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class NganhdaotaoServiceImpl implements NganhdaotaoService {
     private NganhDaoTaoDAO nganhDaoTaoDAO;
 
@@ -19,7 +17,6 @@ public class NganhdaotaoServiceImpl implements NganhdaotaoService {
         this.nganhDaoTaoDAO = nganhDaoTaoDAO;
     }
 
-    @Transactional
     @Override
     public Nganhdaotao save(Nganhdaotao nganhDaoTao) {
         return nganhDaoTaoDAO.save(nganhDaoTao);
@@ -40,13 +37,11 @@ public class NganhdaotaoServiceImpl implements NganhdaotaoService {
         return nganhDaoTaoDAO.list();
     }
 
-    @Transactional
     @Override
     public boolean update(Nganhdaotao nganhdaotao) {
         return nganhDaoTaoDAO.update(nganhdaotao);
     }
 
-    @Transactional
     @Override
     public boolean delete(String maNganhdaotao) {
         return nganhDaoTaoDAO.delete(maNganhdaotao);

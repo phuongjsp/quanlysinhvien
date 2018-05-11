@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.KhenThuongDAO;
 import hoang.phuong.server.model.Khenthuong;
 import hoang.phuong.server.service.KhenThuongService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Date;
 import java.util.List;
 
 @Service
-@Transactional
 public class KhenThuongServiceImpl implements KhenThuongService {
     private final KhenThuongDAO khenThuongDAO;
 

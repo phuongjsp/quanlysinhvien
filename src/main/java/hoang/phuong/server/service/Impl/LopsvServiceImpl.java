@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.LopsvDAO;
 import hoang.phuong.server.model.Lopsv;
 import hoang.phuong.server.service.LopsvService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class LopsvServiceImpl implements LopsvService {
     private LopsvDAO lopsvDAO;
 
@@ -19,7 +17,6 @@ public class LopsvServiceImpl implements LopsvService {
         this.lopsvDAO = lopsvDAO;
     }
 
-    @Transactional
     @Override
     public Lopsv save(Lopsv lopsv) {
         return lopsvDAO.save(lopsv);
@@ -40,13 +37,11 @@ public class LopsvServiceImpl implements LopsvService {
         return lopsvDAO.list();
     }
 
-    @Transactional
     @Override
     public boolean update(Lopsv lopsv) {
         return lopsvDAO.update(lopsv);
     }
 
-    @Transactional
     @Override
     public boolean delete(String maLop) {
         return lopsvDAO.delete(maLop);

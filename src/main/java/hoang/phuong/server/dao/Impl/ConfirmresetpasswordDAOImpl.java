@@ -5,11 +5,12 @@ import hoang.phuong.server.model.Confirmresetpassword;
 import org.hibernate.SessionFactory;
 import org.hibernate.criterion.Restrictions;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
+
+import javax.inject.Inject;
 
 @Repository
-@Transactional
 public class ConfirmresetpasswordDAOImpl extends AbstractDAO<Integer, Confirmresetpassword> implements ConfirmresetpasswordDAO {
+    @Inject
     public ConfirmresetpasswordDAOImpl(SessionFactory sessionFactory) {
         super(sessionFactory);
     }

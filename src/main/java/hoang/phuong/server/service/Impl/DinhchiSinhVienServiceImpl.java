@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.DinhchiSinhVienDAO;
 import hoang.phuong.server.model.Dinhchisinhvien;
 import hoang.phuong.server.service.DinhchiSinhVienService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class DinhchiSinhVienServiceImpl implements DinhchiSinhVienService {
     private final DinhchiSinhVienDAO dinhchiSinhVienDAO;
 

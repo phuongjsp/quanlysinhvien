@@ -10,14 +10,13 @@ import org.springframework.util.CollectionUtils;
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
-import java.io.Serializable;
 import java.sql.Date;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
 @Entity
 @Table(name = "users")
-public class User implements Serializable {
+public class User {
 
     private static final long serialVersionUID = 1L;
 

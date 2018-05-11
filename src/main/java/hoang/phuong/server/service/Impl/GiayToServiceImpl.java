@@ -4,13 +4,11 @@ import hoang.phuong.server.dao.GiayToDAO;
 import hoang.phuong.server.model.Giayto;
 import hoang.phuong.server.service.GiayToService;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
 import java.util.List;
 
 @Service
-@Transactional
 public class GiayToServiceImpl implements GiayToService {
     private GiayToDAO giayToDAO;
 
