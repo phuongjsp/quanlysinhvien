@@ -3,6 +3,7 @@ package hoang.phuong.server.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "thongtinthem")
 public class Thongtinthem {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

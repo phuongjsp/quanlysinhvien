@@ -84,7 +84,7 @@ public class AppConfig {
         // Setting Hibernate properties
         props.put(SHOW_SQL, env.getProperty("hibernate.show_sql"));
         props.put(HBM2DDL_AUTO, env.getProperty("hibernate.hbm2ddl.auto"));
-        props.put(DIALECT, "org.hibernate.dialect.MySQL5InnoDBDialect");
+        props.put(DIALECT, "org.hibernate.dialect.MySQL5Dialect");
         props.put("hibernate.enable_lazy_load_no_trans", true);
         // Setting C3P0 properties
         props.put(C3P0_MIN_SIZE, env.getProperty("hibernate.c3p0.min_size"));

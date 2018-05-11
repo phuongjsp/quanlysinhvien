@@ -62,6 +62,7 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
 
     private List<Thongtinsinhvien> getThongtinsinhviens(List<Map<String, Object>> mapOrder, int min, int max, boolean b) {
         List<Dinhchisinhvien> dinhchisinhvienList = dinhchiSinhVienService.listConDinhChi();
+        //doto chage to set or linked
         List<Integer> listIdSvbiDinhChi = new ArrayList<>();
         dinhchisinhvienList.forEach(dinhchisinhvien -> {
             listIdSvbiDinhChi.add(dinhchisinhvien.getIdSv());

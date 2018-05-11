@@ -3,6 +3,7 @@ package hoang.phuong.server.model;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "thongtingiadinh")
 public class Thongtingiadinh {
     private int id;
     private int idSv;

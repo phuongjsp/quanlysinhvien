@@ -1,28 +1,25 @@
-create table quanlysinhvien.activeuser
+create table activeuser
 (
   email        varchar(100) null,
   username     varchar(50)  null,
   userLastName varchar(50)  null,
   KeyCode      varchar(100) null,
   id_active    int auto_increment
-  constraint `PRIMARY`
-  primary key
+    primary key
 );
 
-create table quanlysinhvien.confirmresetpassword
+create table confirmresetpassword
 (
   id      int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   email   varchar(100) null,
   keyCode varchar(100) null
 );
 
-create table quanlysinhvien.diachi
+create table diachi
 (
   id        int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   tinh      varchar(50) null,
   quanHuyen varchar(50) null,
   xaPhuong  varchar(50) null,
@@ -32,36 +29,28 @@ create table quanlysinhvien.diachi
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.giaovien
+create table giaovien
 (
   id          int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   maGV        varchar(50)  not null,
   TenGiaoVien varchar(125) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.giayto
+create table giayto
 (
   id        int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   tenGiayTo varchar(50) not null,
   maGiayTo  varchar(50) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.hibernate_sequence
-(
-  next_val bigint null
-);
-
-create table quanlysinhvien.khoa
+create table khoa
 (
   id      int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   tenKhoa varchar(50)  not null,
   maKhoa  varchar(11)  not null,
   namHoc  varchar(50)  not null,
@@ -71,39 +60,35 @@ create table quanlysinhvien.khoa
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.kyhoc
+create table kyhoc
 (
   id       int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   TenKyHoc varchar(50) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.lopsv
+create table lopsv
 (
   id     int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   maLop  varchar(50)  not null,
   tenLop varchar(125) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.monhoc
+create table monhoc
 (
   id        int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   tenMonHoc varchar(50) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.nganhdaotao
+create table nganhdaotao
 (
   id       int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   tenNganh varchar(50)  not null,
   maNganh  varchar(50)  not null,
   khoa     varchar(50)  not null,
@@ -113,11 +98,10 @@ create table quanlysinhvien.nganhdaotao
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.thoikhoabieu
+create table thoikhoabieu
 (
   id         int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idMonHoc   int not null,
   idKyHoc    int not null,
   idGiaoVien int not null,
@@ -131,19 +115,18 @@ create table quanlysinhvien.thoikhoabieu
   collate = utf8_vietnamese_ci;
 
 create index idGiaoVien
-  on quanlysinhvien.thoikhoabieu (idGiaoVien);
+  on thoikhoabieu (idGiaoVien);
 
 create index idKyHoc
-  on quanlysinhvien.thoikhoabieu (idKyHoc);
+  on thoikhoabieu (idKyHoc);
 
 create index idMonHoc
-  on quanlysinhvien.thoikhoabieu (idMonHoc);
+  on thoikhoabieu (idMonHoc);
 
-create table quanlysinhvien.thongtinsinhvien
+create table thongtinsinhvien
 (
   id              int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   maSV            varchar(50)     not null,
   ho              varchar(50)     not null,
   ten             varchar(50)     not null,
@@ -182,11 +165,43 @@ create table quanlysinhvien.thongtinsinhvien
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.lophocphan
+create table dinhchisinhvien
+(
+  id      int auto_increment
+    primary key,
+  idSv    int          not null,
+  lyDo    varchar(255) null,
+  tuNgay  date         null,
+  denNgay date         null,
+  constraint FKj9um8maslvtqnwon253d019a
+  foreign key (idSv) references thongtinsinhvien (id),
+  constraint dinhchisinhvien_thongtinsinhvien_id_fk
+  foreign key (idSv) references thongtinsinhvien (id)
+);
+
+create index FKj9um8maslvtqnwon253d019a
+  on dinhchisinhvien (idSv);
+
+create table khenthuong
+(
+  id   int auto_increment
+    primary key,
+  idSv int          not null,
+  lyDo varchar(255) null,
+  ngay date         null,
+  constraint FKdtcdorqte1y69k9oagus6ukk3
+  foreign key (idSv) references thongtinsinhvien (id),
+  constraint khenthuong_thongtinsinhvien_id_fk
+  foreign key (idSv) references thongtinsinhvien (id)
+);
+
+create index FKdtcdorqte1y69k9oagus6ukk3
+  on khenthuong (idSv);
+
+create table lophocphan
 (
   id       int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idMonHoc int not null,
   idSV     int not null,
   idKyHoc  int not null,
@@ -200,19 +215,18 @@ create table quanlysinhvien.lophocphan
   collate = utf8_vietnamese_ci;
 
 create index idKyHoc
-  on quanlysinhvien.lophocphan (idKyHoc);
+  on lophocphan (idKyHoc);
 
 create index idMonHoc
-  on quanlysinhvien.lophocphan (idMonHoc);
+  on lophocphan (idMonHoc);
 
 create index idSV
-  on quanlysinhvien.lophocphan (idSV);
+  on lophocphan (idSV);
 
-create table quanlysinhvien.sinhviencogiayto
+create table sinhviencogiayto
 (
   id       int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idSv     int      not null,
   idGiayTo int      not null,
   thongtin longtext null,
@@ -226,16 +240,15 @@ create table quanlysinhvien.sinhviencogiayto
   collate = utf8_vietnamese_ci;
 
 create index idGiayTo
-  on quanlysinhvien.sinhviencogiayto (idGiayTo);
+  on sinhviencogiayto (idGiayTo);
 
 create index idSv
-  on quanlysinhvien.sinhviencogiayto (idSv);
+  on sinhviencogiayto (idSv);
 
-create table quanlysinhvien.thongtingiadinh
+create table thongtingiadinh
 (
   id         int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idSV       int         not null,
   quanHe     varchar(50) not null,
   ten        varchar(50) not null,
@@ -247,28 +260,27 @@ create table quanlysinhvien.thongtingiadinh
   collate = utf8_vietnamese_ci;
 
 create index idSV
-  on quanlysinhvien.thongtingiadinh (idSV);
+  on thongtingiadinh (idSV);
 
 create index Lop
-  on quanlysinhvien.thongtinsinhvien (Lop);
+  on thongtinsinhvien (Lop);
 
 create index hoKhauThuongChu
-  on quanlysinhvien.thongtinsinhvien (hoKhauThuongChu);
+  on thongtinsinhvien (hoKhauThuongChu);
 
 create index khoaHoc
-  on quanlysinhvien.thongtinsinhvien (khoaHoc);
+  on thongtinsinhvien (khoaHoc);
 
 create index nganhDK
-  on quanlysinhvien.thongtinsinhvien (nganhDK);
+  on thongtinsinhvien (nganhDK);
 
 create index noiSinh
-  on quanlysinhvien.thongtinsinhvien (noiSinh);
+  on thongtinsinhvien (noiSinh);
 
-create table quanlysinhvien.thongtinthem
+create table thongtinthem
 (
   id          int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idSV        int          not null,
   tenThongTin varchar(50)  not null,
   thongTin    varchar(125) not null,
@@ -280,13 +292,12 @@ create table quanlysinhvien.thongtinthem
   collate = utf8_vietnamese_ci;
 
 create index idSV
-  on quanlysinhvien.thongtinthem (idSV);
+  on thongtinthem (idSV);
 
-create table quanlysinhvien.users
+create table users
 (
   user_id        int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   user_name      varchar(50)  null,
   user_last_name varchar(50)  null,
   password       varchar(100) null,
@@ -300,11 +311,10 @@ create table quanlysinhvien.users
   unique (email)
 );
 
-create table quanlysinhvien.user_roles
+create table user_roles
 (
   id      int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   user_id int         null,
   role    varchar(50) null,
   constraint FKhfh9dx7w3ubf1co1vdev94g3f
@@ -312,23 +322,21 @@ create table quanlysinhvien.user_roles
 );
 
 create index FKhfh9dx7w3ubf1co1vdev94g3f
-  on quanlysinhvien.user_roles (user_id);
+  on user_roles (user_id);
 
-create table quanlysinhvien.vanbang
+create table vanbang
 (
   id         int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   maVanBang  varchar(50)  not null,
   tenVanBang varchar(125) not null
 )
   collate = utf8_vietnamese_ci;
 
-create table quanlysinhvien.svcovb
+create table svcovb
 (
   id           int auto_increment
-  constraint `PRIMARY`
-  primary key,
+    primary key,
   idSv         int          not null,
   loaiVb       int          not null,
   tenThuocTinh varchar(50)  not null,
@@ -341,8 +349,8 @@ create table quanlysinhvien.svcovb
   collate = utf8_vietnamese_ci;
 
 create index idSV
-  on quanlysinhvien.svcovb (idSv);
+  on svcovb (idSv);
 
 create index idVb
-  on quanlysinhvien.svcovb (loaiVb);
+  on svcovb (loaiVb);
 
