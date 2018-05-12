@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+
 @Service
 public class SvCoVbServiceImpl implements SvCoVbService {
     private SvCoVbDAO svCoVbDAO;
@@ -43,12 +44,14 @@ public class SvCoVbServiceImpl implements SvCoVbService {
 
     @Override
     public List<Svcovb> listbyIdSvAndLoaiVb(int idSv, int idLoaiVb) {
-        return svCoVbDAO.listbyIdSvAndLoaiVb(idSv,idLoaiVb);
+        return svCoVbDAO.listbyIdSvAndLoaiVb(idSv, idLoaiVb);
     }
+
     @Override
     public boolean update(Svcovb svcovb) {
         return svCoVbDAO.update(svcovb);
     }
+
     @Override
     public boolean delete(int id) {
         return svCoVbDAO.delete(id);

@@ -1,7 +1,7 @@
 <component name="ArtifactManager">
   <artifact type="war" name="quan-ly-sinh-vien:war">
     <output-path>$PROJECT_DIR$/target</output-path>
-    <root id="archive" name="quan-ly-sinh-vien-0.0.2.war">
+    <root id="archive" name="quan-ly-sinh-vien-1.0.0-Alpha-test.war">
       <element id="artifact" artifact-name="quan-ly-sinh-vien:war exploded" />
     </root>
   </artifact>

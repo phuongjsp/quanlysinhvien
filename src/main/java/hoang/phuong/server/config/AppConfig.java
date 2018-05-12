@@ -1,6 +1,5 @@
 package hoang.phuong.server.config;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.*;
 import org.springframework.context.support.PropertySourcesPlaceholderConfigurer;
@@ -12,6 +11,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
 import javax.annotation.Resource;
+import javax.inject.Inject;
 import java.util.Properties;
 
 import static org.hibernate.cfg.Environment.*;
@@ -24,8 +24,13 @@ import static org.hibernate.cfg.Environment.*;
 
 public class AppConfig {
 
-    @Autowired
+
     private Environment env;
+
+    @Inject
+    public AppConfig(Environment env) {
+        this.env = env;
+    }
 
     @Bean
     public static PropertySourcesPlaceholderConfigurer propertySourcesPlaceholderConfigurer() {
@@ -69,6 +74,7 @@ public class AppConfig {
     public BCryptPasswordEncoder bCryptPasswordEncoder() {
         return new BCryptPasswordEncoder();
     }
+
     @Bean
     @Resource(name = "getSessionFactory")
     public LocalSessionFactoryBean getSessionFactory() {
@@ -97,7 +103,6 @@ public class AppConfig {
         factoryBean.setPackagesToScan("hoang.phuong.server.model");
         return factoryBean;
     }
-
 
 
     @Bean

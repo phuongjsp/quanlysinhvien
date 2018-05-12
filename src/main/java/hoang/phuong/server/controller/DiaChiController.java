@@ -21,7 +21,7 @@ public class DiaChiController {
 
     @PostMapping("")
     public Diachi save(@RequestBody Diachi diachi) {
-       return   diaChiService.save(diachi);
+        return diaChiService.save(diachi);
     }
 
     @GetMapping("/{id}")
@@ -30,12 +30,12 @@ public class DiaChiController {
     }
 
     @GetMapping("")
-    public  List<Diachi> list() {
+    public List<Diachi> list() {
         return diaChiService.list();
     }
 
     @PostMapping("/fliter")
-    public  List<Diachi> listByProperties(@RequestBody  Map<String, String> mapparameters) {
+    public List<Diachi> listByProperties(@RequestBody Map<String, String> mapparameters) {
         return diaChiService.listByProperties(mapparameters);
     }
 
@@ -44,6 +44,7 @@ public class DiaChiController {
         return diaChiService.update(diachi);
 
     }
+
     /*---Delete a diachi by id---*/
     @DeleteMapping("/{id}")
     public boolean delete(@PathVariable("id") int id) {

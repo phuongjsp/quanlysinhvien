@@ -30,11 +30,13 @@ public class KhenThuongDAOImpl extends AbstractDAO<Integer, Khenthuong> implemen
         return listDAO();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Khenthuong> findByIdSv(int idSv) {
         return getSession().createQuery("from Khenthuong where idSv=:idSv").setParameter("idSv", idSv).getResultList();
     }
 
+    @SuppressWarnings("unchecked")
     @Override
     public List<Khenthuong> findByYear(Date stdate, Date eddate) {
         return getSession().createQuery("from Khenthuong where ngay between :stdate and :endate")

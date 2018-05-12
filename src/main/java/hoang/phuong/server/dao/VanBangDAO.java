@@ -6,9 +6,14 @@ import java.util.List;
 
 public interface VanBangDAO {
     Vanbang save(Vanbang vanbang);
+
     Vanbang getbyId(int id);
+
     Vanbang getByMaVB(String maVB);
+
     List<Vanbang> list();
+
     boolean update(Vanbang vanbang);
+
     boolean delete(int id);
 }

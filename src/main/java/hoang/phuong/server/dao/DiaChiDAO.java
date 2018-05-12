@@ -11,7 +11,9 @@ public interface DiaChiDAO {
     Diachi getByID(int id);
 
     List<Diachi> list();
-    List<Diachi> listByProperties(Map<String,String> map);
+
+    List<Diachi> listByProperties(Map<String, String> map);
+
     boolean update(Diachi diachi);
 
     boolean delete(int id);

@@ -44,7 +44,7 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
 
     @Override
     public boolean update(Khoa khoa) {
-        if(getByID(khoa.getId())!=null){
+        if (getByID(khoa.getId()) != null) {
             Khoa khoa2 = getByID(khoa.getId());
             khoa2.setMaKhoa(khoa.getMaKhoa());
             khoa2.setTenKhoa(khoa.getTenKhoa());
@@ -58,10 +58,10 @@ public class KhoaDAOImpl extends AbstractDAO<Integer, Khoa> implements KhoaDAO {
 
     @Override
     public boolean delete(int id) {
-       if(getByID(id)!=null){
-           deleteDAO(id);
-           return true;
-       }
-       return false;
+        if (getByID(id) != null) {
+            deleteDAO(id);
+            return true;
+        }
+        return false;
     }
 }

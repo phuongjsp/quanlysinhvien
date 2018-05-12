@@ -14,6 +14,7 @@ import java.sql.Date;
 import java.util.Collections;
 import java.util.EnumSet;
 import java.util.Set;
+
 @Entity
 @Table(name = "users")
 public class User {

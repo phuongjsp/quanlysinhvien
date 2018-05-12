@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import javax.inject.Inject;
 import java.util.List;
+
 @Service
 public class VanBangServiceImpl implements VanBangService {
 
@@ -36,10 +37,12 @@ public class VanBangServiceImpl implements VanBangService {
     public List<Vanbang> list() {
         return vanBangDAO.list();
     }
+
     @Override
     public boolean update(Vanbang vanbang) {
         return vanBangDAO.update(vanbang);
     }
+
     @Override
     public boolean delete(int id) {
         return vanBangDAO.delete(id);

@@ -5,6 +5,8 @@ import org.hibernate.HibernateException;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.transaction.annotation.Transactional;
 
 import javax.inject.Inject;
@@ -14,7 +16,7 @@ import java.util.List;
 
 @Transactional
 public abstract class AbstractDAO<PK extends Serializable, T> {
-
+    private static final Logger LOG = LoggerFactory.getLogger(AbstractDAO.class);
     private final Class<T> persistentClass;
     private SessionFactory sessionFactory;
 
@@ -47,8 +49,14 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
         return getSession().get(persistentClass, key);
     }
 
-    protected void saveDAO(T entity) {
-        getSession().save(entity);
+    protected T saveDAO(T entity) {
+        try {
+            getSession().save(entity);
+            return entity;
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+            return null;
+        }
     }
 
 //    protected void persistDAO(T entity) {
@@ -61,21 +69,26 @@ public abstract class AbstractDAO<PK extends Serializable, T> {
 //    }
 
 
-    protected void deleteDAO(T entity) {
-        getSession().delete(entity);
+    protected boolean deleteDAO(T entity) {
+        try {
+            getSession().delete(entity);
+            return true;
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+            return false;
+        }
     }
 
-    @Deprecated
-    @SuppressWarnings("unchecked")
-    protected List<T> listLimit(int min, int max) {
-        Criteria criteria = createEntityCriteria();
-        return criteria.setFirstResult(min).setMaxResults(max).list();
-    }
 
-
-    protected void deleteDAO(PK key) {
-        T entity = getSession().byId(persistentClass).load(key);
-        getSession().delete(entity);
+    protected boolean deleteDAO(PK key) {
+        try {
+            T entity = getSession().byId(persistentClass).load(key);
+            getSession().delete(entity);
+            return true;
+        } catch (Exception e) {
+            LOG.error(e.getMessage());
+            return false;
+        }
     }
 
     @Deprecated

@@ -42,6 +42,7 @@ public class Thongtinsinhvien {
     public void setId(int id) {
         this.id = id;
     }
+
     public Integer getId() {
         return id;
     }
@@ -93,6 +94,7 @@ public class Thongtinsinhvien {
     public Date getNgaySinh() {
         return ngaySinh;
     }
+
     public void setNgaySinh(Date ngaySinh) {
         this.ngaySinh = ngaySinh;
     }
@@ -174,9 +176,7 @@ public class Thongtinsinhvien {
         if (noiSinh != null ? !noiSinh.equals(that.noiSinh) : that.noiSinh != null) return false;
         if (hoKhauThuongChu != null ? !hoKhauThuongChu.equals(that.hoKhauThuongChu) : that.hoKhauThuongChu != null)
             return false;
-        if (lop != null ? !lop.equals(that.lop) : that.lop != null) return false;
-
-        return true;
+        return lop != null ? lop.equals(that.lop) : that.lop == null;
     }
 
     @Override

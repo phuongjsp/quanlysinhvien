@@ -13,7 +13,8 @@ public interface DiaChiService {
     Diachi getByID(int id);
 
     List<Diachi> list();
-    List<Diachi> listByProperties(Map<String,String> map);
+
+    List<Diachi> listByProperties(Map<String, String> map);
 
     boolean update(Diachi diachi);
 

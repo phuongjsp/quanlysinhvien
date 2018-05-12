@@ -22,4 +22,10 @@ public interface ThongtinsinhvienService {
     List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
 
     List<Thongtinsinhvien> listBiDinhChiOrderBy(List<Map<String, Object>> mapOrder, int min, int max);
+
+    Integer getIdByMaSv(String maSv);
+
+    List<String> checkMaSv(String maSv);
+
+    String getMaSvById(int id);
 }

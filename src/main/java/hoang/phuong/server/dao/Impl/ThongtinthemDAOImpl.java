@@ -46,20 +46,22 @@ public class ThongtinthemDAOImpl extends AbstractDAO<Integer, Thongtinthem> impl
 
     @Override
     public boolean update(Thongtinthem thongtinthem) {
-        if(getByID(thongtinthem.getId())!=null){
+        if (getByID(thongtinthem.getId()) != null) {
             Thongtinthem thongtinthem2 = getByID(thongtinthem.getId());
             thongtinthem2.setTenThongTin(thongtinthem.getTenThongTin());
             thongtinthem2.setThongTin(thongtinthem.getThongTin());
             getSession().flush();
             return true;
-        }return false;
+        }
+        return false;
     }
 
     @Override
     public boolean delete(int id) {
-      if(getByID(id)!=null){
-          deleteDAO(id);
-          return true;
-      }return false;
+        if (getByID(id) != null) {
+            deleteDAO(id);
+            return true;
+        }
+        return false;
     }
 }

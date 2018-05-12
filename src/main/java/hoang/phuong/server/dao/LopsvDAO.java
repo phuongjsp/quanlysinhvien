@@ -10,6 +10,7 @@ public interface LopsvDAO {
     Lopsv getByMaLop(String maLop);
 
     Lopsv getbyId(int id);
+
     List<Lopsv> list();
 
     boolean update(Lopsv lopsv);

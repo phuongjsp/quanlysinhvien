@@ -36,7 +36,7 @@ public class KhenThuongController {
     }
 
     @GetMapping("/idSv/{idSv}")
-    public List<Khenthuong> listByIdSv(@PathVariable("id") int idSv) {
+    public List<Khenthuong> listByIdSv(@PathVariable("idSv") int idSv) {
         return khenThuongService.findByIdSv(idSv);
     }
 
@@ -52,8 +52,8 @@ public class KhenThuongController {
     }
 
     @PutMapping("")
-    public Khenthuong update(@RequestBody Khenthuong khenthuong) {
-        return khenThuongService.update(khenthuong);
+    public boolean update(@RequestBody Khenthuong khenthuong) {
+        return khenThuongService.update(khenthuong) != null;
     }
 
     @DeleteMapping("/{id}")

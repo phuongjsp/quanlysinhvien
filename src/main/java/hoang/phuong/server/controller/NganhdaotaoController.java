@@ -23,7 +23,7 @@ public class NganhdaotaoController {
     }
 
     @GetMapping("/{id}")
-    public  Nganhdaotao get(@PathVariable("id") int id) {
+    public Nganhdaotao get(@PathVariable("id") int id) {
         return nganhdaotaoService.getByID(id);
     }
 
@@ -33,8 +33,8 @@ public class NganhdaotaoController {
     }
 
     @GetMapping("")
-    public  List<Nganhdaotao> list() {
-        return  nganhdaotaoService.list();
+    public List<Nganhdaotao> list() {
+        return nganhdaotaoService.list();
     }
 
     @PutMapping("")

@@ -9,6 +9,7 @@ import java.util.List;
 public interface KhoaService {
 
     Khoa save(Khoa khoa);
+
     Khoa getByID(int id);
 
     Khoa getByMaKhoa(String maKhoa);

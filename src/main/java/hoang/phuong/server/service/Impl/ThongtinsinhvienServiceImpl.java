@@ -16,6 +16,7 @@ import java.util.Map;
 public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
     private ThongtinsinhvienDAO thongtinsinhvienDAO;
     private DinhchiSinhVienService dinhchiSinhVienService;
+
     @Inject
     public ThongtinsinhvienServiceImpl(ThongtinsinhvienDAO thongtinsinhvienDAO, DinhchiSinhVienService dinhchiSinhVienService) {
         this.thongtinsinhvienDAO = thongtinsinhvienDAO;
@@ -49,7 +50,6 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
     }
 
 
-
     @Override
     public List<Thongtinsinhvien> listOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
         return getThongtinsinhviens(mapOrder, min, max, false);
@@ -68,5 +68,20 @@ public class ThongtinsinhvienServiceImpl implements ThongtinsinhvienService {
     public List<Thongtinsinhvien> listBiDinhChiOrderBy(List<Map<String, Object>> mapOrder, int min, int max) {
         return getThongtinsinhviens(mapOrder, min, max, true);
 
+    }
+
+    @Override
+    public Integer getIdByMaSv(String maSv) {
+        return thongtinsinhvienDAO.getIdByMaSv(maSv);
+    }
+
+    @Override
+    public List<String> checkMaSv(String maSv) {
+        return thongtinsinhvienDAO.checkMaSv(maSv);
+    }
+
+    @Override
+    public String getMaSvById(int id) {
+        return thongtinsinhvienDAO.getMaSvById(id);
     }
 }

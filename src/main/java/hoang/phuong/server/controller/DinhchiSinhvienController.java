@@ -38,11 +38,11 @@ public class DinhchiSinhvienController {
     public List<Dinhchisinhvien> listcondinhchi() {
         return dinhchiSinhVienService.listConDinhChi();
     }
+
     @PutMapping("")
     public boolean update(@RequestBody Dinhchisinhvien dinhchisinhvien) {
         Dinhchisinhvien dinhchisinhvien1 = dinhchiSinhVienService.update(dinhchisinhvien);
-        if (dinhchisinhvien1 != null) return true;
-        return false;
+        return dinhchisinhvien1 != null;
     }
 
     @DeleteMapping("/{id}")

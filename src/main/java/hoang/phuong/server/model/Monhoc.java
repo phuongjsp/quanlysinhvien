@@ -7,9 +7,11 @@ import javax.persistence.*;
 public class Monhoc {
     private int id;
     private String tenMonHoc;
+    private String maMh;
+
 
     @Id
-    @Column(name = "id")
+    @Column(name = "id", nullable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     public int getId() {
         return id;
@@ -20,7 +22,17 @@ public class Monhoc {
     }
 
     @Basic
-    @Column(name = "tenMonHoc")
+    @Column(name = "maMH", nullable = false, length = 20)
+    public String getMaMh() {
+        return maMh;
+    }
+
+    public void setMaMh(String maMH) {
+        this.maMh = maMH;
+    }
+
+    @Basic
+    @Column(name = "tenMonHoc", nullable = false, length = 50)
     public String getTenMonHoc() {
         return tenMonHoc;
     }
@@ -37,9 +49,7 @@ public class Monhoc {
         Monhoc monhoc = (Monhoc) o;
 
         if (id != monhoc.id) return false;
-        if (tenMonHoc != null ? !tenMonHoc.equals(monhoc.tenMonHoc) : monhoc.tenMonHoc != null) return false;
-
-        return true;
+        return tenMonHoc != null ? tenMonHoc.equals(monhoc.tenMonHoc) : monhoc.tenMonHoc == null;
     }
 
     @Override

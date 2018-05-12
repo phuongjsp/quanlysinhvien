@@ -19,7 +19,7 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
     @Deprecated
     @Override
     public Nganhdaotao save(Nganhdaotao nganhDaoTao) {
-        if(getByMaNganhdaotao(nganhDaoTao.getMaNganh())==null){
+        if (getByMaNganhdaotao(nganhDaoTao.getMaNganh()) == null) {
             saveDAO(nganhDaoTao);
             return nganhDaoTao;
         }
@@ -30,11 +30,13 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
     public Nganhdaotao getByID(int id) {
         return getByKey(id);
     }
+
     @Override
     @Deprecated
     public Nganhdaotao getByMaNganhdaotao(String maNganhdaotao) {
         return (Nganhdaotao) createEntityCriteria().add(Restrictions.eq("maNganh", maNganhdaotao)).uniqueResult();
     }
+
     @Override
     public List<Nganhdaotao> list() {
         return listDAO();
@@ -42,7 +44,7 @@ public class NganhDaoTaoDAOImpl extends AbstractDAO<Integer, Nganhdaotao> implem
 
     @Override
     public boolean update(Nganhdaotao nganhdaotao) {
-        if(getByID(nganhdaotao.getId())!=null){
+        if (getByID(nganhdaotao.getId()) != null) {
             Nganhdaotao nganhdaotao2 = getByID(nganhdaotao.getId());
             nganhdaotao2.setMaNganh(nganhdaotao.getMaNganh());
             nganhdaotao2.setTenNganh(nganhdaotao.getTenNganh());

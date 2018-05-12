@@ -24,13 +24,13 @@ public class ThongtinsinhvienController {
         return thongtinsinhvienService.save(thongtinsinhvien);
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/id/{id}")
     public Thongtinsinhvien get(@PathVariable("id") int id) {
         return thongtinsinhvienService.getById(id);
     }
 
     @GetMapping("/maSV-{maSV}")
-    public  Thongtinsinhvien  get(@PathVariable("maSV") String maSV) {
+    public Thongtinsinhvien get(@PathVariable("maSV") String maSV) {
         return thongtinsinhvienService.getByMaSV(maSV);
     }
 
@@ -51,7 +51,7 @@ public class ThongtinsinhvienController {
  */
     @PostMapping("/fliter/{min}/{max}")
     public List<Thongtinsinhvien> listFliter(@RequestBody List<Map<String, Object>> mapparameters,
-                                                             @PathVariable("min") int min, @PathVariable("max") int max) {
+                                             @PathVariable("min") int min, @PathVariable("max") int max) {
         return thongtinsinhvienService.listOrderBy(mapparameters, min, max);
     }
 
@@ -73,4 +73,20 @@ public class ThongtinsinhvienController {
         return thongtinsinhvienService.delete(maSV);
 
     }
+
+    @GetMapping("/per/id/{maSv}")
+    public Integer PerformanceId(@PathVariable("maSv") String maSv) {
+        return thongtinsinhvienService.getIdByMaSv(maSv);
+    }
+
+    @GetMapping("/per/idToMaSv/{id}")
+    public String PerformanceIdToMaSv(@PathVariable("id") int id) {
+        return thongtinsinhvienService.getMaSvById(id);
+    }
+
+    @GetMapping("/per/masv/{maSv}")
+    public List<String> PerformanceListMasv(@PathVariable("maSv") String maSv) {
+        return thongtinsinhvienService.checkMaSv(maSv);
+    }
+
 }

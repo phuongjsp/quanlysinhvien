@@ -20,6 +20,7 @@ public interface UserService {
     boolean isKeyCodeActive(String keyCode);
 
     User isActiveUser(String keyCode);
+
     User save(User user);
 
     void deleteActiveUser(String email);
@@ -39,7 +40,9 @@ public interface UserService {
     void ConfirmResetPassword(String email, String path);
 
     boolean isKeyCodeResetPassword(String keyCode);
+
     User resetPassword(String keyCode, String password);
+
     void deleteConfirmResetPassword(String email);
 
 

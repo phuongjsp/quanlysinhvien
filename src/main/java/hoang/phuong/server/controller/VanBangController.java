@@ -6,6 +6,7 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
+
 @RestController
 @RequestMapping("/qlsv/vanbang")
 public class VanBangController {
@@ -22,22 +23,22 @@ public class VanBangController {
     }
 
     @GetMapping("/{id}")
-    public  Vanbang  get(@PathVariable("id") int id) {
+    public Vanbang get(@PathVariable("id") int id) {
         return vanBangService.getbyId(id);
     }
 
     @GetMapping("/maVB-{maVB}")
-    public  Vanbang get(@PathVariable("maVB") String maVB) {
+    public Vanbang get(@PathVariable("maVB") String maVB) {
         return vanBangService.getByMaVB(maVB);
     }
 
     @GetMapping("")
-    public List<Vanbang>  list() {
+    public List<Vanbang> list() {
         return vanBangService.list();
     }
 
     @PutMapping("")
-    public boolean update( @RequestBody Vanbang vanbang) {
+    public boolean update(@RequestBody Vanbang vanbang) {
         return vanBangService.update(vanbang);
 
     }

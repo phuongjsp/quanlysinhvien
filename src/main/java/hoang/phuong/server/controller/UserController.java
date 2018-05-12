@@ -41,6 +41,7 @@ public class UserController {
     public boolean isKeyCodeCreateUser(@PathVariable(value = "keyCode") String keyCode) {
         return userService.isKeyCodeActive(keyCode);
     }
+
     @PostMapping(value = "/active/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User CreateUser(@PathVariable(value = "keyCode") String keyCode
@@ -53,6 +54,7 @@ public class UserController {
         userService.deleteActiveUser(user.getEmail());
         return userService.save(user);
     }
+
     @PutMapping(value = "/{id}",
             consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
     public User update(@PathVariable Integer id, @RequestBody User user) {
@@ -75,6 +77,7 @@ public class UserController {
     public boolean isKeyCodeResetPassword(@PathVariable(value = "keyCode") String keyCode) {
         return userService.isKeyCodeResetPassword(keyCode);
     }
+
     @PostMapping(value = "/reset/{keyCode}")
     @ResponseStatus(HttpStatus.CREATED)
     public User resetPassword(@PathVariable(value = "keyCode") String keyCode

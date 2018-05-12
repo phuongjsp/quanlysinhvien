@@ -27,23 +27,23 @@ public class ThongtinthemController {
     }
 
     @GetMapping("/{id}")
-    public  Thongtinthem get(@PathVariable("id") int id) {
+    public Thongtinthem get(@PathVariable("id") int id) {
         return thongtinthemService.getByID(id);
     }
 
     @GetMapping("/maSv-{maSv}")
-    public  List<Thongtinthem>  get(@PathVariable("maSv") String maSv) {
+    public List<Thongtinthem> get(@PathVariable("maSv") String maSv) {
         Thongtinsinhvien thongtinsinhvien = thongtinsinhvienService.getByMaSV(maSv);
-        return  thongtinthemService.listByIDSv(thongtinsinhvien.getId());
+        return thongtinthemService.listByIDSv(thongtinsinhvien.getId());
     }
 
     @GetMapping("")
-    public List<Thongtinthem>  list() {
+    public List<Thongtinthem> list() {
         return thongtinthemService.list();
     }
 
     @PutMapping("")
-    public boolean    update(@PathVariable("id") int id, @RequestBody Thongtinthem thongtinthem) {
+    public boolean update(@RequestBody Thongtinthem thongtinthem) {
         return thongtinthemService.update(thongtinthem);
 
     }

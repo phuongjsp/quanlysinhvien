@@ -20,7 +20,7 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
     @Deprecated
     @Override
     public Lopsv save(Lopsv lopsv) {
-        if(getByMaLop(lopsv.getMaLop())==null) {
+        if (getByMaLop(lopsv.getMaLop()) == null) {
             saveDAO(lopsv);
             return lopsv;
         }
@@ -47,12 +47,13 @@ public class LopsvDAOImpl extends AbstractDAO<Integer, Lopsv> implements LopsvDA
     @Override
     public boolean update(Lopsv lopsv) {
 
-        if(getByMaLop(lopsv.getMaLop())!=null){
+        if (getByMaLop(lopsv.getMaLop()) != null) {
             Lopsv lopsv2 = getByMaLop(lopsv.getMaLop());
             lopsv2.setTenLop(lopsv.getTenLop());
             getSession().flush();
             return true;
-        }return false  ;
+        }
+        return false;
     }
 
     @Deprecated

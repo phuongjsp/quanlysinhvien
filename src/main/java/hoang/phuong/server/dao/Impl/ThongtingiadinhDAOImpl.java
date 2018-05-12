@@ -46,22 +46,25 @@ public class ThongtingiadinhDAOImpl extends AbstractDAO<Integer, Thongtingiadinh
 
     @Override
     public boolean update(Thongtingiadinh thongtingiadinh) {
-        if(getByID(thongtingiadinh.getId())!=null){
+        if (getByID(thongtingiadinh.getId()) != null) {
             Thongtingiadinh thongtingiadinh2 = getByID(thongtingiadinh.getId());
-            if (thongtingiadinh.getNgheNghiep() != null) thongtingiadinh2.setNgheNghiep(thongtingiadinh.getNgheNghiep());
+            if (thongtingiadinh.getNgheNghiep() != null)
+                thongtingiadinh2.setNgheNghiep(thongtingiadinh.getNgheNghiep());
             if (thongtingiadinh.getQuanHe() != null) thongtingiadinh2.setQuanHe(thongtingiadinh.getQuanHe());
             if (thongtingiadinh.getTen() != null) thongtingiadinh2.setTen(thongtingiadinh.getTen());
             if (thongtingiadinh.getSdt() != null) thongtingiadinh2.setSdt(thongtingiadinh.getSdt());
             getSession().flush();
             return true;
-        }return false;
+        }
+        return false;
     }
 
     @Override
     public boolean delete(int id) {
-        if(getByID(id)!=null){
+        if (getByID(id) != null) {
             deleteDAO(id);
             return true;
-        }return false;
+        }
+        return false;
     }
 }

@@ -23,7 +23,7 @@ public class LopController {
     }
 
     @GetMapping("/maLop-{maLop}")
-    public  Lopsv get(@PathVariable("maLop") String maLop) {
+    public Lopsv get(@PathVariable("maLop") String maLop) {
         return lopsvService.getByMaLop(maLop);
     }
 

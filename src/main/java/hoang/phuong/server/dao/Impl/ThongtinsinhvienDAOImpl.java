@@ -89,6 +89,28 @@ public class ThongtinsinhvienDAOImpl extends AbstractDAO<Integer, Thongtinsinhvi
         }
 
     }
+
+    @Override
+    public Integer getIdByMaSv(String maSv) {
+        return (Integer) getSession()
+                .createQuery("select id from Thongtinsinhvien where maSv=:maSv")
+                .setParameter("maSv", maSv).uniqueResult();
+    }
+
+    @SuppressWarnings("unchecked")
+    @Override
+    public List<String> checkMaSv(String maSv) {
+        return getSession().createQuery("select maSv from Thongtinsinhvien where maSv like :maSv")
+                .setParameter("maSv", "%" + maSv + "%")
+                .getResultList();
+    }
+
+    @Override
+    public String getMaSvById(int id) {
+        return (String) getSession().createQuery("select maSv from Thongtinsinhvien where id=:id").setParameter("id", id)
+                .uniqueResult();
+    }
+
     @Deprecated
     @SuppressWarnings("unchecked")
     @Override

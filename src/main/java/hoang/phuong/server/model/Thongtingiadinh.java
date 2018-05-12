@@ -11,7 +11,8 @@ public class Thongtingiadinh {
     private String ten;
     private String sdt;
     private String ngheNghiep;
-//    @ManyToOne(optional = false)
+
+    //    @ManyToOne(optional = false)
 //    @JoinColumn(name = "idSV", referencedColumnName = "id", insertable = false, updatable = false)
 //    private Thongtinsinhvien thongtinsinhvien;
 //
@@ -94,9 +95,7 @@ public class Thongtingiadinh {
         if (quanHe != null ? !quanHe.equals(that.quanHe) : that.quanHe != null) return false;
         if (ten != null ? !ten.equals(that.ten) : that.ten != null) return false;
         if (sdt != null ? !sdt.equals(that.sdt) : that.sdt != null) return false;
-        if (ngheNghiep != null ? !ngheNghiep.equals(that.ngheNghiep) : that.ngheNghiep != null) return false;
-
-        return true;
+        return ngheNghiep != null ? ngheNghiep.equals(that.ngheNghiep) : that.ngheNghiep == null;
     }
 
     @Override

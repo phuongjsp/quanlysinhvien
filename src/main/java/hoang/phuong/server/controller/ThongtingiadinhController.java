@@ -26,17 +26,17 @@ public class ThongtingiadinhController {
     }
 
     @GetMapping("/{id}")
-    public Thongtingiadinh  get(@PathVariable("id") int id) {
+    public Thongtingiadinh get(@PathVariable("id") int id) {
         return thongtingiadinhService.getByID(id);
     }
 
     @GetMapping("/IDSV-{idsv}")
-    public  List<Thongtingiadinh> getListByIDSv(@PathVariable("idsv") int idsv) {
+    public List<Thongtingiadinh> getListByIDSv(@PathVariable("idsv") int idsv) {
         return thongtingiadinhService.listByIDSv(idsv);
     }
 
     @GetMapping("")
-    public  List<Thongtingiadinh>  list() {
+    public List<Thongtingiadinh> list() {
         return thongtingiadinhService.list();
     }
 

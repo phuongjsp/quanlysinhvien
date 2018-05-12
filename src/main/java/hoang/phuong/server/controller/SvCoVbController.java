@@ -8,12 +8,13 @@ import org.springframework.web.bind.annotation.*;
 
 import javax.inject.Inject;
 import java.util.List;
+
 @RestController
 @RequestMapping("/qlsv/svcovb")
 public class SvCoVbController {
     private SvCoVbService svCoVbService;
-private ThongtinsinhvienService thongtinsinhvienService;
-private VanBangService vanBangService;
+    private ThongtinsinhvienService thongtinsinhvienService;
+    private VanBangService vanBangService;
 
     @Inject
     public SvCoVbController(SvCoVbService svCoVbService, ThongtinsinhvienService thongtinsinhvienService, VanBangService vanBangService) {
@@ -28,7 +29,7 @@ private VanBangService vanBangService;
     }
 
     @GetMapping("/{id}")
-    public  Svcovb get(@PathVariable("id") int id) {
+    public Svcovb get(@PathVariable("id") int id) {
         return svCoVbService.getById(id);
     }
 
@@ -52,11 +53,11 @@ private VanBangService vanBangService;
             @PathVariable("MaSv") String MaSv,
             @PathVariable("maVB") String maVB) {
         return svCoVbService.listbyIdSvAndLoaiVb(thongtinsinhvienService.getByMaSV(MaSv).getId(),
-                vanBangService.getByMaVB(maVB).getId() );
+                vanBangService.getByMaVB(maVB).getId());
     }
 
     @PutMapping("")
-    public boolean update(@PathVariable("id") int id, @RequestBody Svcovb svcovb) {
+    public boolean update(@RequestBody Svcovb svcovb) {
         return svCoVbService.update(svcovb);
 
     }

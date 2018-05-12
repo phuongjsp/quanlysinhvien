@@ -138,6 +138,7 @@ public class UserServiceImpl implements UserService {
     public boolean isKeyCodeResetPassword(String keyCode) {
         return confirmresetpasswordDAO.getByKeyCode(keyCode) != null;
     }
+
     @Override
     public User resetPassword(String keyCode, String password) {
         try {
@@ -242,7 +243,7 @@ public class UserServiceImpl implements UserService {
     }
 
 
-    String createKeyCodeActive(String keyCode) {
+    private String createKeyCodeActive(String keyCode) {
         if (activeuserDAO.getByKeyCode(keyCode) != null) {
             keyCode = UUID.randomUUID().toString().replace("-", "P$");
             createKeyCodeActive(keyCode);
@@ -250,13 +251,14 @@ public class UserServiceImpl implements UserService {
         return keyCode;
     }
 
-    String createKeyCodeResetPassword(String keyCode) {
+    private String createKeyCodeResetPassword(String keyCode) {
         if (confirmresetpasswordDAO.getByKeyCode(keyCode) != null) {
             keyCode = UUID.randomUUID().toString().replace("-", "P$");
             createKeyCodeResetPassword(keyCode);
         }
         return keyCode;
     }
+
     @Override
     public void delete(Integer id, String password) {
         if (!PASSWORD_PATTERN.matcher(password).matches()) {
